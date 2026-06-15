@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahil — AI Image Generation Engineer & VTON Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070711;
+  --bg-2:#0c0c1d;
+  --surface:rgba(255,255,255,.04);
+  --surface-2:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.08);
+  --stroke-strong:rgba(255,255,255,.16);
+  --txt:#eef0fb;
+  --txt-dim:#9aa0c0;
+  --txt-faint:#646a90;
+  --violet:#7c5cff;
+  --indigo:#4b3bff;
+  --cyan:#22e3ff;
+  --grad:linear-gradient(110deg,#4b3bff 0%,#7c5cff 42%,#22e3ff 100%);
+  --grad-soft:linear-gradient(135deg,rgba(124,92,255,.18),rgba(34,227,255,.10));
+  --r:20px;
+  --shadow:0 24px 60px -20px rgba(8,4,40,.8);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(124,92,255,.4);color:#fff}
+h1,h2,h3,h4,.display{font-family:'Outfit',sans-serif;letter-spacing:-.02em;line-height:1.08}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.gradtext{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ambient background */
+.ambient{position:fixed;inset:0;z-index:-2;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.55}
+.blob.a{width:620px;height:620px;background:#4b3bff;top:-220px;left:-160px}
+.blob.b{width:560px;height:560px;background:#22e3ff;top:30%;right:-220px;opacity:.32}
+.blob.c{width:520px;height:520px;background:#7c5cff;bottom:-200px;left:30%;opacity:.3}
+.grid-overlay{position:fixed;inset:0;z-index:-1;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%)}
+
+/* NAV */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;width:calc(100% - 32px);max-width:1240px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px 12px 22px;border-radius:18px;
+  background:rgba(12,12,29,.55);border:1px solid var(--stroke);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  transition:.4s;box-shadow:0 8px 30px -12px rgba(0,0,0,.6)}
+nav.scrolled{background:rgba(8,8,20,.82);border-color:var(--stroke-strong)}
+.logo{font-family:'Outfit';font-weight:800;font-size:20px;display:flex;align-items:center;gap:9px}
+.logo .dot{width:10px;height:10px;border-radius:50%;background:var(--grad);box-shadow:0 0 14px var(--violet)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{font-size:14px;color:var(--txt-dim);font-weight:500;padding:8px 14px;border-radius:10px;transition:.25s;position:relative}
+.nav-links a:hover{color:var(--txt);background:var(--surface)}
+.nav-links a.active{color:var(--txt)}
+.nav-links a.active::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;border-radius:2px;background:var(--grad)}
+.nav-cta{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:600;padding:10px 18px;border-radius:11px;
+  background:var(--grad);color:#fff;transition:.3s;box-shadow:0 8px 24px -8px rgba(124,92,255,.7)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(124,92,255,.9)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.burger span{width:22px;height:2px;background:var(--txt);border-radius:2px;transition:.3s}
+
+/* HERO */
+header{min-height:100vh;display:flex;align-items:center;padding:150px 0 80px;position:relative}
+.hero-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
+.hero-grid .hero{order:2}
+.hero-grid .hero-visual{order:1}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;letter-spacing:.04em;
+  color:var(--txt-dim);padding:8px 16px;border-radius:30px;background:var(--surface);border:1px solid var(--stroke);margin-bottom:26px}
+.eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(34,227,255,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,227,255,.55)}70%{box-shadow:0 0 0 10px rgba(34,227,255,0)}100%{box-shadow:0 0 0 0 rgba(34,227,255,0)}}
+.hero h1{font-size:clamp(40px,6.2vw,78px);font-weight:800;margin-bottom:10px}
+.role-line{font-size:clamp(20px,2.6vw,30px);font-family:'Outfit';font-weight:600;color:var(--txt-dim);min-height:1.4em;margin-bottom:24px}
+.role-line .typed{color:var(--txt)}
+.role-line .typed b{font-weight:700}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--cyan);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.lede{font-size:17px;color:var(--txt-dim);max-width:560px;margin-bottom:36px}
+.hero p.lede b{color:var(--txt);font-weight:600}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:13px;font-weight:600;font-size:15px;font-family:'Outfit';cursor:pointer;transition:.3s;border:1px solid transparent}
+.btn.primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px -10px rgba(124,92,255,.7)}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(124,92,255,.9)}
+.btn.ghost{background:var(--surface);border-color:var(--stroke-strong);color:var(--txt)}
+.btn.ghost:hover{background:var(--surface-2);transform:translateY(-3px);border-color:var(--violet)}
+.hero-stats{display:flex;gap:34px;margin-top:46px}
+.hero-stats .s b{font-family:'Outfit';font-size:30px;font-weight:800;display:block}
+.hero-stats .s span{font-size:13px;color:var(--txt-faint)}
+
+/* hero visual */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:560px}
+.hero-glow{position:absolute;width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,255,.14),transparent 68%);
+  filter:blur(55px);top:18%;left:50%;transform:translateX(-50%);z-index:0;pointer-events:none}
+.hero-cutout{position:relative;z-index:1;width:auto;max-width:115%;max-height:620px;object-fit:contain;
+  object-position:bottom center;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 84%,rgba(0,0,0,.6) 94%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 84%,rgba(0,0,0,.6) 94%,transparent 100%);
+  animation:floaty 6s ease-in-out infinite}
+.float-chip{position:absolute;z-index:2;background:rgba(12,12,29,.8);border:1px solid var(--stroke-strong);backdrop-filter:blur(14px);
+  padding:12px 16px;border-radius:14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:9px;box-shadow:var(--shadow);animation:floaty 5s ease-in-out infinite}
+.float-chip .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--grad);font-size:14px}
+.fc1{top:10%;left:0;animation-delay:0s}
+.fc2{top:48%;right:0;animation-delay:1.5s}
+.fc3{bottom:6%;left:6%;animation-delay:.8s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* SECTION */
+section{padding:100px 0;position:relative}
+.sec-head{margin-bottom:54px;max-width:680px}
+.sec-tag{font-family:'JetBrains Mono';font-size:13px;color:var(--cyan);letter-spacing:.08em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sec-tag::before{content:"";width:26px;height:1px;background:var(--cyan)}
+.sec-head h2{font-size:clamp(30px,4.4vw,50px);font-weight:800;margin-bottom:16px}
+.sec-head p{color:var(--txt-dim);font-size:17px}
+
+/* ABOUT + SKILLS */
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:start}
+.about-card{background:var(--surface);border:1px solid var(--stroke);border-radius:var(--r);padding:34px;backdrop-filter:blur(10px)}
+.about-card p{color:var(--txt-dim);margin-bottom:18px}
+.about-card p:last-child{margin-bottom:0}
+.about-card b{color:var(--txt)}
+.skill-block{margin-bottom:30px}
+.skill-block:last-child{margin-bottom:0}
+.skill-block h4{font-size:14px;font-family:'JetBrains Mono';color:var(--txt-faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-size:14px;font-weight:500;padding:10px 16px;border-radius:11px;background:var(--surface);border:1px solid var(--stroke);
+  color:var(--txt-dim);cursor:default;transition:.28s}
+.chip:hover{color:var(--txt);border-color:var(--violet);background:var(--surface-2);transform:translateY(-3px);box-shadow:0 10px 22px -10px rgba(124,92,255,.5)}
+
+/* PROJECTS */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px}
+.filter{font-size:14px;font-weight:600;padding:10px 20px;border-radius:30px;cursor:pointer;transition:.28s;
+  background:var(--surface);border:1px solid var(--stroke);color:var(--txt-dim)}
+.filter:hover{color:var(--txt)}
+.filter.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 10px 24px -10px rgba(124,92,255,.7)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:26px}
+.card{background:var(--surface);border:1px solid var(--stroke);border-radius:var(--r);overflow:hidden;cursor:pointer;
+  transition:.45s cubic-bezier(.2,.7,.3,1);position:relative;will-change:transform,opacity}
+.card.hide{display:none}
+.card:hover{transform:translateY(-8px);border-color:var(--stroke-strong);box-shadow:var(--shadow)}
+.card .thumb{aspect-ratio:16/10;background:var(--grad-soft);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card .thumb img{width:100%;height:100%;object-fit:cover}
+.card .thumb .ph{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--txt-dim);text-align:center;padding:20px}
+.card .thumb .ph svg{width:42px;height:42px;opacity:.55}
+.card .thumb .ph code{font-size:11px;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:7px;color:var(--cyan)}
+.card .num{position:absolute;top:14px;left:14px;font-family:'JetBrains Mono';font-size:12px;background:rgba(7,7,17,.7);
+  padding:5px 10px;border-radius:8px;border:1px solid var(--stroke);backdrop-filter:blur(6px)}
+.card .body{padding:24px}
+.card .body h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.card .body p{font-size:14px;color:var(--txt-dim);margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.tag{font-size:11px;font-family:'JetBrains Mono';padding:5px 10px;border-radius:7px;background:var(--surface-2);border:1px solid var(--stroke);color:var(--txt-dim)}
+.view-link{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:var(--cyan);font-family:'Outfit'}
+.view-link svg{width:15px;height:15px;transition:.3s}
+.card:hover .view-link svg{transform:translateX(4px)}
+
+/* TIMELINE */
+.timeline{position:relative;max-width:780px;margin:0 auto;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--violet),var(--cyan),transparent)}
+.tl-item{position:relative;padding-bottom:42px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-30px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--bg);
+  border:3px solid var(--violet);box-shadow:0 0 0 4px rgba(124,92,255,.15);transition:.3s}
+.tl-item:hover::before{border-color:var(--cyan);box-shadow:0 0 0 5px rgba(34,227,255,.2)}
+.tl-item .when{font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);margin-bottom:7px}
+.tl-item h3{font-size:20px;font-weight:700;margin-bottom:4px}
+.tl-item .org{font-size:14px;color:var(--txt-faint);margin-bottom:10px}
+.tl-item p{font-size:14px;color:var(--txt-dim);max-width:560px}
+
+/* CTA BANNER */
+.cta-banner{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:end;
+  background:linear-gradient(120deg,rgba(75,59,255,.16),rgba(34,227,255,.06));
+  border:1px solid var(--stroke);border-radius:28px;padding:54px 54px 0;margin-bottom:70px;overflow:hidden;
+  backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+.cta-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,255,.4),transparent 65%);
+  right:-80px;top:-160px;filter:blur(40px);pointer-events:none}
+.cta-copy{position:relative;z-index:2;padding-bottom:54px;max-width:520px}
+.cta-copy h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;margin:14px 0 16px}
+.cta-copy p{color:var(--txt-dim);font-size:16px;margin-bottom:28px}
+.cta-figure{position:relative;z-index:2;display:flex;justify-content:center;align-items:flex-end;min-height:340px}
+.cta-img{max-height:420px;width:auto;max-width:320px;object-fit:cover;border-radius:22px;
+  border:1px solid var(--stroke-strong);box-shadow:var(--shadow);
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.5));animation:floaty 6s ease-in-out infinite}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:start}
+.contact-info h3{font-size:26px;font-weight:700;margin-bottom:14px}
+.contact-info p{color:var(--txt-dim);margin-bottom:28px;max-width:380px}
+.socials{display:flex;flex-direction:column;gap:12px}
+.social{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:14px;background:var(--surface);
+  border:1px solid var(--stroke);transition:.3s}
+.social:hover{border-color:var(--violet);background:var(--surface-2);transform:translateX(5px)}
+.social .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--grad-soft);border:1px solid var(--stroke)}
+.social .ic svg{width:18px;height:18px}
+.social .meta b{font-family:'Outfit';font-size:15px;display:block}
+.social .meta span{font-size:13px;color:var(--txt-faint)}
+.form{background:var(--surface);border:1px solid var(--stroke);border-radius:var(--r);padding:34px;backdrop-filter:blur(10px)}
+.field{position:relative;margin-bottom:24px}
+.field input,.field textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--stroke);border-radius:13px;
+  padding:20px 16px 8px;color:var(--txt);font-size:15px;font-family:inherit;transition:.3s;resize:vertical}
+.field textarea{min-height:120px}
+.field label{position:absolute;left:16px;top:16px;color:var(--txt-faint);font-size:15px;pointer-events:none;transition:.25s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--violet);background:rgba(124,92,255,.06);box-shadow:0 0 0 4px rgba(124,92,255,.1)}
+.field input:focus+label,.field textarea:focus+label,
+.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{
+  top:7px;font-size:11px;color:var(--cyan);font-family:'JetBrains Mono'}
+.form .btn{width:100%;justify-content:center}
+.form-note{margin-top:16px;font-size:13px;color:var(--txt-faint);text-align:center;min-height:1.2em}
+.form-note.ok{color:var(--cyan)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--stroke);padding:40px 0;text-align:center;color:var(--txt-faint);font-size:14px}
+footer .gradtext{font-weight:600}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;z-index:200;background:rgba(4,4,12,.72);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:.35s}
+.modal-bg.open{opacity:1;pointer-events:auto}
+.modal{background:var(--bg-2);border:1px solid var(--stroke-strong);border-radius:24px;max-width:760px;width:100%;
+  max-height:88vh;overflow-y:auto;transform:translateY(24px) scale(.97);transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:var(--shadow)}
+.modal-bg.open .modal{transform:translateY(0) scale(1)}
+.modal .m-thumb{aspect-ratio:16/8;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.modal .m-thumb img{width:100%;height:100%;object-fit:cover}
+.modal .m-thumb .ph{color:var(--txt-dim);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:24px}
+.modal .m-thumb .ph svg{width:48px;height:48px;opacity:.5}
+.modal .m-thumb .ph code{font-size:12px;background:rgba(0,0,0,.4);padding:6px 12px;border-radius:8px;color:var(--cyan)}
+.modal-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:11px;background:rgba(7,7,17,.7);
+  border:1px solid var(--stroke);color:#fff;font-size:22px;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px);transition:.25s;z-index:2}
+.modal-close:hover{background:var(--surface-2);transform:rotate(90deg)}
+.modal .m-body{padding:34px}
+.modal .m-cat{font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);margin-bottom:10px}
+.modal .m-body h2{font-size:28px;font-weight:800;margin-bottom:18px}
+.modal .m-body p{color:var(--txt-dim);margin-bottom:20px}
+.modal .m-feat{list-style:none;margin-bottom:24px}
+.modal .m-feat li{display:flex;gap:12px;padding:9px 0;color:var(--txt-dim);font-size:15px;align-items:flex-start}
+.modal .m-feat li svg{width:18px;height:18px;flex-shrink:0;margin-top:3px;color:var(--cyan)}
+.modal .m-tags{display:flex;flex-wrap:wrap;gap:8px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(36px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+  .cta-banner{grid-template-columns:1fr;padding:40px 28px 0;text-align:center}
+  .cta-copy{padding-bottom:0;margin:0 auto}
+  .cta-copy .sec-tag{justify-content:center}
+  .cta-figure{min-height:auto}
+  .cta-img{max-height:340px}
+  .hero-visual{order:-1;max-width:360px;margin:0 auto}
+  .nav-links{display:none}
+  .burger{display:flex}
+  nav.open .nav-links{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;
+    background:rgba(8,8,20,.95);border:1px solid var(--stroke-strong);border-radius:16px;padding:14px;backdrop-filter:blur(20px)}
+  nav.open .nav-links a{width:100%}
+}
+@media(max-width:560px){
+  section{padding:70px 0}
+  header{padding:120px 0 60px}
+  .hero-stats{gap:22px;flex-wrap:wrap}
+  .about-card,.form{padding:24px}
+  .float-chip{display:none}
+}
+/* ABOUT HERO BANNER */
+.about-hero{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center;margin-bottom:64px;
+  background:var(--grad-soft);border:1px solid var(--stroke-strong);border-radius:28px;padding:46px;box-shadow:var(--shadow)}
+.ah-photo{position:relative;display:flex;justify-content:center;align-items:center;min-height:360px}
+.ah-ring{position:absolute;width:330px;height:330px;border-radius:50%;
+  background:conic-gradient(from 180deg,var(--violet),var(--cyan),var(--violet));filter:blur(2px);opacity:.55;animation:spin 14s linear infinite}
+.ah-circle{position:relative;width:300px;height:300px;border-radius:50%;overflow:hidden;z-index:1;
+  border:3px solid rgba(255,255,255,.12);background:radial-gradient(circle at 50% 35%,rgba(124,92,255,.30),rgba(8,8,20,.85) 75%)}
+.ah-circle img{position:absolute;left:50%;top:11%;transform:translateX(-50%);width:72%;height:auto;object-fit:contain}
+.ah-chip{position:absolute;z-index:2;background:rgba(12,12,29,.82);border:1px solid var(--stroke-strong);backdrop-filter:blur(14px);
+  padding:9px 14px;border-radius:12px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px;box-shadow:var(--shadow);animation:floaty 5s ease-in-out infinite}
+.ah-chip .ic{color:var(--cyan)}
+.ahc1{top:6%;left:2%;animation-delay:0s}
+.ahc2{top:20%;right:0;animation-delay:1.1s}
+.ahc3{bottom:16%;left:0;animation-delay:.6s}
+.ahc4{bottom:4%;right:6%;animation-delay:1.6s}
+.ah-text .ah-kicker{display:inline-block;font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:14px;margin-bottom:14px}
+.ah-text h3{font-family:'Outfit';font-weight:700;font-size:clamp(24px,3vw,38px);line-height:1.15;margin-bottom:16px}
+.ah-text p{color:var(--txt-dim);font-size:16px;line-height:1.7;margin-bottom:24px;max-width:520px}
+.ah-actions{display:flex;gap:14px;flex-wrap:wrap}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:860px){
+  .about-hero{grid-template-columns:1fr;text-align:center;padding:32px}
+  .ah-text p{margin-left:auto;margin-right:auto}
+  .ah-actions{justify-content:center}
+}
+
+#shoots .ba-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+.ba-tab{padding:11px 20px;border-radius:11px;font-family:'Outfit';font-weight:600;font-size:14px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--stroke-strong);color:var(--txt-dim);transition:.25s}
+.ba-tab:hover{color:var(--txt);border-color:var(--violet)}
+.ba-tab.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 10px 26px -12px rgba(124,92,255,.8)}
+.ba-wrap{max-width:560px;margin:0 auto}
+.ba-stage .ba-scene{text-align:center;margin-top:16px;color:var(--txt-faint);font-size:14px;font-family:'JetBrains Mono',monospace}
+.ba-frame{position:relative;width:100%;aspect-ratio:4/5;border-radius:22px;overflow:hidden;
+  border:1px solid var(--stroke-strong);box-shadow:var(--shadow);user-select:none;touch-action:pan-y}
+.ba-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-before-wrap{position:absolute;inset:0;overflow:hidden;width:50%;border-right:2px solid rgba(255,255,255,.85)}
+.ba-before-wrap .ba-before{position:absolute;left:0;top:0;height:100%;object-fit:cover;object-position:center;max-width:none}
+.ba-divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.85);transform:translateX(-1px);pointer-events:none}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;
+  background:var(--grad);display:flex;align-items:center;justify-content:center;gap:1px;color:#fff;font-size:18px;font-weight:700;
+  box-shadow:0 8px 20px -6px rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.9)}
+.ba-tag{position:absolute;bottom:14px;padding:6px 13px;border-radius:9px;font-size:12px;font-weight:700;font-family:'Outfit';
+  background:rgba(8,8,20,.72);backdrop-filter:blur(8px);color:#fff;border:1px solid var(--stroke-strong);z-index:3}
+.ba-tag-l{left:14px}
+.ba-tag-r{right:14px;background:var(--grad);border-color:transparent}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4}
+.shoot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.shoot-card{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--stroke-strong);background:var(--surface);box-shadow:var(--shadow)}
+.shoot-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .5s}
+.shoot-card:hover img{transform:scale(1.05)}
+.shoot-card figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 12px;font-size:12.5px;font-weight:600;color:#fff;
+  background:linear-gradient(to top,rgba(5,5,14,.85),transparent);font-family:'JetBrains Mono',monospace}
+@media(max-width:760px){
+  .shoot-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .shoot-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="ambient"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
+<div class="grid-overlay"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="logo"><span class="dot"></span>Sahil<span class="gradtext">.</span></a>
+  <div class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#shoots">Shoots</a>
+    <a href="#journey">Journey</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="#" class="nav-cta" id="resumeBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Resume
+    </a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="home">
+  <div class="wrap hero-grid">
+    <div class="hero">
+      <span class="eyebrow"><span class="pulse"></span>Available for select projects</span>
+      <h1>Hi, I'm <span class="gradtext">Sahil</span></h1>
+      <div class="role-line"><span class="typed" id="typed"></span><span class="cursor"></span></div>
+      <p class="lede">I build <b>high-precision AI re-texturing engines</b>, automated ghost-mannequin retouching systems, and 3D furnishing texture pipelines — writing rigorous constraint logic for diffusion models that enforces <b>zero-hallucination geometry</b>, scale locks, and perspective matching for top-tier fashion & retail catalogs.</p>
+      <div class="btns">
+        <a href="#work" class="btn primary">View My Work
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#contact" class="btn ghost">Let's Talk</a>
+      </div>
+      <div class="hero-stats">
+        <div class="s"><b class="gradtext">3+</b><span>Production pipelines</span></div>
+        <div class="s"><b class="gradtext">100%</b><span>Geometry preservation</span></div>
+        <div class="s"><b class="gradtext">0</b><span>Tolerance for hallucination</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <img src="assets/img/p1.png" alt="Sahil — AI Image Generation Engineer" class="hero-cutout">
+      <div class="float-chip fc1"><span class="ic">✦</span>Stable Diffusion</div>
+      <div class="float-chip fc2"><span class="ic">◈</span>ControlNet</div>
+      <div class="float-chip fc3"><span class="ic">⬡</span>VTON Engine</div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">01 / About</div>
+      <h2>Engineering precision into <span class="gradtext">generative imagery</span></h2>
+      <p>Where computer vision meets constraint-driven prompting — so the output is exact, not approximate.</p>
+    </div>
+    <div class="about-hero reveal">
+      <div class="ah-photo">
+        <div class="ah-ring"></div>
+        <div class="ah-circle"><img src="assets/img/p2.png" alt="Sahil — AI Image Engineer"></div>
+        <div class="ah-chip ahc1"><span class="ic">✦</span>Diffusion</div>
+        <div class="ah-chip ahc2"><span class="ic">◈</span>ControlNet</div>
+        <div class="ah-chip ahc3"><span class="ic">⬡</span>VTON</div>
+        <div class="ah-chip ahc4"><span class="ic">⚡</span>Retouch</div>
+      </div>
+      <div class="ah-text">
+        <span class="ah-kicker">Hi, I'm Sahil 👋</span>
+        <h3>I turn <span class="gradtext">plain product shots</span> into catalog-grade visuals</h3>
+        <p>An AI Image Generation Engineer specialising in VTON, fabric re-texturing and high-precision product retouching — building diffusion pipelines that keep geometry exact while reimagining everything around it.</p>
+        <div class="ah-actions">
+          <a href="#shoots" class="btn primary">See the transformations <span>→</span></a>
+          <a href="#contact" class="btn ghost">Work with me</a>
+        </div>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <p>I specialize in building AI systems that treat <b>generation as engineering</b>, not guesswork. My fabric re-texturing and VTON work swaps materials onto garment wireframes while preserving 100% of the source's physical shape, outline, neckline depth, and edge geometry.</p>
+        <p>On the retouching side, I drive ghost-mannequin pipelines that generate seamless hollow interiors and erase wrinkles while keeping volumetric roundness intact. For home furnishings, I project patterns onto draped and tucked surfaces with <b>zero design bleeding</b>.</p>
+        <p>Every pipeline is governed by hard constraints — scale lock, geometry lock, negative prompts — so retail and fashion catalogs ship clean, consistent, production-ready assets.</p>
+      </div>
+      <div class="reveal">
+        <div class="skill-block">
+          <h4>GenAI & Computer Vision</h4>
+          <div class="chips">
+            <span class="chip">Stable Diffusion</span><span class="chip">ControlNet</span><span class="chip">Inpainting / Img2Img</span>
+            <span class="chip">High-Precision Masking</span><span class="chip">Constraint Prompt Engineering</span><span class="chip">Scale & Geometry Lock</span><span class="chip">Negative Constraints</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Web & App Development</h4>
+          <div class="chips">
+            <span class="chip">TypeScript</span><span class="chip">JavaScript (ES6+)</span><span class="chip">React.js</span>
+            <span class="chip">Tailwind CSS</span><span class="chip">CSS3 — Glassmorphism</span><span class="chip">Animations</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Workflows & Automation</h4>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Blender Live-Server Scripting</span><span class="chip">Fabric Draping Logic</span>
+            <span class="chip">E-Commerce Asset Pipelines</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">02 / Selected Work</div>
+      <h2>Featured <span class="gradtext">projects</span></h2>
+      <p>Production AI systems built for precision at catalog scale. Click any card for the full breakdown.</p>
+    </div>
+    <div class="filters reveal" id="filters">
+      <div class="filter active" data-f="all">All</div>
+      <div class="filter" data-f="vton">VTON & Fabric</div>
+      <div class="filter" data-f="retouch">Retouching</div>
+      <div class="filter" data-f="furnish">Furnishing</div>
+    </div>
+    <div class="proj-grid reveal" id="projGrid"></div>
+  </div>
+</section>
+
+<!-- AI PRODUCT SHOOTS -->
+<section id="shoots">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">03 / AI Product Shoots</div>
+      <h2>From flat studio shot to <span class="gradtext">scroll-stopping catalog</span></h2>
+      <p>Real client footwear, relit and recomposed with diffusion pipelines — geometry, logo and stitching locked, only the world around the product reimagined. Drag the slider to compare.</p>
+    </div>
+
+    <div class="ba-tabs reveal">
+      <button class="ba-tab active" data-ba="0">Studio → Cinematic Blue</button>
+      <button class="ba-tab " data-ba="1">Studio → Golden Concrete</button>
+      <button class="ba-tab " data-ba="2">Studio → Misty Forest</button>
+    </div>
+
+    <div class="ba-wrap reveal">
+    <div class="ba-stage" data-stage="0" style="display:block">
+      <div class="ba-frame">
+        <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Dramatic studio relight">
+        <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+        <div class="ba-divider"><div class="ba-handle"><span>‹</span><span>›</span></div></div>
+        <span class="ba-tag ba-tag-l">Before</span>
+        <span class="ba-tag ba-tag-r">After</span>
+        <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+      </div>
+      <p class="ba-scene">Dramatic studio relight</p>
+    </div>
+    <div class="ba-stage" data-stage="1" style="display:none">
+      <div class="ba-frame">
+        <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Golden-hour architectural">
+        <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+        <div class="ba-divider"><div class="ba-handle"><span>‹</span><span>›</span></div></div>
+        <span class="ba-tag ba-tag-l">Before</span>
+        <span class="ba-tag ba-tag-r">After</span>
+        <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+      </div>
+      <p class="ba-scene">Golden-hour architectural</p>
+    </div>
+    <div class="ba-stage" data-stage="2" style="display:none">
+      <div class="ba-frame">
+        <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Outdoor trail composite">
+        <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+        <div class="ba-divider"><div class="ba-handle"><span>‹</span><span>›</span></div></div>
+        <span class="ba-tag ba-tag-l">Before</span>
+        <span class="ba-tag ba-tag-r">After</span>
+        <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+      </div>
+      <p class="ba-scene">Outdoor trail composite</p>
+    </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:80px">
+      <h2 style="font-size:clamp(26px,3vw,36px)">More <span class="gradtext">transformations</span></h2>
+      <p>A selection of finished scenes generated from plain pack-shots.</p>
+    </div>
+    <div class="shoot-grid reveal">
+      <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Cinematic colour-pop relight"><figcaption>Cinematic colour-pop relight</figcaption></figure>
+      <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Pastel studio scene"><figcaption>Pastel studio scene</figcaption></figure>
+      <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Urban lifestyle backdrop"><figcaption>Urban lifestyle backdrop</figcaption></figure>
+      <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Studio gradient set"><figcaption>Studio gradient set</figcaption></figure>
+      <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Soft pastel composition"><figcaption>Soft pastel composition</figcaption></figure>
+      <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Concrete & shadow play"><figcaption>Concrete & shadow play</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">04 / Journey</div>
+      <h2>Experience & <span class="gradtext">education</span></h2>
+      <p>A timeline of the work and learning behind the pipelines.</p>
+    </div>
+    <div class="timeline reveal" id="timeline"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="cta-banner reveal">
+      <div class="cta-glow"></div>
+      <div class="cta-copy">
+        <div class="sec-tag">05 / Contact</div>
+        <h2>Have a project on <span class="gradtext">your mind?</span></h2>
+        <p>Building something at the intersection of AI and visual precision? Let's make it exact — from first prompt to production-ready catalog asset.</p>
+        <a href="#contactForm" class="btn primary">Start a conversation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="cta-figure">
+        <img src="assets/img/p3.jpg" alt="Sahil" class="cta-img">
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Let's build something precise.</h3>
+        <p>Open to collaborations on VTON, AI retouching, and texture-projection pipelines for fashion and retail.</p>
+        <div class="socials">
+          <a href="mailto:sahil@example.com" class="social">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+            <span class="meta"><b>Email</b><span>sahil@example.com</span></span>
+          </a>
+          <a href="#" class="social">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
+            <span class="meta"><b>LinkedIn</b><span>/in/sahil</span></span>
+          </a>
+          <a href="#" class="social">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+            <span class="meta"><b>GitHub</b><span>/sahil</span></span>
+          </a>
+        </div>
+      </div>
+      <div class="form reveal" id="contactForm">
+        <div class="field"><input type="text" id="f-name" placeholder=" "><label for="f-name">Your name</label></div>
+        <div class="field"><input type="email" id="f-email" placeholder=" "><label for="f-email">Email address</label></div>
+        <div class="field"><input type="text" id="f-subj" placeholder=" "><label for="f-subj">Subject</label></div>
+        <div class="field"><textarea id="f-msg" placeholder=" "></textarea><label for="f-msg">Tell me about the project</label></div>
+        <button class="btn primary" id="sendBtn">Send message
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        <div class="form-note" id="formNote"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 <span class="gradtext">Sahil</span> — AI Image Generation Engineer & VTON Specialist. Built with precision.</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="m-thumb" id="mThumb"></div>
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="m-body">
+      <div class="m-cat" id="mCat"></div>
+      <h2 id="mTitle"></h2>
+      <p id="mDesc"></p>
+      <ul class="m-feat" id="mFeat"></ul>
+      <div class="m-tags" id="mTags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---- PROJECT DATA ---- */
+const projects=[
+  {id:1,cat:"vton",catLabel:"VTON & Fabric",title:"AI Fabric Re-Texturing & VTON Engine",
+   short:"Swaps textures on garment wireframes while preserving 100% of physical shape and edge geometry.",
+   desc:"A precision system that swaps textures onto garment wireframes — Kurta, Dupatta, Bottom — without distorting the source. Constraint logic locks every structural attribute so only the material changes, never the form.",
+   img:"",
+   feat:["Maintains 100% of physical shape and outline","Preserves neckline depth and scalloped edge geometry","Per-garment masking for Kurta, Dupatta & Bottom","Scale-lock and geometry-lock constraint prompting"],
+   tags:["Stable Diffusion","ControlNet","Inpainting","Masking","Scale Lock"]},
+  {id:2,cat:"retouch",catLabel:"Retouching",title:"Automated Ghost-Mannequin Retouching",
+   short:"Removes mannequins, generates hollow interiors, and erases wrinkles while keeping 3D volume.",
+   desc:"An AI-driven fashion engine that fully removes mannequins, generates seamless hollow neck and waist interiors, and runs ultra-aggressive wrinkle erasure — all while preserving volumetric roundness and fabric texture fidelity.",
+   img:"",
+   feat:["Complete mannequin removal with clean fills","Seamless hollow neck & waist interior generation","Ultra-aggressive wrinkle erasure","Preserves 3D volumetric roundness & denim twill texture"],
+   tags:["Inpainting","Img2Img","High-Precision Masking","Negative Constraints"]},
+  {id:3,cat:"furnish",catLabel:"Furnishing",title:"High-Precision Furnishing Projection System",
+   short:"Projects source patterns onto bedsheets, mattresses & comforters with zero design bleeding.",
+   desc:"A texture-projection workflow that copies patterns from source images onto home-furnishing products — bedsheets, mattresses, comforters — covering flat surfaces and vertical draped/tucked sides with no design bleed across edges.",
+   img:"",
+   feat:["Pattern projection onto flat and draped surfaces","Handles vertical tucked sides accurately","Zero design bleeding across edges","Blender live-server scripting for layout control"],
+   tags:["Python","Blender","Fabric Draping Logic","Perspective Matching"]}
+];
+
+const timeline=[
+  {when:"2024 — Present",title:"AI Image Generation Engineer & VTON Specialist",org:"Fashion & Retail E-Commerce",desc:"Designing constraint-driven diffusion pipelines for fabric re-texturing, ghost-mannequin retouching, and furnishing projection across top-tier catalogs."},
+  {when:"2023 — 2024",title:"Computer Vision & Diffusion R&D",org:"Generative Imaging Workflows",desc:"Built high-precision masking and constraint prompt systems enforcing zero-hallucination geometry, scale locks and perspective matching."},
+  {when:"2022 — 2023",title:"Frontend & Automation Developer",org:"Product Engineering",desc:"Shipped React + TypeScript interfaces and Python automation for e-commerce asset processing pipelines."},
+  {when:"Education",title:"Computer Science & Visual Computing",org:"Self-directed + formal training",desc:"Deep focus on diffusion models, ControlNet conditioning, and 3D texture projection through Blender scripting."}
+];
+
+const phSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>';
+
+/* ---- RENDER PROJECTS ---- */
+const grid=document.getElementById('projGrid');
+function thumbHTML(p){
+  if(p.img) return `<img src="${p.img}" alt="${p.title}">`;
+  return `<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600;font-size:14px">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
+}
+projects.forEach((p,i)=>{
+  const c=document.createElement('div');
+  c.className='card';c.dataset.cat=p.cat;c.style.transitionDelay=(i*0.05)+'s';
+  c.innerHTML=`
+    <div class="thumb"><span class="num">0${p.id}</span>${thumbHTML(p)}</div>
+    <div class="body">
+      <h3>${p.title}</h3>
+      <p>${p.short}</p>
+      <div class="tags">${p.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <span class="view-link">View details
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>`;
+  c.addEventListener('click',()=>openModal(p));
+  grid.appendChild(c);
+});
+
+/* ---- FILTERS ---- */
+document.getElementById('filters').addEventListener('click',e=>{
+  const f=e.target.closest('.filter');if(!f)return;
+  document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));
+  f.classList.add('active');
+  const cat=f.dataset.f;
+  document.querySelectorAll('.card').forEach(card=>{
+    const show=cat==='all'||card.dataset.cat===cat;
+    if(show){card.classList.remove('hide');card.style.animation='cardIn .5s ease both'}
+    else{card.classList.add('hide')}
+  });
+});
+const sty=document.createElement('style');
+sty.textContent='@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}';
+document.head.appendChild(sty);
+
+/* ---- TIMELINE ---- */
+const tl=document.getElementById('timeline');
+timeline.forEach(t=>{
+  const d=document.createElement('div');d.className='tl-item';
+  d.innerHTML=`<div class="when">${t.when}</div><h3>${t.title}</h3><div class="org">${t.org}</div><p>${t.desc}</p>`;
+  tl.appendChild(d);
+});
+
+/* ---- MODAL ---- */
+const modalBg=document.getElementById('modalBg');
+function openModal(p){
+  document.getElementById('mThumb').innerHTML=p.img?`<img src="${p.img}" alt="${p.title}">`:`<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
+  document.getElementById('mCat').textContent=p.catLabel;
+  document.getElementById('mTitle').textContent=p.title;
+  document.getElementById('mDesc').textContent=p.desc;
+  document.getElementById('mFeat').innerHTML=p.feat.map(f=>`<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>${f}</li>`).join('');
+  document.getElementById('mTags').innerHTML=p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  modalBg.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeModal(){modalBg.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+modalBg.addEventListener('click',e=>{if(e.target===modalBg)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ---- TYPING EFFECT ---- */
+const roles=["AI Image Generation Engineer","VTON & Fabric Specialist","Diffusion Pipeline Architect","Constraint Prompt Engineer"];
+const typed=document.getElementById('typed');let ri=0,ci=0,del=false;
+function type(){
+  const r=roles[ri];
+  typed.textContent=r.substring(0,ci);
+  if(!del&&ci<r.length){ci++;setTimeout(type,75)}
+  else if(!del&&ci===r.length){del=true;setTimeout(type,1600)}
+  else if(del&&ci>0){ci--;setTimeout(type,38)}
+  else{del=false;ri=(ri+1)%roles.length;setTimeout(type,300)}
+}
+type();
+
+/* ---- NAV scroll + active ---- */
+const nav=document.getElementById('nav');
+const navAs=[...document.querySelectorAll('.nav-links a')];
+const secs=['home','about','work','journey','contact'].map(id=>document.getElementById(id));
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>30);
+  let cur='home';
+  secs.forEach(s=>{if(scrollY>=s.offsetTop-140)cur=s.id});
+  navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+/* ---- BEFORE / AFTER SLIDER ---- */
+(function(){
+  function sizeBefore(stage){
+    const frame=stage.querySelector('.ba-frame');
+    const before=stage.querySelector('.ba-before');
+    if(frame&&before){before.style.width=frame.clientWidth+'px';}
+  }
+  function setPos(stage,pct){
+    pct=Math.max(0,Math.min(100,pct));
+    stage.querySelector('.ba-before-wrap').style.width=pct+'%';
+    stage.querySelector('.ba-divider').style.left=pct+'%';
+    stage.querySelector('.ba-handle').style.left=pct+'%';
+  }
+  document.querySelectorAll('.ba-stage').forEach(stage=>{
+    const range=stage.querySelector('.ba-range');
+    const apply=()=>setPos(stage,+range.value);
+    range.addEventListener('input',apply);
+    // pointer drag anywhere on frame
+    const frame=stage.querySelector('.ba-frame');
+    let drag=false;
+    const move=e=>{const r=frame.getBoundingClientRect();const x=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*100;range.value=x;apply();};
+    frame.addEventListener('pointerdown',e=>{drag=true;move(e);});
+    window.addEventListener('pointermove',e=>{if(drag)move(e);});
+    window.addEventListener('pointerup',()=>drag=false);
+    sizeBefore(stage);apply();
+  });
+  // tabs
+  const tabs=document.querySelectorAll('.ba-tab');
+  const stages=document.querySelectorAll('.ba-stage');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const idx=t.dataset.ba;
+    stages.forEach(s=>{
+      const on=s.dataset.stage===idx;
+      s.style.display=on?'block':'none';
+      if(on){requestAnimationFrame(()=>sizeBefore(s));}
+    });
+  }));
+  window.addEventListener('resize',()=>document.querySelectorAll('.ba-stage').forEach(s=>{if(s.style.display!=='none')sizeBefore(s);}));
+})();
+
+/* ---- BURGER ---- */
+const burger=document.getElementById('burger');
+burger.addEventListener('click',()=>nav.classList.toggle('open'));
+navAs.forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* ---- REVEAL on scroll ---- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---- FORM (mock) ---- */
+const note=document.getElementById('formNote');
+document.getElementById('sendBtn').addEventListener('click',()=>{
+  const n=document.getElementById('f-name').value.trim();
+  const e=document.getElementById('f-email').value.trim();
+  const m=document.getElementById('f-msg').value.trim();
+  if(!n||!e||!m){note.className='form-note';note.textContent='Please fill in your name, email and message.';return}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){note.className='form-note';note.textContent='That email doesn\'t look right — check and try again.';return}
+  note.className='form-note ok';note.textContent='Thanks, '+n+'! Your message is ready to send. (This is a demo form — wire it to your email service to go live.)';
+  ['f-name','f-email','f-subj','f-msg'].forEach(id=>document.getElementById(id).value='');
+});
+
+/* ---- RESUME ---- */
+document.getElementById('resumeBtn').addEventListener('click',e=>{
+  e.preventDefault();
+  alert('Place your resume PDF next to this file and update the Resume link href to "resume.pdf".');
+});
+</script>
+</body>
+</html>
