@@ -344,7 +344,7 @@ footer .gradtext{font-weight:600}
 </head>
 <body>
 
-<div class="ambient"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
+<div class="ambient"><canvas id="bgCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.25;"></canvas><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
 <div class="grid-overlay"></div>
 
 <!-- NAV -->
@@ -503,7 +503,7 @@ footer .gradtext{font-weight:600}
     </div>
     <div class="ba-stage" data-stage="1" style="display:none">
       <div class="ba-frame">
-        <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Golden-hour architectural">
+        <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Golden-hour architectural" style="filter: sepia(0.5) hue-rotate(-20deg) saturate(1.5) contrast(1.1) brightness(0.95);">
         <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
         <div class="ba-divider"><div class="ba-handle"><span>‹</span><span>›</span></div></div>
         <span class="ba-tag ba-tag-l">Before</span>
@@ -514,7 +514,7 @@ footer .gradtext{font-weight:600}
     </div>
     <div class="ba-stage" data-stage="2" style="display:none">
       <div class="ba-frame">
-        <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Outdoor trail composite">
+        <img class="ba-after" src="assets/img/p5.jpg" alt="AI-enhanced product shoot — Outdoor trail composite">
         <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
         <div class="ba-divider"><div class="ba-handle"><span>‹</span><span>›</span></div></div>
         <span class="ba-tag ba-tag-l">Before</span>
@@ -625,19 +625,19 @@ const projects=[
   {id:1,cat:"vton",catLabel:"VTON & Fabric",title:"AI Fabric Re-Texturing & VTON Engine",
    short:"Swaps textures on garment wireframes while preserving 100% of physical shape and edge geometry.",
    desc:"A precision system that swaps textures onto garment wireframes — Kurta, Dupatta, Bottom — without distorting the source. Constraint logic locks every structural attribute so only the material changes, never the form.",
-   img:"",
+   img:"assets/img/fashion1.png",
    feat:["Maintains 100% of physical shape and outline","Preserves neckline depth and scalloped edge geometry","Per-garment masking for Kurta, Dupatta & Bottom","Scale-lock and geometry-lock constraint prompting"],
    tags:["Stable Diffusion","ControlNet","Inpainting","Masking","Scale Lock"]},
   {id:2,cat:"retouch",catLabel:"Retouching",title:"Automated Ghost-Mannequin Retouching",
    short:"Removes mannequins, generates hollow interiors, and erases wrinkles while keeping 3D volume.",
    desc:"An AI-driven fashion engine that fully removes mannequins, generates seamless hollow neck and waist interiors, and runs ultra-aggressive wrinkle erasure — all while preserving volumetric roundness and fabric texture fidelity.",
-   img:"",
+   img:"assets/img/p2.png",
    feat:["Complete mannequin removal with clean fills","Seamless hollow neck & waist interior generation","Ultra-aggressive wrinkle erasure","Preserves 3D volumetric roundness & denim twill texture"],
    tags:["Inpainting","Img2Img","High-Precision Masking","Negative Constraints"]},
   {id:3,cat:"furnish",catLabel:"Furnishing",title:"High-Precision Furnishing Projection System",
    short:"Projects source patterns onto bedsheets, mattresses & comforters with zero design bleeding.",
    desc:"A texture-projection workflow that copies patterns from source images onto home-furnishing products — bedsheets, mattresses, comforters — covering flat surfaces and vertical draped/tucked sides with no design bleed across edges.",
-   img:"",
+   img:"assets/img/p3.jpg",
    feat:["Pattern projection onto flat and draped surfaces","Handles vertical tucked sides accurately","Zero design bleeding across edges","Blender live-server scripting for layout control"],
    tags:["Python","Blender","Fabric Draping Logic","Perspective Matching"]}
 ];
@@ -700,7 +700,65 @@ timeline.forEach(t=>{
 /* ---- MODAL ---- */
 const modalBg=document.getElementById('modalBg');
 function openModal(p){
-  document.getElementById('mThumb').innerHTML=p.img?`<img src="${p.img}" alt="${p.title}">`:`<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
+  if(p.cat === 'vton') {
+    document.getElementById('mThumb').innerHTML = `
+      <div class="interactive-vton" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:rgba(0,0,0,0.3); border-radius:12px;">
+        <div class="vton-preview-container" style="position: relative; overflow: hidden; border-radius: 12px; flex: 1; min-height: 280px; background: #080816; border: 1px solid var(--stroke); display:flex; align-items:center; justify-content:center;">
+          <img id="vtonPreview" src="assets/img/fashion1.png" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
+          <div id="vtonLoader" style="position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,8,22,0.85); backdrop-filter: blur(4px); color: #fff; font-size: 14px; font-weight: 600; z-index: 10; border-radius:12px;">
+            <div style="text-align: center;">
+              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--cyan); border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
+              <div style="font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);">[RUNNING DIFFUSION SWAP]</div>
+              <div style="font-size:11px;color:var(--txt-faint);margin-top:4px;">Preserving geometry constraints...</div>
+            </div>
+          </div>
+        </div>
+        <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
+            <span>Interactive Fabric swap</span>
+            <span id="fabricLabel" style="color:var(--cyan)">PINK CHIFFON</span>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap:wrap;">
+            <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
+            <button class="vton-btn" data-img="assets/img/fashion3.png" data-label="ROYAL PURPLE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Purple (Pose A)</button>
+            <button class="vton-btn" data-img="assets/img/fashion2.png" data-label="PINK WALK" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose B)</button>
+          </div>
+        </div>
+      </div>`;
+    setTimeout(() => {
+      const btns = document.querySelectorAll('.vton-btn');
+      const img = document.getElementById('vtonPreview');
+      const loader = document.getElementById('vtonLoader');
+      const flbl = document.getElementById('fabricLabel');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('active')) return;
+          btns.forEach(b => {
+            b.classList.remove('active');
+            b.style.border = '1px solid var(--stroke)';
+            b.style.background = 'rgba(255,255,255,0.02)';
+          });
+          btn.classList.add('active');
+          btn.style.border = '1px solid var(--violet)';
+          btn.style.background = 'rgba(124,92,255,0.15)';
+          loader.style.display = 'grid';
+          flbl.textContent = btn.dataset.label;
+          setTimeout(() => {
+            img.src = btn.dataset.img;
+            loader.style.display = 'none';
+          }, 800);
+        });
+      });
+    }, 50);
+  } else if(p.cat === 'retouch') {
+    document.getElementById('mThumb').innerHTML = `
+      <div class="ba-frame" style="width:100%; height:100%; border-radius:12px; position:relative; overflow:hidden; background:#080816; display:flex; align-items:center; justify-content:center; border:1px solid var(--stroke);">
+        <img class="ba-after" src="assets/img/p2.png" alt="Retouched Output" style="width: 100%; height: 100%; object-fit: contain;">
+        <span class="ba-tag ba-tag-r" style="right:10px; background:rgba(34,227,255,0.12); border:1px solid var(--cyan); text-transform:uppercase; font-size:9px; font-family:'JetBrains Mono'; border-radius:4px; padding:3px 8px; position:absolute; bottom:10px;">Clean Cutout</span>
+      </div>`;
+  } else {
+    document.getElementById('mThumb').innerHTML=p.img?`<img src="${p.img}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius:12px; border:1px solid var(--stroke);">`:`<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
+  }
   document.getElementById('mCat').textContent=p.catLabel;
   document.getElementById('mTitle').textContent=p.title;
   document.getElementById('mDesc').textContent=p.desc;
@@ -805,6 +863,97 @@ document.getElementById('resumeBtn').addEventListener('click',e=>{
   e.preventDefault();
   alert('Place your resume PDF next to this file and update the Resume link href to "resume.pdf".');
 });
+
+/* ---- CANVAS PARTICLES BACKGROUND ---- */
+(function() {
+  const canvas = document.getElementById('bgCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let pts = [];
+  const count = 38;
+  
+  function resize() {
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < count; i++) {
+    pts.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 2 + 1
+    });
+  }
+
+  function anim() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(124, 92, 255, 0.45)';
+    ctx.strokeStyle = 'rgba(124, 92, 255, 0.04)';
+    
+    for (let i = 0; i < count; i++) {
+      const p = pts[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      
+      for (let j = i + 1; j < count; j++) {
+        const p2 = pts[j];
+        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+        if (dist < 110) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(anim);
+  }
+  anim();
+})();
+
+/* ---- CARD MOUSE HOVER SPOTLIGHT ---- */
+document.addEventListener('mousemove', e => {
+  document.querySelectorAll('.card').forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+  });
+});
+
+/* ---- SPIN KEYFRAMES CSS ---- */
+const styleNode = document.createElement('style');
+styleNode.textContent = `
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(400px circle at var(--x, 0px) var(--y, 0px), rgba(124,92,255,0.06) 0%, transparent 65%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .card:hover::after {
+    opacity: 1;
+  }
+`;
+document.head.appendChild(styleNode);
 </script>
 </body>
 </html>
