@@ -517,6 +517,8 @@ footer .gradtext{font-weight:600}
       <div class="filter" data-f="vton">VTON & Fabric</div>
       <div class="filter" data-f="retouch">Retouching</div>
       <div class="filter" data-f="furnish">Furnishing</div>
+      <div class="filter" data-f="web">Web Tools</div>
+      <div class="filter" data-f="agents">AI Agents</div>
     </div>
     <div class="proj-grid reveal" id="projGrid"></div>
   </div>
@@ -670,24 +672,36 @@ footer .gradtext{font-weight:600}
 <script>
 /* ---- PROJECT DATA ---- */
 const projects=[
-  {id:1,cat:"vton",catLabel:"VTON & Fabric",title:"AI Fabric Re-Texturing & VTON Engine",
-   short:"Swaps textures on garment wireframes while preserving 100% of physical shape and edge geometry.",
-   desc:"A precision system that swaps textures onto garment wireframes — Kurta, Dupatta, Bottom — without distorting the source. Constraint logic locks every structural attribute so only the material changes, never the form.",
+  {id:1,cat:"vton",catLabel:"VTON & Fabric",title:"AI Multi-Angle Orchestrator",
+   short:"Generate Front, Back, and Side angles simultaneously mapping mannequin garments onto models.",
+   desc:"A production model-mapping system designed for e-commerce brands. Input a mannequin shot and a reference model; the AI instantly maps the garment across multiple angles simultaneously while keeping 100% texture, pattern, and design integrity.",
    img:"assets/img/fashion1.png",
-   feat:["Maintains 100% of physical shape and outline","Preserves neckline depth and scalloped edge geometry","Per-garment masking for Kurta, Dupatta & Bottom","Scale-lock and geometry-lock constraint prompting"],
-   tags:["Stable Diffusion","ControlNet","Inpainting","Masking","Scale Lock"]},
-  {id:2,cat:"retouch",catLabel:"Retouching",title:"Automated Ghost-Mannequin Retouching",
-   short:"Removes mannequins, generates hollow interiors, and erases wrinkles while keeping 3D volume.",
-   desc:"An AI-driven fashion engine that fully removes mannequins, generates seamless hollow neck and waist interiors, and runs ultra-aggressive wrinkle erasure — all while preserving volumetric roundness and fabric texture fidelity.",
+   feat:["Simultaneous multi-angle generation (Front, Back, Side)","Maintains 100% garment texture & structural integrity","Dual-source garment mapping with natural pose physics","Reduces e-commerce cataloging costs and timelines by 90%"],
+   tags:["Stable Diffusion","ControlNet","Dual-Source Mapping","VTON Engine","API serving"]},
+  {id:2,cat:"retouch",catLabel:"Retouching",title:"PhotoFix AI Pro: Automated Retouching Engine",
+   short:"Automated post-production engine replacing manual Photoshop workflows with one-click mass retouching.",
+   desc:"An advanced post-production batch tool that processes multiple images simultaneously. It auto-removes wrinkles, cleans background studio props, repairs walls, and polishes textures with zero manual masking.",
    img:"assets/img/p2.png",
-   feat:["Complete mannequin removal with clean fills","Seamless hollow neck & waist interior generation","Ultra-aggressive wrinkle erasure","Preserves 3D volumetric roundness & denim twill texture"],
-   tags:["Inpainting","Img2Img","High-Precision Masking","Negative Constraints"]},
+   feat:["Wrinkle removal and texture polishing","Studio cleanup (removes props, scratches, repairs walls)","High-precision retouching without manual masking","95% reduction in post-production time"],
+   tags:["Img2Img","Inpainting","Mass Retouching","Negative Constraints"]},
   {id:3,cat:"furnish",catLabel:"Furnishing",title:"High-Precision Furnishing Projection System",
    short:"Projects source patterns onto bedsheets, mattresses & comforters with zero design bleeding.",
    desc:"A texture-projection workflow that copies patterns from source images onto home-furnishing products — bedsheets, mattresses, comforters — covering flat surfaces and vertical draped/tucked sides with no design bleed across edges.",
    img:"assets/img/p3.jpg",
    feat:["Pattern projection onto flat and draped surfaces","Handles vertical tucked sides accurately","Zero design bleeding across edges","Blender live-server scripting for layout control"],
-   tags:["Python","Blender","Fabric Draping Logic","Perspective Matching"]}
+   tags:["Python","Blender","Fabric Draping Logic","Perspective Matching"]},
+  {id:4,cat:"web",catLabel:"Web Tools",title:"Hujoo Shop: Premium E-Commerce Storefront",
+   short:"High-conversion React/Next.js storefront optimized for premium fashion and accessories.",
+   desc:"A beautiful, minimalist, dark-themed e-commerce storefront. Features fully responsive product grids, smooth page transitions, and structured catalog categorization to maximize conversion rate.",
+   img:"assets/img/p6.png",
+   feat:["Optimized, minimalist dark-themed design","Fully responsive layout across mobile and desktop","Streamlined user journey from landing page to checkout","React / Next.js high-performance architecture"],
+   tags:["React.js","Next.js","Tailwind CSS","Responsive UI"]},
+  {id:5,cat:"agents",catLabel:"AI Agents",title:"Multi-Role AI Conversational Agent",
+   short:"Advanced Telegram bot capable of dynamic persona roleplay and Hinglish conversations.",
+   desc:"A conversational bot built with LLMs that switches between multiple personas (e.g. Mentor, Bestie, Assistant). Integrates custom keyboard markup, Hinglish/Hindi text processing, and visual prompts.",
+   img:"assets/img/p7.png",
+   feat:["Dynamic roleplay persona switching (Mentor, Bestie, Assistant)","Multi-language context preservation (Hinglish, Hindi, English)","Custom interactive keyboard UI & button interfaces","Highly engaging chat retention loops"],
+   tags:["LLMs","AI Agents","Hinglish NLP","Telegram Bot API"]}
 ];
 
 const timeline=[
@@ -909,7 +923,7 @@ document.getElementById('sendBtn').addEventListener('click',()=>{
 /* ---- RESUME ---- */
 document.getElementById('resumeBtn').addEventListener('click',e=>{
   e.preventDefault();
-  alert('Place your resume PDF next to this file and update the Resume link href to "resume.pdf".');
+  window.open('https://docs.google.com/presentation/d/1_zRmf4mXpnp7dQ1hYPYSZT21ISMuV9M9eR0X-9Slhj8/edit?usp=sharing', '_blank');
 });
 
 /* ---- CANVAS PARTICLES BACKGROUND ---- */
