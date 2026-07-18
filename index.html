@@ -2206,50 +2206,29 @@
     </div>
   </div>
 
+  <!-- Modular Category Projects Data -->
+  <script src="assets/data/socks.js"></script>
+  <script src="assets/data/vton.js"></script>
+  <script src="assets/data/retouch.js"></script>
+  <script src="assets/data/furnish.js"></script>
+  <script src="assets/data/web.js"></script>
+  <script src="assets/data/agents.js"></script>
+
   <script>
     /* ---- PROJECT DATA ---- */
     const projects = [
-      {
-        id: 1, cat: "vton", catLabel: "VTON & Fabric", title: "AI Multi-Angle Orchestrator",
-        short: "Generate Front, Back, and Side angles simultaneously mapping mannequin garments onto models.",
-        desc: "A production model-mapping system designed for e-commerce brands. Input a mannequin shot and a reference model; the AI instantly maps the garment across multiple angles simultaneously while keeping 100% texture, pattern, and design integrity.",
-        img: "assets/img/fashion1.png",
-        feat: ["Simultaneous multi-angle generation (Front, Back, Side)", "Maintains 100% garment texture & structural integrity", "Dual-source garment mapping with natural pose physics", "Reduces e-commerce cataloging costs and timelines by 90%"],
-        tags: ["Stable Diffusion", "ControlNet", "Dual-Source Mapping", "VTON Engine", "API serving"]
-      },
-      {
-        id: 2, cat: "retouch", catLabel: "Retouching", title: "PhotoFix AI Pro: Automated Retouching Engine",
-        short: "Automated post-production engine replacing manual Photoshop workflows with one-click mass retouching.",
-        desc: "An advanced post-production batch tool that processes multiple images simultaneously. It auto-removes wrinkles, cleans background studio props, repairs walls, and polishes textures with zero manual masking.",
-        img: "assets/img/p2.png",
-        feat: ["Wrinkle removal and texture polishing", "Studio cleanup (removes props, scratches, repairs walls)", "High-precision retouching without manual masking", "95% reduction in post-production time"],
-        tags: ["Img2Img", "Inpainting", "Mass Retouching", "Negative Constraints"]
-      },
-      {
-        id: 3, cat: "furnish", catLabel: "Furnishing", title: "High-Precision Furnishing Projection System",
-        short: "Projects source patterns onto bedsheets, mattresses & comforters with zero design bleeding.",
-        desc: "A texture-projection workflow that copies patterns from source images onto home-furnishing products — bedsheets, mattresses, comforters — covering flat surfaces and vertical draped/tucked sides with no design bleed across edges.",
-        img: "assets/img/p3.jpg",
-        feat: ["Pattern projection onto flat and draped surfaces", "Handles vertical tucked sides accurately", "Zero design bleeding across edges", "Blender live-server scripting for layout control"],
-        tags: ["Python", "Blender", "Fabric Draping Logic", "Perspective Matching"]
-      },
-      {
-        id: 4, cat: "web", catLabel: "Web Tools", title: "Hujoo Shop: Premium E-Commerce Storefront",
-        short: "High-conversion React/Next.js storefront optimized for premium fashion and accessories.",
-        desc: "A beautiful, minimalist, dark-themed e-commerce storefront. Features fully responsive product grids, smooth page transitions, and structured catalog categorization to maximize conversion rate.",
-        img: "assets/img/p6.png",
-        feat: ["Optimized, minimalist dark-themed design", "Fully responsive layout across mobile and desktop", "Streamlined user journey from landing page to checkout", "React / Next.js high-performance architecture"],
-        tags: ["React.js", "Next.js", "Tailwind CSS", "Responsive UI"]
-      },
-      {
-        id: 5, cat: "agents", catLabel: "AI Agents", title: "Multi-Role AI Conversational Agent",
-        short: "Advanced Telegram bot capable of dynamic persona roleplay and Hinglish conversations.",
-        desc: "A conversational bot built with LLMs that switches between multiple personas (e.g. Mentor, Bestie, Assistant). Integrates custom keyboard markup, Hinglish/Hindi text processing, and visual prompts.",
-        img: "assets/img/p7.png",
-        feat: ["Dynamic roleplay persona switching (Mentor, Bestie, Assistant)", "Multi-language context preservation (Hinglish, Hindi, English)", "Custom interactive keyboard UI & button interfaces", "Highly engaging chat retention loops"],
-        tags: ["LLMs", "AI Agents", "Hinglish NLP", "Telegram Bot API"]
-      }
+      ...socksProjects,
+      ...vtonProjects,
+      ...retouchProjects,
+      ...furnishProjects,
+      ...webProjects,
+      ...agentsProjects
     ];
+
+    // Assign dynamic sequential IDs
+    projects.forEach((p, i) => {
+      p.id = i + 1;
+    });
 
     const timeline = [
       { when: "2024 — Present", title: "AI Image Generation & Automation Engineer", org: "Fashion & Retail E-Commerce", desc: "Designing constraint-driven diffusion pipelines for fabric VTON, ghost-mannequin retouching, API integrations (fal.ai, ComfyUI, Gemini) and database deployments." },
@@ -2310,27 +2289,50 @@
     const modalBg = document.getElementById('modalBg');
     function openModal(p) {
       if (p.cat === 'vton') {
+        const isSocks = p.isSocks === true;
         document.getElementById('mThumb').innerHTML = `
       <div class="interactive-vton" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:rgba(0,0,0,0.3); border-radius:12px;">
         <div class="vton-preview-container" style="position: relative; overflow: hidden; border-radius: 12px; flex: 1; min-height: 280px; background: #080816; border: 1px solid var(--stroke); display:flex; align-items:center; justify-content:center;">
-          <img id="vtonPreview" src="assets/img/fashion1.png" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
+          <img id="vtonPreview" src="${isSocks ? 'assets/img/socks_1.jpg' : 'assets/img/fashion1.png'}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
           <div id="vtonLoader" style="position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,8,22,0.85); backdrop-filter: blur(4px); color: #fff; font-size: 14px; font-weight: 600; z-index: 10; border-radius:12px;">
             <div style="text-align: center;">
               <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--cyan); border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
-              <div style="font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);">[RUNNING DIFFUSION SWAP]</div>
-              <div style="font-size:11px;color:var(--txt-faint);margin-top:4px;">Preserving geometry constraints...</div>
+              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);">${isSocks ? '[LOCKING LOGO POSITION]' : '[RUNNING DIFFUSION SWAP]'}</div>
+              <div id="vtonLoaderDesc" style="font-size:11px;color:var(--txt-faint);margin-top:4px;">${isSocks ? 'Running Gemini spatial anchor logic...' : 'Preserving geometry constraints...'}</div>
             </div>
           </div>
         </div>
+
+        ${isSocks ? `
+        <!-- BEFORE/AFTER TABS -->
+        <div class="socks-toggle-pill" style="display: flex; gap: 4px; background: rgba(0,0,0,0.5); border: 1px solid var(--stroke); border-radius: 100px; padding: 4px; width: fit-content; margin: 12px auto 0; z-index: 5;">
+          <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (Mannequin)</button>
+          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: var(--violet); color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px rgba(124,92,255,0.3);">After (AI Try-On)</button>
+        </div>
+        ` : ''}
+
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
-            <span>Interactive Fabric swap</span>
-            <span id="fabricLabel" style="color:var(--cyan)">PINK CHIFFON</span>
+            <span>${isSocks ? 'Select Sock Style / Branding Anchor' : 'Interactive Fabric swap'}</span>
+            <span id="fabricLabel" style="color:var(--cyan)">${isSocks ? 'BLACK LOW-CUT (TOE)' : 'PINK CHIFFON'}</span>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap:wrap;">
+          <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 120px; overflow-y: auto; padding-right: 4px;">
+            ${isSocks ? `
+            <button class="vton-btn active" data-img="assets/img/socks_1.jpg" data-mannequin="assets/img/mannequin_1.jpg" data-label="BLACK LOW-CUT (TOE)" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Toe</button>
+            <button class="vton-btn" data-img="assets/img/socks_2.jpg" data-mannequin="assets/img/mannequin_2.jpg" data-label="WHITE/GREEN COLLAR" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Green Low</button>
+            <button class="vton-btn" data-img="assets/img/socks_3.jpg" data-mannequin="assets/img/mannequin_3.jpg" data-label="BLUE STRIPED" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Blue Stripe</button>
+            <button class="vton-btn" data-img="assets/img/socks_4.jpg" data-mannequin="assets/img/mannequin_4.jpg" data-label="YELLOW STRIPED COLLAR" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Yellow Stripe</button>
+            <button class="vton-btn" data-img="assets/img/socks_5.jpg" data-mannequin="assets/img/mannequin_5.jpg" data-label="BLACK CREW (RIBBED)" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Crew</button>
+            <button class="vton-btn" data-img="assets/img/socks_6.jpg" data-mannequin="assets/img/mannequin_6.jpg" data-label="BLUE STRIPED CUFF" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Blue Cuff</button>
+            <button class="vton-btn" data-img="assets/img/socks_7.jpg" data-mannequin="assets/img/mannequin_7.jpg" data-label="WHITE/PINK COLLAR" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink Low</button>
+            <button class="vton-btn" data-img="assets/img/socks_8.jpg" data-mannequin="assets/img/mannequin_8.jpg" data-label="PINK SIDE STRIPE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink Side</button>
+            <button class="vton-btn" data-img="assets/img/socks_9.jpg" data-mannequin="assets/img/mannequin_9.jpg" data-label="BLACK SIDE STRIPE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Side</button>
+            <button class="vton-btn" data-img="assets/img/socks_10.jpg" data-mannequin="assets/img/mannequin_10.jpg" data-label="BLACK STRIPED CUFF" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Cuff</button>
+            ` : `
             <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
             <button class="vton-btn" data-img="assets/img/fashion3.png" data-label="ROYAL PURPLE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Purple (Pose A)</button>
             <button class="vton-btn" data-img="assets/img/fashion2.png" data-label="PINK WALK" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose B)</button>
+            `}
           </div>
         </div>
       </div>`;
@@ -2339,6 +2341,62 @@
           const img = document.getElementById('vtonPreview');
           const loader = document.getElementById('vtonLoader');
           const flbl = document.getElementById('fabricLabel');
+          
+          let currentViewMode = 'after'; // default is AI Try-On
+          
+          if (isSocks) {
+            const btnBefore = document.getElementById('btnBefore');
+            const btnAfter = document.getElementById('btnAfter');
+            const lTitle = document.getElementById('vtonLoaderTitle');
+            const lDesc = document.getElementById('vtonLoaderDesc');
+            
+            btnBefore.addEventListener('click', () => {
+              if (currentViewMode === 'before') return;
+              currentViewMode = 'before';
+              
+              // Style transition
+              btnBefore.style.background = 'rgba(255,255,255,0.15)';
+              btnBefore.style.color = '#fff';
+              btnAfter.style.background = 'transparent';
+              btnAfter.style.color = 'var(--txt-dim)';
+              btnAfter.style.boxShadow = 'none';
+              
+              // Loader
+              lTitle.textContent = '[LOADING MANNEQUIN REFERENCE]';
+              lDesc.textContent = 'Fetching raw product photography...';
+              loader.style.display = 'grid';
+              
+              setTimeout(() => {
+                const activeBtn = document.querySelector('.vton-btn.active');
+                img.src = activeBtn.dataset.mannequin;
+                loader.style.display = 'none';
+              }, 400);
+            });
+            
+            btnAfter.addEventListener('click', () => {
+              if (currentViewMode === 'after') return;
+              currentViewMode = 'after';
+              
+              // Style transition
+              btnAfter.style.background = 'var(--violet)';
+              btnAfter.style.color = '#fff';
+              btnAfter.style.boxShadow = '0 0 10px rgba(124,92,255,0.3)';
+              btnBefore.style.background = 'transparent';
+              btnBefore.style.color = 'var(--txt-dim)';
+              
+              // Loader
+              lTitle.textContent = '[RUNNING DIFFUSION SWAP]';
+              lDesc.textContent = 'Enforcing Gemini anatomical constraints...';
+              loader.style.display = 'grid';
+              
+              setTimeout(() => {
+                const activeBtn = document.querySelector('.vton-btn.active');
+                img.src = activeBtn.dataset.img;
+                loader.style.display = 'none';
+              }, 400);
+            });
+          }
+          
           btns.forEach(btn => {
             btn.addEventListener('click', () => {
               if (btn.classList.contains('active')) return;
@@ -2350,12 +2408,28 @@
               btn.classList.add('active');
               btn.style.border = '1px solid var(--violet)';
               btn.style.background = 'rgba(124,92,255,0.15)';
+              
+              const lTitle = document.getElementById('vtonLoaderTitle');
+              const lDesc = document.getElementById('vtonLoaderDesc');
+              if (isSocks) {
+                if (currentViewMode === 'after') {
+                  lTitle.textContent = '[LOCKING LOGO POSITION]';
+                  lDesc.textContent = 'Running Gemini spatial anchor logic...';
+                } else {
+                  lTitle.textContent = '[LOADING MANNEQUIN REFERENCE]';
+                  lDesc.textContent = 'Fetching raw product photography...';
+                }
+              } else {
+                lTitle.textContent = '[RUNNING DIFFUSION SWAP]';
+                lDesc.textContent = 'Preserving geometry constraints...';
+              }
+              
               loader.style.display = 'grid';
               flbl.textContent = btn.dataset.label;
               setTimeout(() => {
-                img.src = btn.dataset.img;
+                img.src = currentViewMode === 'after' ? btn.dataset.img : (btn.dataset.mannequin || btn.dataset.img);
                 loader.style.display = 'none';
-              }, 800);
+              }, 700);
             });
           });
         }, 50);
