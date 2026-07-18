@@ -672,6 +672,201 @@
       gap: 26px
     }
 
+    /* ---- SOCKS SHOWCASE SECTION ---- */
+    .socks-showcase-section {
+      padding: 110px 0;
+      position: relative
+    }
+
+    .socks-showcase-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(124,92,255,0.07), transparent 70%);
+      pointer-events: none
+    }
+
+    .socks-brand-header {
+      text-align: center;
+      margin-bottom: 60px
+    }
+
+    .socks-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(124,92,255,.4);
+      background: rgba(124,92,255,.1);
+      font-family: 'JetBrains Mono';
+      font-size: 12px;
+      color: var(--violet);
+      letter-spacing: .08em;
+      margin-bottom: 20px
+    }
+
+    .socks-brand-badge .dot-live {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #7c5cff;
+      box-shadow: 0 0 8px var(--violet);
+      animation: pulse 2s infinite
+    }
+
+    .socks-brand-header h2 {
+      font-size: clamp(30px, 4.5vw, 56px);
+      font-weight: 800;
+      margin-bottom: 16px
+    }
+
+    .socks-brand-header p {
+      font-size: 17px;
+      color: var(--txt-dim);
+      max-width: 580px;
+      margin: 0 auto
+    }
+
+    /* Socks 5-col then 5-col grid — 2 rows of 5 */
+    .socks-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 60px
+    }
+
+    @media(max-width:1100px) {
+      .socks-grid { grid-template-columns: repeat(4, 1fr) }
+    }
+    @media(max-width:800px) {
+      .socks-grid { grid-template-columns: repeat(3, 1fr) }
+    }
+    @media(max-width:560px) {
+      .socks-grid { grid-template-columns: repeat(2, 1fr) }
+    }
+
+    .sock-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      transition: .45s cubic-bezier(.2,.8,.3,1);
+      group: true
+    }
+
+    .sock-card:hover {
+      border-color: rgba(124,92,255,.6);
+      box-shadow: 0 20px 50px -15px rgba(124,92,255,.5), 0 0 0 1px rgba(124,92,255,.2);
+      transform: translateY(-6px) scale(1.02)
+    }
+
+    /* The 'after' (AI try-on) layer — visible by default */
+    .sock-card .sock-after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity .5s ease
+    }
+
+    /* The 'before' (mannequin) layer — hidden by default, shows on hover */
+    .sock-card .sock-before {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .5s ease
+    }
+
+    .sock-card:hover .sock-before {
+      opacity: 1
+    }
+
+    .sock-card:hover .sock-after {
+      opacity: 0
+    }
+
+    /* Gradient overlay at bottom */
+    .sock-card .sock-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 50px 14px 14px;
+      background: linear-gradient(to top, rgba(7,7,17,.95) 0%, rgba(7,7,17,.6) 60%, transparent 100%);
+      z-index: 2;
+      transition: opacity .4s ease
+    }
+
+    .sock-card .sock-title {
+      font-family: 'Outfit';
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3
+    }
+
+    .sock-card .sock-sku {
+      font-family: 'JetBrains Mono';
+      font-size: 10px;
+      color: var(--txt-faint);
+      margin-top: 2px
+    }
+
+    /* Hover mode badge */
+    .sock-card .sock-mode-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 3;
+      font-family: 'JetBrains Mono';
+      font-size: 9px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+      letter-spacing: .06em;
+      transition: .4s ease
+    }
+
+    .sock-card .sock-mode-badge.ai {
+      background: rgba(124,92,255,.2);
+      border: 1px solid rgba(124,92,255,.5);
+      color: #b89dff
+    }
+
+    .sock-card .sock-mode-badge.mannequin {
+      background: rgba(34,227,255,.15);
+      border: 1px solid rgba(34,227,255,.4);
+      color: var(--cyan);
+      opacity: 0
+    }
+
+    .sock-card:hover .sock-mode-badge.ai { opacity: 0 }
+    .sock-card:hover .sock-mode-badge.mannequin { opacity: 1 }
+
+    /* Number badge */
+    .sock-card .sock-num {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      font-family: 'JetBrains Mono';
+      font-size: 11px;
+      background: rgba(7,7,17,.75);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(6px);
+      padding: 4px 9px;
+      border-radius: 7px;
+      color: var(--txt-dim)
+    }
+
     .card {
       background: var(--surface);
       border: 1px solid var(--stroke);
@@ -1999,25 +2194,37 @@
     </div>
   </section>
 
-  <!-- WORK -->
-  <section id="work">
+
+  <!-- CAMPUS SOCKS SHOWCASE -->
+  <section class="socks-showcase-section" id="work">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-tag">02 / Selected Work</div>
-        <h2>Featured <span class="gradtext">projects</span></h2>
-        <p>Production AI systems built for precision at catalog scale. Click any card for the full breakdown.</p>
+      <div class="socks-brand-header reveal">
+        <div class="socks-brand-badge"><span class="dot-live"></span> CAMPUS SOCKS × AI PIPELINE</div>
+        <h2>10-SKU Branding <span class="gradtext">Showcase</span></h2>
+        <p>Hover any style to see the raw mannequin → AI try-on reveal. Every logo is anchored by Gemini spatial constraint logic — zero hallucinations.</p>
       </div>
-      <div class="filters reveal" id="filters">
-        <div class="filter active" data-f="all">All</div>
-        <div class="filter" data-f="vton">VTON & Fabric</div>
-        <div class="filter" data-f="retouch">Retouching</div>
-        <div class="filter" data-f="furnish">Furnishing</div>
-        <div class="filter" data-f="web">Web Tools</div>
-        <div class="filter" data-f="agents">AI Agents</div>
+      <div class="socks-grid reveal" id="socksGrid"></div>
+
+      <!-- Divider to other projects -->
+      <div style="margin-top:80px; border-top: 1px solid var(--stroke); padding-top: 70px;">
+        <div class="sec-head reveal" style="margin-bottom:38px;">
+          <div class="sec-tag">02 / Other Work</div>
+          <h2>More <span class="gradtext">Projects</span></h2>
+          <p>Production AI systems built for precision at catalog scale. Click any card for the full breakdown.</p>
+        </div>
+        <div class="filters reveal" id="filters">
+          <div class="filter active" data-f="all">All</div>
+          <div class="filter" data-f="vton">VTON & Fabric</div>
+          <div class="filter" data-f="retouch">Retouching</div>
+          <div class="filter" data-f="furnish">Furnishing</div>
+          <div class="filter" data-f="web">Web Tools</div>
+          <div class="filter" data-f="agents">AI Agents</div>
+        </div>
+        <div class="proj-grid reveal" id="projGrid"></div>
       </div>
-      <div class="proj-grid reveal" id="projGrid"></div>
     </div>
   </section>
+
 
   <!-- AI PRODUCT SHOOTS -->
   <section id="shoots">
@@ -2239,13 +2446,44 @@
 
     const phSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>';
 
-    /* ---- RENDER PROJECTS ---- */
+    /* ---- RENDER SOCKS SHOWCASE ---- */
+    const socksGrid = document.getElementById('socksGrid');
+    const sockLabels = [
+      "Black Low-Cut", "White/Green", "Blue Stripe",
+      "Yellow Stripe", "Black Crew", "Blue Cuff",
+      "Pink Low-Cut", "Pink Side", "Black Side", "Black Striped Cuff"
+    ];
+    const sockSkus = [
+      "CMP-16", "CMP-17", "CMP-18", "CMP-19", "CMP-20",
+      "CMP-21", "CMP-22", "CMP-23", "CMP-24", "CMP-25"
+    ];
+    socksProjects.forEach((p, i) => {
+      const n = i + 1;
+      const sc = document.createElement('div');
+      sc.className = 'sock-card';
+      sc.innerHTML = `
+        <span class="sock-num">0${n}</span>
+        <img class="sock-after" src="assets/img/socks_${n}.jpg" alt="${sockLabels[i]} AI Try-On">
+        <img class="sock-before" src="assets/img/mannequin_${n}.jpg" alt="${sockLabels[i]} Mannequin">
+        <span class="sock-mode-badge ai">AI TRY-ON</span>
+        <span class="sock-mode-badge mannequin">MANNEQUIN</span>
+        <div class="sock-overlay">
+          <div class="sock-title">${sockLabels[i]}</div>
+          <div class="sock-sku">${sockSkus[i]}</div>
+        </div>`;
+      sc.addEventListener('click', () => openModal(p));
+      socksGrid.appendChild(sc);
+    });
+
+    /* ---- RENDER OTHER PROJECTS ---- */
     const grid = document.getElementById('projGrid');
     function thumbHTML(p) {
       if (p.img) return `<img src="${p.img}" alt="${p.title}">`;
       return `<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600;font-size:14px">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
     }
-    projects.forEach((p, i) => {
+    // Only render non-socks projects in the general grid
+    const nonSocksProjects = projects.filter(p => !p.isSocks);
+    nonSocksProjects.forEach((p, i) => {
       const c = document.createElement('div');
       c.className = 'card'; c.dataset.cat = p.cat; c.style.transitionDelay = (i * 0.05) + 's';
       c.innerHTML = `
@@ -2260,6 +2498,7 @@
       c.addEventListener('click', () => openModal(p));
       grid.appendChild(c);
     });
+
 
     /* ---- FILTERS ---- */
     document.getElementById('filters').addEventListener('click', e => {
