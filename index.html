@@ -2205,23 +2205,7 @@
       </div>
       <div class="socks-grid reveal" id="socksGrid"></div>
 
-      <!-- Divider to other projects -->
-      <div style="margin-top:80px; border-top: 1px solid var(--stroke); padding-top: 70px;">
-        <div class="sec-head reveal" style="margin-bottom:38px;">
-          <div class="sec-tag">02 / Other Work</div>
-          <h2>More <span class="gradtext">Projects</span></h2>
-          <p>Production AI systems built for precision at catalog scale. Click any card for the full breakdown.</p>
-        </div>
-        <div class="filters reveal" id="filters">
-          <div class="filter active" data-f="all">All</div>
-          <div class="filter" data-f="vton">VTON & Fabric</div>
-          <div class="filter" data-f="retouch">Retouching</div>
-          <div class="filter" data-f="furnish">Furnishing</div>
-          <div class="filter" data-f="web">Web Tools</div>
-          <div class="filter" data-f="agents">AI Agents</div>
-        </div>
-        <div class="proj-grid reveal" id="projGrid"></div>
-      </div>
+
     </div>
   </section>
 
@@ -2475,46 +2459,6 @@
       socksGrid.appendChild(sc);
     });
 
-    /* ---- RENDER OTHER PROJECTS ---- */
-    const grid = document.getElementById('projGrid');
-    function thumbHTML(p) {
-      if (p.img) return `<img src="${p.img}" alt="${p.title}">`;
-      return `<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600;font-size:14px">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
-    }
-    // Only render non-socks projects in the general grid
-    const nonSocksProjects = projects.filter(p => !p.isSocks);
-    nonSocksProjects.forEach((p, i) => {
-      const c = document.createElement('div');
-      c.className = 'card'; c.dataset.cat = p.cat; c.style.transitionDelay = (i * 0.05) + 's';
-      c.innerHTML = `
-    <div class="thumb"><span class="num">0${p.id}</span>${thumbHTML(p)}</div>
-    <div class="body">
-      <h3>${p.title}</h3>
-      <p>${p.short}</p>
-      <div class="tags">${p.tags.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}</div>
-      <span class="view-link">View details
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </div>`;
-      c.addEventListener('click', () => openModal(p));
-      grid.appendChild(c);
-    });
-
-
-    /* ---- FILTERS ---- */
-    document.getElementById('filters').addEventListener('click', e => {
-      const f = e.target.closest('.filter'); if (!f) return;
-      document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
-      f.classList.add('active');
-      const cat = f.dataset.f;
-      document.querySelectorAll('.card').forEach(card => {
-        const show = cat === 'all' || card.dataset.cat === cat;
-        if (show) { card.classList.remove('hide'); card.style.animation = 'cardIn .5s ease both' }
-        else { card.classList.add('hide') }
-      });
-    });
-    const sty = document.createElement('style');
-    sty.textContent = '@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}';
-    document.head.appendChild(sty);
 
     /* ---- TIMELINE ---- */
     const tl = document.getElementById('timeline');
