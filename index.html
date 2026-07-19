@@ -1381,6 +1381,12 @@
       overflow: hidden
     }
 
+    .modal .m-thumb.vton-mode {
+      aspect-ratio: auto;
+      height: auto;
+      min-height: 480px;
+    }
+
     .modal .m-thumb img {
       width: 100%;
       height: 100%;
@@ -1427,7 +1433,7 @@
       place-items: center;
       backdrop-filter: blur(6px);
       transition: .25s;
-      z-index: 2
+      z-index: 30
     }
 
     .modal-close:hover {
@@ -1618,6 +1624,12 @@
 
       .modal .m-thumb {
         aspect-ratio: 16/10
+      }
+
+      .modal .m-thumb.vton-mode {
+        aspect-ratio: auto;
+        height: auto;
+        min-height: 520px;
       }
     }
 
@@ -2471,9 +2483,11 @@
     /* ---- MODAL ---- */
     const modalBg = document.getElementById('modalBg');
     function openModal(p) {
+      const mThumb = document.getElementById('mThumb');
       if (p.cat === 'vton') {
         const isSocks = p.isSocks === true;
-        document.getElementById('mThumb').innerHTML = `
+        mThumb.classList.add('vton-mode');
+        mThumb.innerHTML = `
       <div class="interactive-vton" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:rgba(0,0,0,0.3); border-radius:12px;">
         <div class="vton-preview-container" style="position: relative; overflow: hidden; border-radius: 12px; flex: 1; min-height: 280px; background: #080816; border: 1px solid var(--stroke); display:flex; align-items:center; justify-content:center;">
           <img id="vtonPreview" src="${isSocks ? 'assets/img/socks_1.jpg' : 'assets/img/fashion1.png'}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
@@ -2632,7 +2646,7 @@
       document.getElementById('mTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
       modalBg.classList.add('open'); document.body.style.overflow = 'hidden';
     }
-    function closeModal() { modalBg.classList.remove('open'); document.body.style.overflow = '' }
+    function closeModal() { modalBg.classList.remove('open'); document.body.style.overflow = ''; document.getElementById('mThumb').classList.remove('vton-mode'); }
     document.getElementById('modalClose').addEventListener('click', closeModal);
     modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal() });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal() });
