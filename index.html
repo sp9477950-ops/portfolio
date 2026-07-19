@@ -2032,10 +2032,212 @@
         transform: none
       }
     }
+
+    /* ========== SPLASH SCREEN ========== */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #070711;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    #splash.hide {
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+    .splash-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,92,255,0.22) 0%, rgba(34,227,255,0.07) 50%, transparent 75%);
+      pointer-events: none;
+      animation: splashPulse 4s ease-in-out infinite alternate;
+    }
+    @keyframes splashPulse {
+      from { opacity: 0.6; transform: scale(1); }
+      to   { opacity: 1;   transform: scale(1.06); }
+    }
+    .splash-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,92,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,255,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      animation: splashGridFade 1.2s ease forwards;
+    }
+    @keyframes splashGridFade {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    /* floating orbs */
+    .splash-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      animation: splashFloat linear infinite alternate;
+    }
+    .splash-orb.o1 { width:340px; height:340px; background:rgba(124,92,255,0.18); top:-80px; left:-80px; animation-duration:6s; }
+    .splash-orb.o2 { width:280px; height:280px; background:rgba(34,227,255,0.12); bottom:-60px; right:-60px; animation-duration:8s; }
+    .splash-orb.o3 { width:180px; height:180px; background:rgba(75,59,255,0.14); top:40%; right:10%; animation-duration:5s; }
+    @keyframes splashFloat {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(20px,30px) scale(1.1); }
+    }
+    .splash-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+    }
+    .splash-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,92,255,0.12);
+      border: 1px solid rgba(124,92,255,0.35);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: splashFadeUp 0.7s 0.3s ease forwards;
+    }
+    .splash-tag-dot {
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: splashBlink 1.2s 0.3s infinite;
+    }
+    @keyframes splashBlink {
+      0%,100% { opacity:1; } 50% { opacity:0.2; }
+    }
+    .splash-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(54px, 12vw, 96px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      background: linear-gradient(110deg, #fff 0%, #c7b8ff 45%, #22e3ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      animation: splashFadeUp 0.9s 0.7s cubic-bezier(0.2,0.8,0.3,1) forwards;
+      margin-bottom: 16px;
+    }
+    .splash-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(13px, 3vw, 17px);
+      color: var(--txt-dim);
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: splashFadeUp 0.8s 1.3s ease forwards;
+      min-height: 24px;
+    }
+    .splash-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(110deg, #4b3bff, #7c5cff);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      animation: splashFadeUp 0.8s 2.0s ease forwards;
+      box-shadow: 0 0 40px rgba(124,92,255,0.45), 0 0 80px rgba(124,92,255,0.15);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .splash-cta:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 0 60px rgba(124,92,255,0.6), 0 0 100px rgba(34,227,255,0.2);
+    }
+    .splash-cta svg {
+      width: 18px; height: 18px;
+      transition: transform 0.25s;
+    }
+    .splash-cta:hover svg {
+      transform: translateX(4px);
+    }
+    .splash-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: splashFadeUp 0.7s 2.6s ease forwards;
+      z-index: 2;
+    }
+    .splash-scroll-hint span {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--txt-faint);
+      font-family: 'JetBrains Mono';
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--violet), transparent);
+      animation: scrollLinePulse 1.6s 2.6s ease infinite;
+    }
+    @keyframes scrollLinePulse {
+      0% { opacity:0; transform:scaleY(0); transform-origin:top; }
+      50% { opacity:1; }
+      100% { opacity:0; transform:scaleY(1); transform-origin:bottom; }
+    }
+    @keyframes splashFadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="splash">
+    <div class="splash-bg"></div>
+    <div class="splash-grid"></div>
+    <div class="splash-orb o1"></div>
+    <div class="splash-orb o2"></div>
+    <div class="splash-orb o3"></div>
+    <div class="splash-content">
+      <div class="splash-tag"><span class="splash-tag-dot"></span>AI Image Generation Engineer</div>
+      <div class="splash-name">Sahil</div>
+      <div class="splash-role" id="splashRole">></div>
+      <button class="splash-cta" id="splashEnter">
+        View My Portfolio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </button>
+    </div>
+    <div class="splash-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
 
   <div class="ambient"><canvas id="bgCanvas"
       style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.25;"></canvas>
@@ -2834,6 +3036,48 @@
   }
 `;
     document.head.appendChild(styleNode);
+
+    /* ---- SPLASH SCREEN ---- */
+    (function () {
+      const splash = document.getElementById('splash');
+      const enterBtn = document.getElementById('splashEnter');
+      const roleEl = document.getElementById('splashRole');
+
+      // Typewriter for splash role
+      const splashRoles = [
+        'VTON & Fabric Specialist_',
+        'Diffusion Pipeline Architect_',
+        'Constraint Prompt Engineer_'
+      ];
+      let sri = 0, sci = 0, sdel = false;
+      function splashType() {
+        const r = splashRoles[sri];
+        roleEl.textContent = '> ' + r.substring(0, sci);
+        if (!sdel && sci < r.length) { sci++; setTimeout(splashType, 65); }
+        else if (!sdel && sci === r.length) { sdel = true; setTimeout(splashType, 1800); }
+        else if (sdel && sci > 0) { sci--; setTimeout(splashType, 30); }
+        else { sdel = false; sri = (sri + 1) % splashRoles.length; setTimeout(splashType, 200); }
+      }
+      setTimeout(splashType, 1500);
+
+      // Dismiss splash
+      function dismissSplash() {
+        splash.classList.add('hide');
+        document.body.style.overflow = '';
+        setTimeout(() => { splash.style.display = 'none'; }, 850);
+      }
+
+      enterBtn.addEventListener('click', dismissSplash);
+
+      // Also dismiss on scroll (after animations have had time to play)
+      let scrollReady = false;
+      setTimeout(() => { scrollReady = true; }, 2500);
+      window.addEventListener('wheel', () => { if (scrollReady) dismissSplash(); }, { once: true });
+      window.addEventListener('touchmove', () => { if (scrollReady) dismissSplash(); }, { once: true });
+
+      // Lock body scroll while splash is showing
+      document.body.style.overflow = 'hidden';
+    })();
   </script>
 </body>
 
