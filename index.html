@@ -740,10 +740,13 @@
       .socks-grid { grid-template-columns: repeat(4, 1fr) }
     }
     @media(max-width:800px) {
-      .socks-grid { grid-template-columns: repeat(3, 1fr) }
+      .socks-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
     }
     @media(max-width:560px) {
-      .socks-grid { grid-template-columns: repeat(2, 1fr) }
+      .socks-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+    @media(max-width:400px) {
+      .socks-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     }
 
     .sock-card {
@@ -1580,32 +1583,95 @@
       }
     }
 
+
     @media(max-width:560px) {
       section {
-        padding: 70px 0
+        padding: 60px 0
       }
 
       header {
-        padding: 120px 0 60px
+        padding: 110px 0 50px
+      }
+
+      /* Hero — bigger, bolder on mobile */
+      .hero h1 {
+        font-size: clamp(40px, 11vw, 56px)
+      }
+
+      .role-line {
+        font-size: clamp(16px, 4.5vw, 22px)
+      }
+
+      .hero p.lede {
+        font-size: 16px;
+        line-height: 1.65
+      }
+
+      .btns {
+        flex-direction: column;
+        gap: 10px
+      }
+
+      .btn {
+        justify-content: center;
+        padding: 16px 24px;
+        font-size: 16px
       }
 
       .hero-stats {
-        gap: 22px;
-        flex-wrap: wrap
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 32px
+      }
+
+      .hero-stats .s b {
+        font-size: 26px
+      }
+
+      .hero-stats .s span {
+        font-size: 12px
       }
 
       .about-card,
       .form {
-        padding: 24px
+        padding: 22px 18px
       }
 
       .float-chip {
         display: none
       }
 
+      /* Socks header bigger on mobile */
+      .socks-brand-header {
+        margin-bottom: 36px
+      }
+
+      .socks-brand-header p {
+        font-size: 15px;
+        padding: 0 8px
+      }
+
+      .socks-brand-badge {
+        font-size: 10px;
+        padding: 6px 13px
+      }
+
+      /* Sock cards — bigger labels on mobile */
+      .sock-card .sock-title {
+        font-size: 13px
+      }
+
+      .sock-card .sock-sku {
+        font-size: 10px
+      }
+
+      .sock-card .sock-overlay {
+        padding: 40px 10px 10px
+      }
+
       /* Modal responsive sizing */
       .modal-bg {
-        padding: 12px
+        padding: 10px
       }
 
       .modal {
@@ -1614,12 +1680,12 @@
       }
 
       .modal .m-body {
-        padding: 20px
+        padding: 18px 16px
       }
 
       .modal .m-body h2 {
-        font-size: 22px;
-        margin-bottom: 12px
+        font-size: 20px;
+        margin-bottom: 10px
       }
 
       .modal .m-thumb {
@@ -1629,9 +1695,48 @@
       .modal .m-thumb.vton-mode {
         aspect-ratio: auto;
         height: auto;
-        min-height: 520px;
+        min-height: 420px;
+      }
+
+      /* Sec head */
+      .sec-head h2 {
+        font-size: clamp(28px, 7vw, 40px)
+      }
+
+      .sec-head p {
+        font-size: 15px
       }
     }
+
+    /* Very small phones — 390px and under */
+    @media(max-width:390px) {
+      .wrap {
+        padding: 0 16px
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 10vw, 48px)
+      }
+
+      .socks-brand-header h2 {
+        font-size: clamp(26px, 8vw, 36px)
+      }
+
+      .socks-grid {
+        gap: 8px
+      }
+
+      .sock-card .sock-title {
+        font-size: 12px
+      }
+
+      .sock-card .sock-num,
+      .sock-card .sock-mode-badge {
+        font-size: 8px;
+        padding: 3px 7px
+      }
+    }
+
 
     /* ABOUT HERO BANNER */
     .about-hero {
