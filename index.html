@@ -2230,18 +2230,32 @@
     }
     .splash-name {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(54px, 12vw, 96px);
+      font-size: clamp(72px, 18vw, 130px);
       font-weight: 900;
       line-height: 1;
-      letter-spacing: -0.03em;
-      background: linear-gradient(110deg, #fff 0%, #c7b8ff 45%, #22e3ff 100%);
+      letter-spacing: -0.04em;
+      display: flex;
+      justify-content: center;
+      gap: 0.01em;
+      overflow: visible;
+    }
+
+    .splash-name .sl {
+      display: inline-block;
+      background: linear-gradient(135deg, #fff 0%, #c7b8ff 55%, #22e3ff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       opacity: 0;
-      animation: splashFadeUp 0.9s 0.7s cubic-bezier(0.2,0.8,0.3,1) forwards;
-      margin-bottom: 16px;
+      transform: translateY(60px);
+      animation: splashLetterUp 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      animation-delay: calc(0.3s + var(--d) * 0.1s);
     }
+
+    @keyframes splashLetterUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .splash-role {
       font-family: 'JetBrains Mono', monospace;
       font-size: clamp(13px, 3vw, 17px);
@@ -2323,24 +2337,13 @@
   <!-- SPLASH SCREEN -->
   <div id="splash">
     <div class="splash-bg"></div>
-    <div class="splash-grid"></div>
     <div class="splash-orb o1"></div>
     <div class="splash-orb o2"></div>
     <div class="splash-orb o3"></div>
     <div class="splash-content">
-      <div class="splash-tag"><span class="splash-tag-dot"></span>AI Image Generation Engineer</div>
-      <div class="splash-name">Sahil</div>
-      <div class="splash-role" id="splashRole">></div>
-      <button class="splash-cta" id="splashEnter">
-        View My Portfolio
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </button>
-    </div>
-    <div class="splash-scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+      <div class="splash-name" id="splashName">
+        <span class="sl" style="--d:0">S</span><span class="sl" style="--d:1">a</span><span class="sl" style="--d:2">h</span><span class="sl" style="--d:3">i</span><span class="sl" style="--d:4">l</span>
+      </div>
     </div>
   </div>
 
@@ -3145,40 +3148,21 @@
     /* ---- SPLASH SCREEN ---- */
     (function () {
       const splash = document.getElementById('splash');
-      const enterBtn = document.getElementById('splashEnter');
-      const roleEl = document.getElementById('splashRole');
 
-      // Typewriter for splash role
-      const splashRoles = [
-        'VTON & Fabric Specialist_',
-        'Diffusion Pipeline Architect_',
-        'Constraint Prompt Engineer_'
-      ];
-      let sri = 0, sci = 0, sdel = false;
-      function splashType() {
-        const r = splashRoles[sri];
-        roleEl.textContent = '> ' + r.substring(0, sci);
-        if (!sdel && sci < r.length) { sci++; setTimeout(splashType, 65); }
-        else if (!sdel && sci === r.length) { sdel = true; setTimeout(splashType, 1800); }
-        else if (sdel && sci > 0) { sci--; setTimeout(splashType, 30); }
-        else { sdel = false; sri = (sri + 1) % splashRoles.length; setTimeout(splashType, 200); }
-      }
-      setTimeout(splashType, 1500);
-
-      // Dismiss splash
       function dismissSplash() {
+        if (splash.classList.contains('hide')) return;
         splash.classList.add('hide');
         document.body.style.overflow = '';
-        setTimeout(() => { splash.style.display = 'none'; }, 850);
+        setTimeout(() => { splash.style.display = 'none'; }, 800);
       }
 
-      enterBtn.addEventListener('click', dismissSplash);
+      // Auto dismiss after 2.5s
+      setTimeout(dismissSplash, 2500);
 
-      // Also dismiss on scroll (after animations have had time to play)
-      let scrollReady = false;
-      setTimeout(() => { scrollReady = true; }, 2500);
-      window.addEventListener('wheel', () => { if (scrollReady) dismissSplash(); }, { once: true });
-      window.addEventListener('touchmove', () => { if (scrollReady) dismissSplash(); }, { once: true });
+      // Also dismiss instantly on any tap/click/scroll
+      splash.addEventListener('click', dismissSplash);
+      window.addEventListener('wheel', dismissSplash, { once: true });
+      window.addEventListener('touchstart', dismissSplash, { once: true });
 
       // Lock body scroll while splash is showing
       document.body.style.overflow = 'hidden';
