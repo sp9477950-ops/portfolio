@@ -3824,16 +3824,71 @@
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }), { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    /* ---- FORM (mock) ---- */
+    /* ---- FORM SUBMISSION LOGIC ---- */
     const note = document.getElementById('formNote');
-    document.getElementById('sendBtn').addEventListener('click', () => {
-      const n = document.getElementById('f-name').value.trim();
-      const e = document.getElementById('f-email').value.trim();
-      const m = document.getElementById('f-msg').value.trim();
-      if (!n || !e || !m) { note.className = 'form-note'; note.textContent = 'Please fill in your name, email and message.'; return }
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) { note.className = 'form-note'; note.textContent = 'That email doesn\'t look right — check and try again.'; return }
-      note.className = 'form-note ok'; note.textContent = 'Thanks, ' + n + '! Your message is ready to send. (This is a demo form — wire it to your email service to go live.)';
-      ['f-name', 'f-email', 'f-subj', 'f-msg'].forEach(id => document.getElementById(id).value = '');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    sendBtn.addEventListener('click', () => {
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const subject = document.getElementById('f-subj').value.trim();
+      const message = document.getElementById('f-msg').value.trim();
+      
+      if (!name || !email || !message) {
+        note.className = 'form-note';
+        note.textContent = 'Please fill in your name, email and message.';
+        return;
+      }
+      
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        note.className = 'form-note';
+        note.textContent = "That email doesn't look right — check and try again.";
+        return;
+      }
+      
+      // Update button state to sending
+      sendBtn.disabled = true;
+      const originalText = sendBtn.innerHTML;
+      sendBtn.innerHTML = `Sending... <span class="dot-live" style="background:#fff; margin-left: 5px; animation: blink 1s infinite;"></span>`;
+      note.className = 'form-note';
+      note.textContent = 'Submitting your message...';
+      
+      // AJAX request to FormSubmit.co
+      fetch('https://formsubmit.co/ajax/sk9477960@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: name,
+          Email: email,
+          Subject: subject || 'No Subject (Portfolio Form)',
+          Message: message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalText;
+        
+        if (data.success === 'true' || data.success === true) {
+          note.className = 'form-note ok';
+          note.textContent = 'Success! Your message has been sent. Please check your email inbox if this is your first submission to activate FormSubmit.';
+          // Clear inputs
+          ['f-name', 'f-email', 'f-subj', 'f-msg'].forEach(id => document.getElementById(id).value = '');
+        } else {
+          note.className = 'form-note';
+          note.textContent = 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(error => {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalText;
+        note.className = 'form-note';
+        note.textContent = 'Connection error. Please check your internet and try again.';
+        console.error('Error submitting form:', error);
+      });
     });
 
     /* ---- RESUME ---- */
