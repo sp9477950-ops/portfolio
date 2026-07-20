@@ -673,6 +673,162 @@
     }
 
     /* ---- SOCKS SHOWCASE SECTION ---- */
+    /* ===== SHOES SHOWCASE ===== */
+    .shoes-section {
+      padding: 110px 0;
+      position: relative;
+      border-top: 1px solid var(--stroke)
+    }
+
+    .shoes-header {
+      text-align: center;
+      margin-bottom: 64px
+    }
+
+    .shoes-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(16,185,129,.35);
+      background: rgba(16,185,129,.08);
+      font-family: 'JetBrains Mono';
+      font-size: 12px;
+      color: #10b981;
+      letter-spacing: .08em;
+      margin-bottom: 20px
+    }
+
+    .shoes-header h2 {
+      font-size: clamp(30px, 4.5vw, 56px);
+      font-weight: 800;
+      margin-bottom: 16px
+    }
+
+    .shoes-header p {
+      font-size: 17px;
+      color: var(--txt-dim);
+      max-width: 580px;
+      margin: 0 auto
+    }
+
+    .shoes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px
+    }
+
+    @media(max-width:900px) { .shoes-grid { grid-template-columns: 1fr 1fr; gap: 20px } }
+    @media(max-width:560px) { .shoes-grid { grid-template-columns: 1fr; gap: 24px } }
+
+    .shoe-item {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color .35s, box-shadow .35s, transform .35s
+    }
+
+    .shoe-item:hover {
+      border-color: rgba(16,185,129,.45);
+      box-shadow: 0 20px 50px -16px rgba(16,185,129,.2);
+      transform: translateY(-4px)
+    }
+
+    .shoe-ba-wrap {
+      padding: 0
+    }
+
+    .shoe-label-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px
+    }
+
+    .shoe-sku-badge {
+      font-family: 'JetBrains Mono';
+      font-size: 10px;
+      color: #10b981;
+      background: rgba(16,185,129,.1);
+      border: 1px solid rgba(16,185,129,.25);
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: .06em
+    }
+
+    .shoe-name-badge {
+      font-family: 'Outfit';
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt-dim)
+    }
+
+    .shoe-ba-card {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      cursor: pointer
+    }
+
+    .shoe-ba-card .shoe-before-img,
+    .shoe-ba-card .shoe-after-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity .55s ease
+    }
+
+    .shoe-ba-card .shoe-before-img { opacity: 0 }
+    .shoe-ba-card .shoe-after-img  { opacity: 1 }
+
+    .shoe-item:hover .shoe-ba-card .shoe-before-img { opacity: 1 }
+    .shoe-item:hover .shoe-ba-card .shoe-after-img  { opacity: 0 }
+
+    .shoe-hover-hint {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-family: 'JetBrains Mono';
+      font-size: 9px;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .05em;
+      background: rgba(7,7,17,.6);
+      backdrop-filter: blur(4px);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--stroke);
+      transition: opacity .3s;
+      z-index: 3
+    }
+
+    .shoe-item:hover .shoe-hover-hint { opacity: 0 }
+
+    .shoe-angles {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px 14px;
+      background: rgba(0,0,0,.2)
+    }
+
+    .shoe-angles img {
+      flex: 1;
+      border-radius: 8px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 1px solid var(--stroke);
+      transition: border-color .25s, transform .25s;
+      cursor: pointer
+    }
+
+    .shoe-angles img:hover {
+      border-color: #10b981;
+      transform: scale(1.04)
+    }
+
     /* ===== WATCHES SHOWCASE ===== */
     .watches-section {
       padding: 110px 0;
@@ -2744,6 +2900,19 @@
     </div>
   </section>
 
+  <!-- SHOES SHOWCASE -->
+  <section class="shoes-section" id="shoes">
+    <div class="wrap">
+      <div class="shoes-header reveal">
+        <div class="shoes-badge"><span class="dot-live"></span> SHOES × AI PIPELINE</div>
+        <h2>Footwear <span class="gradtext">AI Catalog</span></h2>
+        <p>7-SKU dynamic footwear showcase — raw flat-lay product photography integrated with contextual model shoots. Hover to reveal before/after, click to inspect in detail.</p>
+      </div>
+
+      <div class="shoes-grid reveal" id="shoesGrid"></div>
+    </div>
+  </section>
+
   <!-- AI PRODUCT SHOOTS -->
 
   <section id="shoots">
@@ -2935,6 +3104,7 @@
   <!-- Modular Category Projects Data -->
   <script src="assets/data/socks.js"></script>
   <script src="assets/data/watches.js"></script>
+  <script src="assets/data/shoes.js"></script>
   <script src="assets/data/vton.js"></script>
   <script src="assets/data/retouch.js"></script>
   <script src="assets/data/furnish.js"></script>
@@ -2946,6 +3116,7 @@
     const projects = [
       ...socksProjects,
       ...watchesProjects,
+      ...shoesProjects,
       ...vtonProjects,
       ...retouchProjects,
       ...furnishProjects,
@@ -3050,6 +3221,58 @@
     });
 
 
+    /* ---- RENDER SHOES SHOWCASE ---- */
+    const shoesGrid = document.getElementById('shoesGrid');
+    shoesProjects.forEach((p, i) => {
+      // Add dynamic fields to work with openModal
+      p.cat = 'shoes';
+      p.catLabel = 'Footwear × AI';
+      p.feat = [
+        "Photorealistic environment & lighting integration",
+        "Geometry-locked sole contours & stitching lines",
+        "Constraint-enforced shadow & sunlight matching",
+        "High-fidelity resolution with zero texture blur"
+      ];
+      p.img = p.after; // fallback primary image
+
+      const sc = document.createElement('div');
+      sc.className = 'shoe-item reveal';
+      sc.innerHTML = `
+        <div class="shoe-ba-wrap">
+          <div class="shoe-label-row">
+            <span class="shoe-sku-badge">${p.sku}</span>
+            <span class="shoe-name-badge">${p.title.split(' — ')[1] || p.title}</span>
+          </div>
+          <div class="shoe-ba-card">
+            <img class="shoe-before-img" src="${p.before}" alt="${p.title} Before">
+            <img class="shoe-after-img" src="${p.after}" alt="${p.title} After">
+            <div class="watch-ba-labels">
+              <span class="ba-pill before-pill">Before</span>
+              <span class="ba-pill after-pill" style="background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.4); color: #10b981;">After</span>
+            </div>
+            <div class="shoe-hover-hint">Hover to reveal</div>
+          </div>
+          <div class="shoe-angles">
+            <img class="shoe-thumb-img" src="${p.before_2}" alt="Angle 1">
+            <img class="shoe-thumb-img" src="${p.after_2}" alt="Angle 2">
+          </div>
+        </div>`;
+      
+      // Card click opens modal
+      sc.querySelector('.shoe-ba-card').addEventListener('click', () => openModal(p));
+      
+      // Thumbnail clicks also open modal
+      sc.querySelectorAll('.shoe-thumb-img').forEach(timg => {
+        timg.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(p);
+        });
+      });
+      
+      shoesGrid.appendChild(sc);
+    });
+
+
     /* ---- TIMELINE ---- */
     const tl = document.getElementById('timeline');
     timeline.forEach(t => {
@@ -3072,9 +3295,10 @@
         document.getElementById('mTags').innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
       }
 
-      if (p.cat === 'vton' || p.cat === 'watches') {
+      if (p.cat === 'vton' || p.cat === 'watches' || p.cat === 'shoes') {
         const isSocks = p.isSocks === true;
         const isWatch = p.cat === 'watches';
+        const isShoes = p.cat === 'shoes';
         mThumb.classList.add('vton-mode');
 
         // Dynamically create control buttons
@@ -3096,6 +3320,12 @@
             const borderStyle = watch.sku === p.sku ? 'border: 1px solid var(--cyan); background: rgba(34,227,255,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
             btnsHTML += `<button class="vton-btn ${active}" data-sku="${watch.sku}" data-img="${watch.after}" data-mannequin="${watch.before}" data-label="${watch.sku}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${watch.sku}</button>`;
           });
+        } else if (isShoes) {
+          shoesProjects.forEach((shoe) => {
+            const active = shoe.sku === p.sku ? 'active' : '';
+            const borderStyle = shoe.sku === p.sku ? 'border: 1px solid #10b981; background: rgba(16,185,129,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
+            btnsHTML += `<button class="vton-btn ${active}" data-sku="${shoe.sku}" data-img="${shoe.after}" data-mannequin="${shoe.before}" data-label="${shoe.title}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${shoe.title.split(' — ')[0]}</button>`;
+          });
         } else {
           btnsHTML = `
             <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
@@ -3103,37 +3333,37 @@
             <button class="vton-btn" data-img="assets/img/fashion2.png" data-label="PINK WALK" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose B)</button>
           `;
         }
-
+ 
         mThumb.innerHTML = `
       <div class="interactive-vton" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:rgba(0,0,0,0.3); border-radius:12px;">
         <div class="vton-preview-container" style="position: relative; overflow: hidden; border-radius: 12px; flex: 1; min-height: 280px; background: #080816; border: 1px solid var(--stroke); display:flex; align-items:center; justify-content:center;">
           <img id="vtonPreview" src="${p.after}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
           <div id="vtonLoader" style="position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,8,22,0.85); backdrop-filter: blur(4px); color: #fff; font-size: 14px; font-weight: 600; z-index: 10; border-radius:12px;">
             <div style="text-align: center;">
-              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : 'var(--violet)'}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
-              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:${isWatch ? 'var(--cyan)' : 'var(--cyan)'};">[RUNNING DIFFUSION SWAP]</div>
+              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
+              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);">[RUNNING DIFFUSION SWAP]</div>
               <div id="vtonLoaderDesc" style="font-size:11px;color:var(--txt-faint);margin-top:4px;">Preserving geometry constraints...</div>
             </div>
           </div>
         </div>
-
+ 
         <!-- BEFORE/AFTER TABS -->
         <div class="socks-toggle-pill" style="display: flex; gap: 4px; background: rgba(0,0,0,0.5); border: 1px solid var(--stroke); border-radius: 100px; padding: 4px; width: fit-content; margin: 12px auto 0; z-index: 5;">
-          <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (${isWatch ? 'Flat Shot' : 'Mannequin'})</button>
-          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : 'var(--violet)'}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : 'rgba(124,92,255,0.3)'};">After (AI Model)</button>
+          <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (${isWatch || isShoes ? 'Flat Shot' : 'Mannequin'})</button>
+          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : (isShoes ? 'rgba(16,185,129,0.3)' : 'rgba(124,92,255,0.3)')};">After (AI Model)</button>
         </div>
-
+ 
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
-            <span>${isWatch ? 'Select Watch SKU' : 'Select Sock Style / Branding Anchor'}</span>
-            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : 'var(--cyan)'}">${isWatch ? p.sku : 'BLACK LOW-CUT (TOE)'}</span>
+            <span>${isWatch ? 'Select Watch SKU' : (isShoes ? 'Select Shoe SKU' : 'Select Sock Style / Branding Anchor')}</span>
+            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--cyan)')}">${isWatch ? p.sku : (isShoes ? p.title : 'BLACK LOW-CUT (TOE)')}</span>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 110px; overflow-y: auto; padding-right: 4px;">
             ${btnsHTML}
           </div>
         </div>
       </div>`;
-
+ 
         setTimeout(() => {
           const btns = document.querySelectorAll('.vton-btn');
           const img = document.getElementById('vtonPreview');
@@ -3159,8 +3389,8 @@
             btnAfter.style.boxShadow = 'none';
             
             // Loader
-            lTitle.textContent = isWatch ? '[LOADING STUDIO CATALOG]' : '[LOADING MANNEQUIN REFERENCE]';
-            lDesc.textContent = isWatch ? 'Fetching original flat product photography...' : 'Fetching raw product photography...';
+            lTitle.textContent = (isWatch || isShoes) ? '[LOADING STUDIO CATALOG]' : '[LOADING MANNEQUIN REFERENCE]';
+            lDesc.textContent = (isWatch || isShoes) ? 'Fetching original flat product photography...' : 'Fetching raw product photography...';
             loader.style.display = 'grid';
             
             setTimeout(() => {
@@ -3175,15 +3405,15 @@
             currentViewMode = 'after';
             
             // Style transition
-            btnAfter.style.background = isWatch ? 'var(--cyan)' : 'var(--violet)';
+            btnAfter.style.background = isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)');
             btnAfter.style.color = '#fff';
-            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : '0 0 10px rgba(124,92,255,0.3)';
+            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : (isShoes ? '0 0 10px rgba(16,185,129,0.3)' : '0 0 10px rgba(124,92,255,0.3)');
             btnBefore.style.background = 'transparent';
             btnBefore.style.color = 'var(--txt-dim)';
             
             // Loader
-            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : '[RUNNING DIFFUSION SWAP]';
-            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : 'Enforcing Gemini anatomical constraints...';
+            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : (isShoes ? '[RUNNING PRODUCT CONTEXT DIFFUSION]' : '[RUNNING DIFFUSION SWAP]');
+            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : (isShoes ? 'Synthesizing footwear perspective & lighting...' : 'Enforcing Gemini anatomical constraints...');
             loader.style.display = 'grid';
             
             setTimeout(() => {
@@ -3204,12 +3434,12 @@
               });
               
               btn.classList.add('active');
-              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : 'var(--violet)'}`;
-              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : 'rgba(124,92,255,0.15)'}`;
+              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}`;
+              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : (isShoes ? 'rgba(16,185,129,0.15)' : 'rgba(124,92,255,0.15)')}`;
               
               const sku = btn.dataset.sku;
               // Find matching project config to update description & details dynamically
-              const matchedProject = (isWatch ? watchesProjects : socksProjects).find(x => x.sku === sku);
+              const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : socksProjects)).find(x => x.sku === sku);
               if (matchedProject) {
                 updateModalTexts(matchedProject);
               }
@@ -3218,6 +3448,14 @@
                 if (currentViewMode === 'after') {
                   lTitle.textContent = '[RUNNING REFLECTION DIFFUSION]';
                   lDesc.textContent = 'Synthesizing watch band & lighting alignment...';
+                } else {
+                  lTitle.textContent = '[LOADING STUDIO CATALOG]';
+                  lDesc.textContent = 'Fetching original flat product photography...';
+                }
+              } else if (isShoes) {
+                if (currentViewMode === 'after') {
+                  lTitle.textContent = '[RUNNING PRODUCT CONTEXT DIFFUSION]';
+                  lDesc.textContent = 'Synthesizing footwear perspective & lighting...';
                 } else {
                   lTitle.textContent = '[LOADING STUDIO CATALOG]';
                   lDesc.textContent = 'Fetching original flat product photography...';
