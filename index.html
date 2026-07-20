@@ -2716,11 +2716,11 @@
   </section>
 
 
-  <!-- CAMPUS SOCKS SHOWCASE -->
+  <!-- SOCKS SHOWCASE -->
   <section class="socks-showcase-section" id="work">
     <div class="wrap">
       <div class="socks-brand-header reveal">
-        <div class="socks-brand-badge"><span class="dot-live"></span> CAMPUS SOCKS × AI PIPELINE</div>
+        <div class="socks-brand-badge"><span class="dot-live"></span> SOCKS × AI PIPELINE</div>
         <h2>10-SKU Branding <span class="gradtext">Showcase</span></h2>
         <p>Hover any style to see the raw mannequin → AI try-on reveal. Every logo is anchored by Gemini spatial constraint logic — zero hallucinations.</p>
       </div>
@@ -2731,11 +2731,11 @@
   </section>
 
 
-  <!-- DANIEL WELLINGTON WATCHES SHOWCASE -->
+  <!-- WATCHES SHOWCASE -->
   <section class="watches-section" id="watches">
     <div class="wrap">
       <div class="watches-header reveal">
-        <div class="watches-badge"><span class="dot-live"></span> DANIEL WELLINGTON × AI STUDIO</div>
+        <div class="watches-badge"><span class="dot-live"></span> WATCHES × AI STUDIO</div>
         <h2>Watch <span class="gradtext">AI Catalog</span></h2>
         <p>20-SKU multi-angle catalog — original flat product photography transformed into realistic model wrist shots. Hover to reveal before/after, click to inspect in detail.</p>
       </div>
@@ -2994,6 +2994,7 @@
           <div class="sock-sku">${sockSkus[i]}</div>
         </div>`;
       sc.addEventListener('click', () => openModal(p));
+      socksGrid.appendChild(sc);
     });
 
 
@@ -3002,7 +3003,7 @@
     watchesProjects.forEach((p, i) => {
       // Add dynamic fields to work with openModal
       p.cat = 'watches';
-      p.catLabel = 'Daniel Wellington × AI';
+      p.catLabel = 'Watches × AI';
       p.feat = [
         "Photorealistic wrist & model reconstruction",
         "Geometry-locked metal link casing & dial indices",
@@ -3124,7 +3125,7 @@
 
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
-            <span>${isWatch ? 'Select Daniel Wellington SKU' : 'Select Sock Style / Branding Anchor'}</span>
+            <span>${isWatch ? 'Select Watch SKU' : 'Select Sock Style / Branding Anchor'}</span>
             <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : 'var(--cyan)'}">${isWatch ? p.sku : 'BLACK LOW-CUT (TOE)'}</span>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 110px; overflow-y: auto; padding-right: 4px;">
