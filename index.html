@@ -673,10 +673,209 @@
     }
 
     /* ---- SOCKS SHOWCASE SECTION ---- */
+    /* ===== WATCHES SHOWCASE ===== */
+    .watches-section {
+      padding: 110px 0;
+      position: relative;
+      border-top: 1px solid var(--stroke)
+    }
+
+    .watches-header {
+      text-align: center;
+      margin-bottom: 64px
+    }
+
+    .watches-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(34,227,255,.35);
+      background: rgba(34,227,255,.08);
+      font-family: 'JetBrains Mono';
+      font-size: 12px;
+      color: var(--cyan);
+      letter-spacing: .08em;
+      margin-bottom: 20px
+    }
+
+    .watches-header h2 {
+      font-size: clamp(30px, 4.5vw, 56px);
+      font-weight: 800;
+      margin-bottom: 16px
+    }
+
+    .watches-header p {
+      font-size: 17px;
+      color: var(--txt-dim);
+      max-width: 580px;
+      margin: 0 auto
+    }
+
+    .watches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px
+    }
+
+    @media(max-width:900px) { .watches-grid { grid-template-columns: 1fr 1fr; gap: 20px } }
+    @media(max-width:560px) { .watches-grid { grid-template-columns: 1fr; gap: 24px } }
+
+    .watch-item {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color .35s, box-shadow .35s, transform .35s
+    }
+
+    .watch-item:hover {
+      border-color: rgba(34,227,255,.45);
+      box-shadow: 0 20px 50px -16px rgba(34,227,255,.2);
+      transform: translateY(-4px)
+    }
+
+    .watch-ba-wrap {
+      padding: 0
+    }
+
+    .watch-label-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px
+    }
+
+    .watch-sku-badge {
+      font-family: 'JetBrains Mono';
+      font-size: 10px;
+      color: var(--cyan);
+      background: rgba(34,227,255,.1);
+      border: 1px solid rgba(34,227,255,.25);
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: .06em
+    }
+
+    .watch-name-badge {
+      font-family: 'Outfit';
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt-dim)
+    }
+
+    /* Before/After card */
+    .watch-ba-card {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      cursor: pointer
+    }
+
+    .watch-ba-card .watch-before-img,
+    .watch-ba-card .watch-after-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity .55s ease
+    }
+
+    /* After is shown by default */
+    .watch-ba-card .watch-before-img { opacity: 0 }
+    .watch-ba-card .watch-after-img  { opacity: 1 }
+
+    /* Hover: show before, hide after */
+    .watch-item:hover .watch-ba-card .watch-before-img { opacity: 1 }
+    .watch-item:hover .watch-ba-card .watch-after-img  { opacity: 0 }
+
+    .watch-ba-labels {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 3;
+      pointer-events: none
+    }
+
+    .ba-pill {
+      font-family: 'JetBrains Mono';
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: opacity .4s ease
+    }
+
+    .after-pill {
+      background: rgba(34,227,255,.15);
+      border: 1px solid rgba(34,227,255,.4);
+      color: var(--cyan)
+    }
+
+    .before-pill {
+      background: rgba(124,92,255,.15);
+      border: 1px solid rgba(124,92,255,.4);
+      color: #b89dff;
+      opacity: 0
+    }
+
+    .watch-item:hover .after-pill { opacity: 0 }
+    .watch-item:hover .before-pill { opacity: 1 }
+
+    .watch-hover-hint {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-family: 'JetBrains Mono';
+      font-size: 9px;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .05em;
+      background: rgba(7,7,17,.6);
+      backdrop-filter: blur(4px);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--stroke);
+      transition: opacity .3s;
+      z-index: 3
+    }
+
+    .watch-item:hover .watch-hover-hint { opacity: 0 }
+
+    /* Thumbnail strip */
+    .watch-angles {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px 14px;
+      background: rgba(0,0,0,.2)
+    }
+
+    .watch-angles img {
+      flex: 1;
+      border-radius: 8px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 1px solid var(--stroke);
+      transition: border-color .25s, transform .25s;
+      cursor: pointer
+    }
+
+    .watch-angles img:hover {
+      border-color: var(--cyan);
+      transform: scale(1.04)
+    }
+    /* ============================= */
+
     .socks-showcase-section {
       padding: 110px 0;
       position: relative
     }
+
 
     .socks-showcase-section::before {
       content: '';
@@ -2532,7 +2731,92 @@
   </section>
 
 
+  <!-- DANIEL WELLINGTON WATCHES SHOWCASE -->
+  <section class="watches-section" id="watches">
+    <div class="wrap">
+      <div class="watches-header reveal">
+        <div class="watches-badge"><span class="dot-live"></span> DANIEL WELLINGTON × AI STUDIO</div>
+        <h2>Watch <span class="gradtext">Product Shots</span></h2>
+        <p>3-SKU multi-angle catalog — raw product photography processed through AI pipeline. Hover any card to toggle Before → After.</p>
+      </div>
+
+      <div class="watches-grid reveal">
+
+        <!-- Watch 1: DW0DG0101 — Iconic Link Emerald -->
+        <div class="watch-item reveal">
+          <div class="watch-ba-wrap">
+            <div class="watch-label-row">
+              <span class="watch-sku-badge">DW0DG0101</span>
+              <span class="watch-name-badge">Iconic Link — Emerald</span>
+            </div>
+            <div class="watch-ba-card">
+              <img class="watch-before-img" src="assets/img/watches/dw1_before.jpg" alt="DW0DG0101 Original Product Shot">
+              <img class="watch-after-img" src="assets/img/watches/dw1_after.jpg" alt="DW0DG0101 AI Enhanced Shot">
+              <div class="watch-ba-labels">
+                <span class="ba-pill before-pill">Before</span>
+                <span class="ba-pill after-pill">After</span>
+              </div>
+              <div class="watch-hover-hint">Hover to reveal</div>
+            </div>
+            <div class="watch-angles">
+              <img src="assets/img/watches/dw1_before_2.jpg" alt="DW0DG0101 Angle 2">
+              <img src="assets/img/watches/dw1_after_2.jpg" alt="DW0DG0101 AI Angle 2">
+            </div>
+          </div>
+        </div>
+
+        <!-- Watch 2: DW0DL0600 — Iconic Link Slate -->
+        <div class="watch-item reveal">
+          <div class="watch-ba-wrap">
+            <div class="watch-label-row">
+              <span class="watch-sku-badge">DW0DL0600</span>
+              <span class="watch-name-badge">Iconic Link — Slate</span>
+            </div>
+            <div class="watch-ba-card">
+              <img class="watch-before-img" src="assets/img/watches/dw2_before.jpg" alt="DW0DL0600 Original Product Shot">
+              <img class="watch-after-img" src="assets/img/watches/dw2_after.jpg" alt="DW0DL0600 AI Enhanced Shot">
+              <div class="watch-ba-labels">
+                <span class="ba-pill before-pill">Before</span>
+                <span class="ba-pill after-pill">After</span>
+              </div>
+              <div class="watch-hover-hint">Hover to reveal</div>
+            </div>
+            <div class="watch-angles">
+              <img src="assets/img/watches/dw2_before_2.jpg" alt="DW0DL0600 Angle 2">
+              <img src="assets/img/watches/dw2_after_2.jpg" alt="DW0DL0600 AI Angle 2">
+            </div>
+          </div>
+        </div>
+
+        <!-- Watch 3: DW0DL2101 — Iconic Link Champagne -->
+        <div class="watch-item reveal">
+          <div class="watch-ba-wrap">
+            <div class="watch-label-row">
+              <span class="watch-sku-badge">DW0DL2101</span>
+              <span class="watch-name-badge">Iconic Link — Champagne</span>
+            </div>
+            <div class="watch-ba-card">
+              <img class="watch-before-img" src="assets/img/watches/dw3_before.jpg" alt="DW0DL2101 Original Product Shot">
+              <img class="watch-after-img" src="assets/img/watches/dw3_after.jpg" alt="DW0DL2101 AI Enhanced Shot">
+              <div class="watch-ba-labels">
+                <span class="ba-pill before-pill">Before</span>
+                <span class="ba-pill after-pill">After</span>
+              </div>
+              <div class="watch-hover-hint">Hover to reveal</div>
+            </div>
+            <div class="watch-angles">
+              <img src="assets/img/watches/dw3_before_2.jpg" alt="DW0DL2101 Angle 2">
+              <img src="assets/img/watches/dw3_after_2.jpg" alt="DW0DL2101 AI Angle 2">
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /watches-grid -->
+    </div>
+  </section>
+
   <!-- AI PRODUCT SHOOTS -->
+
   <section id="shoots">
     <div class="wrap">
       <div class="sec-head reveal">
