@@ -2610,7 +2610,73 @@
       position: relative;
       z-index: 2;
       max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+    
+    .splash-logo-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+      opacity: 0;
+      animation: splashFadeUp 0.7s 0.1s ease forwards;
+    }
+    
+    .splash-logo-svg {
+      width: 76px;
+      height: 76px;
+      fill: none;
+      filter: drop-shadow(0 0 10px rgba(34, 227, 255, 0.35));
+      animation: rotateLogo 25s infinite linear;
+    }
+    
+    .hex-path {
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      stroke-width: 1.5;
+      animation: drawHex 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    .line-paths {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      stroke-width: 1;
+      opacity: 0.55;
+      animation: drawLines 2s 0.5s ease-out forwards;
+    }
+    
+    .center-core {
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: center;
+      animation: popCore 0.8s 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, pulseCore 2.5s 2.2s infinite alternate;
+    }
+    
+    @keyframes rotateLogo {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes drawHex {
+      to { stroke-dashoffset: 0; }
+    }
+    
+    @keyframes drawLines {
+      to { stroke-dashoffset: 0; }
+    }
+    
+    @keyframes popCore {
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes pulseCore {
+      0% { filter: drop-shadow(0 0 4px rgba(124, 92, 255, 0.6)); }
+      100% { filter: drop-shadow(0 0 16px rgba(34, 227, 255, 1)); }
+    }
+
     .splash-tag {
       display: inline-flex;
       align-items: center;
@@ -2656,13 +2722,26 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       opacity: 0;
-      transform: translateY(60px);
-      animation: splashLetterUp 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
-      animation-delay: calc(0.3s + var(--d) * 0.1s);
+      transform: translateY(40px);
+      animation: splashLetterUp 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      animation-delay: calc(0.3s + var(--d) * 0.08s);
     }
 
     @keyframes splashLetterUp {
-      to { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+        filter: blur(12px);
+      }
+      50% {
+        opacity: 0.8;
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
     }
 
     .splash-role {
@@ -2746,10 +2825,30 @@
   <!-- SPLASH SCREEN -->
   <div id="splash">
     <div class="splash-bg"></div>
+    <canvas id="splashCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.85; z-index: 1;"></canvas>
     <div class="splash-orb o1"></div>
     <div class="splash-orb o2"></div>
     <div class="splash-orb o3"></div>
     <div class="splash-content">
+      <!-- Premium SVG Logo Mark -->
+      <div class="splash-logo-container">
+        <svg class="splash-logo-svg" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#22e3ff" />
+              <stop offset="60%" stop-color="#7c5cff" />
+              <stop offset="100%" stop-color="#4b3bff" />
+            </linearGradient>
+            <linearGradient id="coreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#22e3ff" />
+              <stop offset="100%" stop-color="#7c5cff" />
+            </linearGradient>
+          </defs>
+          <polygon points="50,12 83,31 83,69 50,88 17,69 17,31" stroke="url(#logoGradient)" class="hex-path"></polygon>
+          <path d="M50,12 L50,88 M17,31 L83,69 M17,69 L83,31" stroke="url(#logoGradient)" class="line-paths"></path>
+          <circle cx="50" cy="50" r="10" class="center-core"></circle>
+        </svg>
+      </div>
       <div class="splash-name" id="splashName">
         <span class="sl" style="--d:0">W</span><span class="sl" style="--d:1">e</span><span class="sl" style="--d:2">l</span><span class="sl" style="--d:3">c</span><span class="sl" style="--d:4">o</span><span class="sl" style="--d:5">m</span><span class="sl" style="--d:6">e</span>
       </div>
@@ -3999,8 +4098,8 @@
         setTimeout(() => { splash.style.display = 'none'; }, 800);
       }
 
-      // Auto dismiss after 2.5s
-      setTimeout(dismissSplash, 2500);
+      // Auto dismiss after 2.8s
+      setTimeout(dismissSplash, 2800);
 
       // Also dismiss instantly on any tap/click/scroll
       splash.addEventListener('click', dismissSplash);
@@ -4009,6 +4108,102 @@
 
       // Lock body scroll while splash is showing
       document.body.style.overflow = 'hidden';
+
+      // Interactive splash particles
+      const canvas = document.getElementById('splashCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        let mouse = { x: null, y: null };
+        const count = 35;
+        
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        
+        // Populate particles
+        for (let i = 0; i < count; i++) {
+          pts.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            r: Math.random() * 2 + 1
+          });
+        }
+        
+        splash.addEventListener('mousemove', e => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+        
+        splash.addEventListener('mouseleave', () => {
+          mouse.x = null;
+          mouse.y = null;
+        });
+        
+        let animId;
+        function loop() {
+          if (splash.classList.contains('hide')) {
+            cancelAnimationFrame(animId);
+            return;
+          }
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Draw connecting grid lines
+          ctx.strokeStyle = 'rgba(124, 92, 255, 0.04)';
+          ctx.lineWidth = 1;
+          for (let i = 0; i < pts.length; i++) {
+            for (let j = i + 1; j < pts.length; j++) {
+              const dx = pts[i].x - pts[j].x;
+              const dy = pts[i].y - pts[j].y;
+              const dist = Math.sqrt(dx*dx + dy*dy);
+              if (dist < 120) {
+                ctx.beginPath();
+                ctx.moveTo(pts[i].x, pts[i].y);
+                ctx.lineTo(pts[j].x, pts[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+          
+          // Move and draw particles
+          pts.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            // Bounce bounds
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(34, 227, 255, 0.4)';
+            ctx.fill();
+            
+            // Interactive connection to mouse
+            if (mouse.x !== null && mouse.y !== null) {
+              const dx = p.x - mouse.x;
+              const dy = p.y - mouse.y;
+              const dist = Math.sqrt(dx*dx + dy*dy);
+              if (dist < 160) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.strokeStyle = `rgba(34, 227, 255, ${0.18 * (1 - dist / 160)})`;
+                ctx.stroke();
+              }
+            }
+          });
+          
+          animId = requestAnimationFrame(loop);
+        }
+        loop();
+      }
     })();
   </script>
 </body>
