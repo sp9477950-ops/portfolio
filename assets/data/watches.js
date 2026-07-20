@@ -1,0 +1,222 @@
+const watchesProjects = [
+  {
+    sku: "DW0DG1701",
+    title: "Iconic Link — Classic Gold / Black",
+    short: "Gold link bracelet paired with a deep matte black dial, AI wrist-shot reconstruction.",
+    desc: "A bold contrast of gold and black. The model rendering preserves the high-polish link reflections while ensuring zero texture distortion of the metallic finish on the wrist.",
+    before: "assets/img/watches/DW0DG1701_before.jpg",
+    after: "assets/img/watches/DW0DG1701_after.jpg",
+    before_2: "assets/img/watches/DW0DG1701_before_2.jpg",
+    after_2: "assets/img/watches/DW0DG1701_after_2.jpg",
+    tags: ["Gold Finish", "Reflective Metal", "Matte Black", "Model Placement"]
+  },
+  {
+    sku: "DW0DG2400",
+    title: "Iconic Link — Lumine Gold / Gold",
+    short: "Luxurious all-gold model featuring a gold sunray dial adorned with crystal indexes.",
+    desc: "A stunning monochromatic gold statement. Our model generation pipeline accurately maintains the alignment of crystal index glares and sunray dial reflections under studio lighting.",
+    before: "assets/img/watches/DW0DG2400_before.jpg",
+    after: "assets/img/watches/DW0DG2400_after.jpg",
+    before_2: "assets/img/watches/DW0DG2400_before_2.jpg",
+    after_2: "assets/img/watches/DW0DG2400_after_2.jpg",
+    tags: ["All Gold", "Sunray Dial", "Crystal Indexes", "Studio Lighting"]
+  },
+  {
+    sku: "DW0DL3200",
+    title: "Iconic Link — Classic Rose Gold / White",
+    short: "Elegant rose gold link band matched with a minimal eggshell white dial.",
+    desc: "A classic minimalist design. The AI wrist composition anchors the watch casing precisely against the skin tones, preserving the subtle warmth of the rose gold plating.",
+    before: "assets/img/watches/DW0DL3200_before.jpg",
+    after: "assets/img/watches/DW0DL3200_after.jpg",
+    before_2: "assets/img/watches/DW0DL3200_before_2.jpg",
+    after_2: "assets/img/watches/DW0DL3200_after_2.jpg",
+    tags: ["Rose Gold", "Eggshell White", "Minimalist Casing", "Skin Tone Match"]
+  },
+  {
+    sku: "DW0DL3301",
+    title: "Iconic Link — Classic Silver / White",
+    short: "Stainless steel link bracelet paired with a clean eggshell white dial.",
+    desc: "Timeless steel craftsmanship. Enforces crisp steel link geometry in the model rendering, eliminating standard diffusion warping and retaining sharp metallic bevels.",
+    before: "assets/img/watches/DW0DL3301_before.jpg",
+    after: "assets/img/watches/DW0DL3301_after.jpg",
+    before_2: "assets/img/watches/DW0DL3301_before_2.jpg",
+    after_2: "assets/img/watches/DW0DL3301_after_2.jpg",
+    tags: ["Stainless Steel", "White Dial", "Sharp Bevels", "Geometry Lock"]
+  },
+  {
+    sku: "DW0DL2600",
+    title: "Iconic Link — Emerald Silver / Blue-Green",
+    short: "Polished silver casing framing a deep emerald green sunray dial.",
+    desc: "A captivating play of light. The emerald green dial sunburst effect is preserved in the AI composition, avoiding flat color rendering and capturing realistic depth.",
+    before: "assets/img/watches/DW0DL2600_before.jpg",
+    after: "assets/img/watches/DW0DL2600_after.jpg",
+    before_2: "assets/img/watches/DW0DL2600_before_2.jpg",
+    after_2: "assets/img/watches/DW0DL2600_after_2.jpg",
+    tags: ["Emerald Dial", "Silver Casing", "Sunburst Effect", "Depth Lock"]
+  },
+  {
+    sku: "DW0DL2801",
+    title: "Iconic Link — Emerald Gold / Green",
+    short: "Gleaming gold plating matching a vibrant emerald green sunray dial.",
+    desc: "A rich combination of colors. The model generation ensures the gold metal band reflections blend harmoniously with the deep green dial facets on the model's wrist.",
+    before: "assets/img/watches/DW0DL2801_before.jpg",
+    after: "assets/img/watches/DW0DL2801_after.jpg",
+    before_2: "assets/img/watches/DW0DL2801_before_2.jpg",
+    after_2: "assets/img/watches/DW0DL2801_after_2.jpg",
+    tags: ["Gold & Green", "Vibrant Emerald", "Band Reflection", "Luster Match"]
+  },
+  {
+    sku: "DW0DL2900",
+    title: "Iconic Link — Classic Silver / Black",
+    short: "Sleek stainless steel bracelet paired with a dark matte black dial.",
+    desc: "The ultimate modern dress watch. The AI model wrist-shot handles extreme light reflections across the silver metal links while maintaining pure deep blacks on the face.",
+    before: "assets/img/watches/DW0DL2900_before.jpg",
+    after: "assets/img/watches/DW0DL2900_after.jpg",
+    before_2: "assets/img/watches/DW0DL2900_before_2.jpg",
+    after_2: "assets/img/watches/DW0DL2900_after_2.jpg",
+    tags: ["Stainless Steel", "Black Dial", "Reflection Control", "Modern Dress"]
+  },
+  {
+    sku: "DW0DL3201",
+    title: "Iconic Link — Classic Rose Gold / Black",
+    short: "Warm rose gold link band matched with a bold matte black dial.",
+    desc: "A sophisticated duo of tones. Enforces absolute color fidelity of the copper-gold alloy, preventing color drift towards yellow gold or bronze.",
+    before: "assets/img/watches/DW0DL3201_before.jpg",
+    after: "assets/img/watches/DW0DL3201_after.jpg",
+    before_2: "assets/img/watches/DW0DL3201_before_2.jpg",
+    after_2: "assets/img/watches/DW0DL3201_after_2.jpg",
+    tags: ["Rose Gold", "Black Dial", "Alloy Fidelity", "Color Accuracy"]
+  },
+  {
+    sku: "DWODG1800",
+    title: "Classic Series — Gold / White Minimal",
+    short: "Gold casing and mesh style band paired with a minimalist white dial face.",
+    desc: "Ultra-slim watch dial rendering. The AI workflow places this classic timepiece on the model with a perfect wrist-hugging profile, maintaining the thin case width.",
+    before: "assets/img/watches/DWODG1800_before.jpg",
+    after: "assets/img/watches/DWODG1800_after.jpg",
+    before_2: "assets/img/watches/DWODG1800_before_2.jpg",
+    after_2: "assets/img/watches/DWODG1800_after_2.jpg",
+    tags: ["Ultra Slim", "Mesh Band", "Minimal White", "Wrist Profile Lock"]
+  },
+  {
+    sku: "DWODG1801",
+    title: "Classic Series — Rose Gold / Emerald Mesh",
+    short: "Warm rose gold plating set against a deep emerald green sunray dial face.",
+    desc: "Refined jewel tones. The AI generation maps the watch perfectly onto the wrist, keeping the thin profile mesh band details and keeping textures completely sharp.",
+    before: "assets/img/watches/DWODG1801_before.jpg",
+    after: "assets/img/watches/DWODG1801_after.jpg",
+    before_2: "assets/img/watches/DWODG1801_before_2.jpg",
+    after_2: "assets/img/watches/DWODG1801_after_2.jpg",
+    tags: ["Rose Gold Mesh", "Emerald Dial", "Texture Sharpness", "Jewel Tones"]
+  },
+  {
+    sku: "DWODG1802",
+    title: "Classic Series — Silver / Slate Sunray",
+    short: "Polished silver casing with a modern slate-grey sunray dial face.",
+    desc: "A sleek, industrial palette. Evaluates lighting direction from the environment and casts correct shadows on the model's sleeve and arm skin.",
+    before: "assets/img/watches/DWODG1802_before.jpg",
+    after: "assets/img/watches/DWODG1802_after.jpg",
+    before_2: "assets/img/watches/DWODG1802_before_2.jpg",
+    after_2: "assets/img/watches/DWODG1802_after_2.jpg",
+    tags: ["Silver Mesh", "Slate Sunray", "Lighting Match", "Shadow Cast"]
+  },
+  {
+    sku: "DWODG2000",
+    title: "Classic Series — Gold / Black Mesh",
+    short: "Gleaming gold plating matching a dark minimalist black dial face.",
+    desc: "High contrast luxury. The model shoot rendering handles metal luster and black face absorption perfectly, making the watch pop realistically on the model's wrist.",
+    before: "assets/img/watches/DWODG2000_before.jpg",
+    after: "assets/img/watches/DWODG2000_after.jpg",
+    before_2: "assets/img/watches/DWODG2000_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2000_after_2.jpg",
+    tags: ["Gold Mesh", "Black Dial", "Luster Match", "High Contrast"]
+  },
+  {
+    sku: "DWODG2001",
+    title: "Classic Series — Rose Gold / Black Minimal",
+    short: "Polished rose gold case with matching rose gold mesh and a black dial.",
+    desc: "Sleek and romantic. Ensures the rose gold mesh maintains its intricate weave pattern under different lighting angles on the model's wrist.",
+    before: "assets/img/watches/DWODG2001_before.jpg",
+    after: "assets/img/watches/DWODG2001_after.jpg",
+    before_2: "assets/img/watches/DWODG2001_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2001_after_2.jpg",
+    tags: ["Rose Gold Mesh", "Black Dial", "Mesh Weave", "Contrast Pop"]
+  },
+  {
+    sku: "DWODG2200",
+    title: "Classic Series — Silver / Emerald Mesh",
+    short: "Sleek silver mesh band framing a vibrant emerald green sunray dial face.",
+    desc: "Fresh and modern style. The AI render locks the silver mesh texture to prevent any blurry artifacts or texture stretching near the clasp.",
+    before: "assets/img/watches/DWODG2200_before.jpg",
+    after: "assets/img/watches/DWODG2200_after.jpg",
+    before_2: "assets/img/watches/DWODG2200_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2200_after_2.jpg",
+    tags: ["Silver Mesh", "Emerald Dial", "Clasp Alignment", "Texture Lock"]
+  },
+  {
+    sku: "DWODG2300",
+    title: "Classic Series — Gold / Slate Minimal",
+    short: "Gold plated case and mesh style band paired with a slate dial face.",
+    desc: "A warm and cool pairing. The model shot pipeline renders precise bezel highlights and meshes, keeping the watch looking crisp against the model's clothing.",
+    before: "assets/img/watches/DWODG2300_before.jpg",
+    after: "assets/img/watches/DWODG2300_after.jpg",
+    before_2: "assets/img/watches/DWODG2300_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2300_after_2.jpg",
+    tags: ["Gold Mesh", "Slate Dial", "Highlight Control", "Crisp Bezel"]
+  },
+  {
+    sku: "DWODG2301",
+    title: "Classic Series — Rose Gold / Blue Mesh",
+    short: "Warm rose gold casing framing a deep navy blue sunray dial face.",
+    desc: "A nautical aesthetic. The AI model rendering keeps the rich blue color from shifting, capturing the correct navy tone under bright studio flash conditions.",
+    before: "assets/img/watches/DWODG2301_before.jpg",
+    after: "assets/img/watches/DWODG2301_after.jpg",
+    before_2: "assets/img/watches/DWODG2301_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2301_after_2.jpg",
+    tags: ["Rose Gold", "Navy Blue Dial", "Mesh Band", "Studio Flash"]
+  },
+  {
+    sku: "DWODG2302",
+    title: "Classic Series — Silver / Champagne Minimal",
+    short: "Stainless steel mesh band matched with a warm champagne dial face.",
+    desc: "A vintage inspired colorway. Evaluates lighting warmth to render realistic specular highlights along the polished watch edges.",
+    before: "assets/img/watches/DWODG2302_before.jpg",
+    after: "assets/img/watches/DWODG2302_after.jpg",
+    before_2: "assets/img/watches/DWODG2302_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2302_after_2.jpg",
+    tags: ["Silver Mesh", "Champagne Dial", "Specular Highlights", "Vintage Look"]
+  },
+  {
+    sku: "DWODG2401",
+    title: "Classic Series — Gold / Emerald Sunray",
+    short: "Rich gold plating paired with a vibrant emerald green sunray dial face.",
+    desc: "Flagship mesh style. The AI render matches the watch perfectly with model poses, keeping the watch strap geometry flat and locking the green sunray reflections.",
+    before: "assets/img/watches/DWODG2401_before.jpg",
+    after: "assets/img/watches/DWODG2401_after.jpg",
+    before_2: "assets/img/watches/DWODG2401_before_2.jpg",
+    after_2: "assets/img/watches/DWODG2401_after_2.jpg",
+    tags: ["Gold Mesh", "Emerald Dial", "Pose Geometry", "Reflection Lock"]
+  },
+  {
+    sku: "DWODL2200",
+    title: "Classic Series — Rose Gold / Champagne Mesh",
+    short: "Rose gold plating and mesh style band paired with a champagne dial.",
+    desc: "Warm and luxurious dress style. The model placement aligns the watch dial perfectly with the camera perspective, keeping numerals and hand details ultra-clear.",
+    before: "assets/img/watches/DWODL2200_before.jpg",
+    after: "assets/img/watches/DWODL2200_after.jpg",
+    before_2: "assets/img/watches/DWODL2200_before_2.jpg",
+    after_2: "assets/img/watches/DWODL2200_after_2.jpg",
+    tags: ["Rose Gold", "Champagne Dial", "Perspective Lock", "Sharp Hands"]
+  },
+  {
+    sku: "DWODL3101",
+    title: "Classic Series — Silver / Gold Minimal",
+    short: "Polished silver mesh band paired with a luxurious gold dial face.",
+    desc: "A bold mixed-metal statement. Enforces precise color separation between the silver case and the gold dial, preventing blending or color bleeding.",
+    before: "assets/img/watches/DWODL3101_before.jpg",
+    after: "assets/img/watches/DWODL3101_after.jpg",
+    before_2: "assets/img/watches/DWODL3101_before_2.jpg",
+    after_2: "assets/img/watches/DWODL3101_after_2.jpg",
+    tags: ["Silver Mesh", "Gold Dial", "Color Separation", "Mixed Metal"]
+  }
+];

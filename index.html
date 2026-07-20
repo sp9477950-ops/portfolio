@@ -2736,82 +2736,11 @@
     <div class="wrap">
       <div class="watches-header reveal">
         <div class="watches-badge"><span class="dot-live"></span> DANIEL WELLINGTON × AI STUDIO</div>
-        <h2>Watch <span class="gradtext">Product Shots</span></h2>
-        <p>3-SKU multi-angle catalog — raw product photography processed through AI pipeline. Hover any card to toggle Before → After.</p>
+        <h2>Watch <span class="gradtext">AI Catalog</span></h2>
+        <p>20-SKU multi-angle catalog — original flat product photography transformed into realistic model wrist shots. Hover to reveal before/after, click to inspect in detail.</p>
       </div>
 
-      <div class="watches-grid reveal">
-
-        <!-- Watch 1: DW0DG0101 — Iconic Link Emerald -->
-        <div class="watch-item reveal">
-          <div class="watch-ba-wrap">
-            <div class="watch-label-row">
-              <span class="watch-sku-badge">DW0DG0101</span>
-              <span class="watch-name-badge">Iconic Link — Emerald</span>
-            </div>
-            <div class="watch-ba-card">
-              <img class="watch-before-img" src="assets/img/watches/dw1_before.jpg" alt="DW0DG0101 Original Product Shot">
-              <img class="watch-after-img" src="assets/img/watches/dw1_after.jpg" alt="DW0DG0101 AI Enhanced Shot">
-              <div class="watch-ba-labels">
-                <span class="ba-pill before-pill">Before</span>
-                <span class="ba-pill after-pill">After</span>
-              </div>
-              <div class="watch-hover-hint">Hover to reveal</div>
-            </div>
-            <div class="watch-angles">
-              <img src="assets/img/watches/dw1_before_2.jpg" alt="DW0DG0101 Angle 2">
-              <img src="assets/img/watches/dw1_after_2.jpg" alt="DW0DG0101 AI Angle 2">
-            </div>
-          </div>
-        </div>
-
-        <!-- Watch 2: DW0DL0600 — Iconic Link Slate -->
-        <div class="watch-item reveal">
-          <div class="watch-ba-wrap">
-            <div class="watch-label-row">
-              <span class="watch-sku-badge">DW0DL0600</span>
-              <span class="watch-name-badge">Iconic Link — Slate</span>
-            </div>
-            <div class="watch-ba-card">
-              <img class="watch-before-img" src="assets/img/watches/dw2_before.jpg" alt="DW0DL0600 Original Product Shot">
-              <img class="watch-after-img" src="assets/img/watches/dw2_after.jpg" alt="DW0DL0600 AI Enhanced Shot">
-              <div class="watch-ba-labels">
-                <span class="ba-pill before-pill">Before</span>
-                <span class="ba-pill after-pill">After</span>
-              </div>
-              <div class="watch-hover-hint">Hover to reveal</div>
-            </div>
-            <div class="watch-angles">
-              <img src="assets/img/watches/dw2_before_2.jpg" alt="DW0DL0600 Angle 2">
-              <img src="assets/img/watches/dw2_after_2.jpg" alt="DW0DL0600 AI Angle 2">
-            </div>
-          </div>
-        </div>
-
-        <!-- Watch 3: DW0DL2101 — Iconic Link Champagne -->
-        <div class="watch-item reveal">
-          <div class="watch-ba-wrap">
-            <div class="watch-label-row">
-              <span class="watch-sku-badge">DW0DL2101</span>
-              <span class="watch-name-badge">Iconic Link — Champagne</span>
-            </div>
-            <div class="watch-ba-card">
-              <img class="watch-before-img" src="assets/img/watches/dw3_before.jpg" alt="DW0DL2101 Original Product Shot">
-              <img class="watch-after-img" src="assets/img/watches/dw3_after.jpg" alt="DW0DL2101 AI Enhanced Shot">
-              <div class="watch-ba-labels">
-                <span class="ba-pill before-pill">Before</span>
-                <span class="ba-pill after-pill">After</span>
-              </div>
-              <div class="watch-hover-hint">Hover to reveal</div>
-            </div>
-            <div class="watch-angles">
-              <img src="assets/img/watches/dw3_before_2.jpg" alt="DW0DL2101 Angle 2">
-              <img src="assets/img/watches/dw3_after_2.jpg" alt="DW0DL2101 AI Angle 2">
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /watches-grid -->
+      <div class="watches-grid reveal" id="watchesGrid"></div>
     </div>
   </section>
 
@@ -3005,6 +2934,7 @@
 
   <!-- Modular Category Projects Data -->
   <script src="assets/data/socks.js"></script>
+  <script src="assets/data/watches.js"></script>
   <script src="assets/data/vton.js"></script>
   <script src="assets/data/retouch.js"></script>
   <script src="assets/data/furnish.js"></script>
@@ -3015,12 +2945,14 @@
     /* ---- PROJECT DATA ---- */
     const projects = [
       ...socksProjects,
+      ...watchesProjects,
       ...vtonProjects,
       ...retouchProjects,
       ...furnishProjects,
       ...webProjects,
       ...agentsProjects
     ];
+
 
     // Assign dynamic sequential IDs
     projects.forEach((p, i) => {
@@ -3062,7 +2994,58 @@
           <div class="sock-sku">${sockSkus[i]}</div>
         </div>`;
       sc.addEventListener('click', () => openModal(p));
-      socksGrid.appendChild(sc);
+    });
+
+
+    /* ---- RENDER WATCHES SHOWCASE ---- */
+    const watchesGrid = document.getElementById('watchesGrid');
+    watchesProjects.forEach((p, i) => {
+      // Add dynamic fields to work with openModal
+      p.cat = 'watches';
+      p.catLabel = 'Daniel Wellington × AI';
+      p.feat = [
+        "Photorealistic wrist & model reconstruction",
+        "Geometry-locked metal link casing & dial indices",
+        "Constraint-enforced reflection & light matching",
+        "High-fidelity resolution with zero texture blur"
+      ];
+      p.img = p.after; // fallback primary image
+
+      const wc = document.createElement('div');
+      wc.className = 'watch-item reveal';
+      wc.innerHTML = `
+        <div class="watch-ba-wrap">
+          <div class="watch-label-row">
+            <span class="watch-sku-badge">${p.sku}</span>
+            <span class="watch-name-badge">${p.title.split(' — ')[1] || p.title}</span>
+          </div>
+          <div class="watch-ba-card">
+            <img class="watch-before-img" src="${p.before}" alt="${p.title} Before">
+            <img class="watch-after-img" src="${p.after}" alt="${p.title} After">
+            <div class="watch-ba-labels">
+              <span class="ba-pill before-pill">Before</span>
+              <span class="ba-pill after-pill">After</span>
+            </div>
+            <div class="watch-hover-hint">Hover to reveal</div>
+          </div>
+          <div class="watch-angles">
+            <img class="watch-thumb-img" src="${p.before_2}" alt="Angle 1">
+            <img class="watch-thumb-img" src="${p.after_2}" alt="Angle 2">
+          </div>
+        </div>`;
+      
+      // Card click opens modal
+      wc.querySelector('.watch-ba-card').addEventListener('click', () => openModal(p));
+      
+      // Thumbnail clicks also open modal
+      wc.querySelectorAll('.watch-thumb-img').forEach(timg => {
+        timg.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(p);
+        });
+      });
+      
+      watchesGrid.appendChild(wc);
     });
 
 
@@ -3078,55 +3061,78 @@
     const modalBg = document.getElementById('modalBg');
     function openModal(p) {
       const mThumb = document.getElementById('mThumb');
-      if (p.cat === 'vton') {
+      
+      // Helper function to update modal texts dynamically
+      function updateModalTexts(project) {
+        document.getElementById('mCat').textContent = project.catLabel;
+        document.getElementById('mTitle').textContent = project.title;
+        document.getElementById('mDesc').textContent = project.desc;
+        document.getElementById('mFeat').innerHTML = project.feat.map(f => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>${f}</li>`).join('');
+        document.getElementById('mTags').innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
+      }
+
+      if (p.cat === 'vton' || p.cat === 'watches') {
         const isSocks = p.isSocks === true;
+        const isWatch = p.cat === 'watches';
         mThumb.classList.add('vton-mode');
+
+        // Dynamically create control buttons
+        let btnsHTML = '';
+        if (isSocks) {
+          const sockLabels = [
+            "Black Low-Cut", "White/Green", "Blue Stripe", "Yellow Stripe", "Black Crew",
+            "Blue Cuff", "Pink Low-Cut", "Pink Side", "Black Side", "Black Striped Cuff"
+          ];
+          socksProjects.forEach((sock, idx) => {
+            const num = idx + 1;
+            const active = sock.sku === p.sku ? 'active' : '';
+            const borderStyle = sock.sku === p.sku ? 'border: 1px solid var(--violet); background: rgba(124,92,255,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
+            btnsHTML += `<button class="vton-btn ${active}" data-sku="${sock.sku}" data-img="assets/img/socks_${num}.jpg" data-mannequin="assets/img/mannequin_${num}.jpg" data-label="${sockLabels[idx].toUpperCase()}" style="flex: 1; min-width:80px; padding: 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${sockLabels[idx]}</button>`;
+          });
+        } else if (isWatch) {
+          watchesProjects.forEach((watch) => {
+            const active = watch.sku === p.sku ? 'active' : '';
+            const borderStyle = watch.sku === p.sku ? 'border: 1px solid var(--cyan); background: rgba(34,227,255,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
+            btnsHTML += `<button class="vton-btn ${active}" data-sku="${watch.sku}" data-img="${watch.after}" data-mannequin="${watch.before}" data-label="${watch.sku}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${watch.sku}</button>`;
+          });
+        } else {
+          btnsHTML = `
+            <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
+            <button class="vton-btn" data-img="assets/img/fashion3.png" data-label="ROYAL PURPLE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Purple (Pose A)</button>
+            <button class="vton-btn" data-img="assets/img/fashion2.png" data-label="PINK WALK" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose B)</button>
+          `;
+        }
+
         mThumb.innerHTML = `
       <div class="interactive-vton" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:rgba(0,0,0,0.3); border-radius:12px;">
         <div class="vton-preview-container" style="position: relative; overflow: hidden; border-radius: 12px; flex: 1; min-height: 280px; background: #080816; border: 1px solid var(--stroke); display:flex; align-items:center; justify-content:center;">
-          <img id="vtonPreview" src="${isSocks ? 'assets/img/socks_1.jpg' : 'assets/img/fashion1.png'}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
+          <img id="vtonPreview" src="${p.after}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
           <div id="vtonLoader" style="position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,8,22,0.85); backdrop-filter: blur(4px); color: #fff; font-size: 14px; font-weight: 600; z-index: 10; border-radius:12px;">
             <div style="text-align: center;">
-              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--cyan); border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
-              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);">${isSocks ? '[LOCKING LOGO POSITION]' : '[RUNNING DIFFUSION SWAP]'}</div>
-              <div id="vtonLoaderDesc" style="font-size:11px;color:var(--txt-faint);margin-top:4px;">${isSocks ? 'Running Gemini spatial anchor logic...' : 'Preserving geometry constraints...'}</div>
+              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : 'var(--violet)'}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
+              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:${isWatch ? 'var(--cyan)' : 'var(--cyan)'};">[RUNNING DIFFUSION SWAP]</div>
+              <div id="vtonLoaderDesc" style="font-size:11px;color:var(--txt-faint);margin-top:4px;">Preserving geometry constraints...</div>
             </div>
           </div>
         </div>
 
-        ${isSocks ? `
         <!-- BEFORE/AFTER TABS -->
         <div class="socks-toggle-pill" style="display: flex; gap: 4px; background: rgba(0,0,0,0.5); border: 1px solid var(--stroke); border-radius: 100px; padding: 4px; width: fit-content; margin: 12px auto 0; z-index: 5;">
-          <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (Mannequin)</button>
-          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: var(--violet); color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px rgba(124,92,255,0.3);">After (AI Try-On)</button>
+          <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (${isWatch ? 'Flat Shot' : 'Mannequin'})</button>
+          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : 'var(--violet)'}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : 'rgba(124,92,255,0.3)'};">After (AI Model)</button>
         </div>
-        ` : ''}
 
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
-            <span>${isSocks ? 'Select Sock Style / Branding Anchor' : 'Interactive Fabric swap'}</span>
-            <span id="fabricLabel" style="color:var(--cyan)">${isSocks ? 'BLACK LOW-CUT (TOE)' : 'PINK CHIFFON'}</span>
+            <span>${isWatch ? 'Select Daniel Wellington SKU' : 'Select Sock Style / Branding Anchor'}</span>
+            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : 'var(--cyan)'}">${isWatch ? p.sku : 'BLACK LOW-CUT (TOE)'}</span>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 120px; overflow-y: auto; padding-right: 4px;">
-            ${isSocks ? `
-            <button class="vton-btn active" data-img="assets/img/socks_1.jpg" data-mannequin="assets/img/mannequin_1.jpg" data-label="BLACK LOW-CUT (TOE)" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Toe</button>
-            <button class="vton-btn" data-img="assets/img/socks_2.jpg" data-mannequin="assets/img/mannequin_2.jpg" data-label="WHITE/GREEN COLLAR" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Green Low</button>
-            <button class="vton-btn" data-img="assets/img/socks_3.jpg" data-mannequin="assets/img/mannequin_3.jpg" data-label="BLUE STRIPED" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Blue Stripe</button>
-            <button class="vton-btn" data-img="assets/img/socks_4.jpg" data-mannequin="assets/img/mannequin_4.jpg" data-label="YELLOW STRIPED COLLAR" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Yellow Stripe</button>
-            <button class="vton-btn" data-img="assets/img/socks_5.jpg" data-mannequin="assets/img/mannequin_5.jpg" data-label="BLACK CREW (RIBBED)" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Crew</button>
-            <button class="vton-btn" data-img="assets/img/socks_6.jpg" data-mannequin="assets/img/mannequin_6.jpg" data-label="BLUE STRIPED CUFF" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Blue Cuff</button>
-            <button class="vton-btn" data-img="assets/img/socks_7.jpg" data-mannequin="assets/img/mannequin_7.jpg" data-label="WHITE/PINK COLLAR" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink Low</button>
-            <button class="vton-btn" data-img="assets/img/socks_8.jpg" data-mannequin="assets/img/mannequin_8.jpg" data-label="PINK SIDE STRIPE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink Side</button>
-            <button class="vton-btn" data-img="assets/img/socks_9.jpg" data-mannequin="assets/img/mannequin_9.jpg" data-label="BLACK SIDE STRIPE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Side</button>
-            <button class="vton-btn" data-img="assets/img/socks_10.jpg" data-mannequin="assets/img/mannequin_10.jpg" data-label="BLACK STRIPED CUFF" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Black Cuff</button>
-            ` : `
-            <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
-            <button class="vton-btn" data-img="assets/img/fashion3.png" data-label="ROYAL PURPLE" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Purple (Pose A)</button>
-            <button class="vton-btn" data-img="assets/img/fashion2.png" data-label="PINK WALK" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose B)</button>
-            `}
+          <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 110px; overflow-y: auto; padding-right: 4px;">
+            ${btnsHTML}
           </div>
         </div>
       </div>`;
+
         setTimeout(() => {
           const btns = document.querySelectorAll('.vton-btn');
           const img = document.getElementById('vtonPreview');
@@ -3135,74 +3141,87 @@
           
           let currentViewMode = 'after'; // default is AI Try-On
           
-          if (isSocks) {
-            const btnBefore = document.getElementById('btnBefore');
-            const btnAfter = document.getElementById('btnAfter');
-            const lTitle = document.getElementById('vtonLoaderTitle');
-            const lDesc = document.getElementById('vtonLoaderDesc');
+          const btnBefore = document.getElementById('btnBefore');
+          const btnAfter = document.getElementById('btnAfter');
+          const lTitle = document.getElementById('vtonLoaderTitle');
+          const lDesc = document.getElementById('vtonLoaderDesc');
+          
+          btnBefore.addEventListener('click', () => {
+            if (currentViewMode === 'before') return;
+            currentViewMode = 'before';
             
-            btnBefore.addEventListener('click', () => {
-              if (currentViewMode === 'before') return;
-              currentViewMode = 'before';
-              
-              // Style transition
-              btnBefore.style.background = 'rgba(255,255,255,0.15)';
-              btnBefore.style.color = '#fff';
-              btnAfter.style.background = 'transparent';
-              btnAfter.style.color = 'var(--txt-dim)';
-              btnAfter.style.boxShadow = 'none';
-              
-              // Loader
-              lTitle.textContent = '[LOADING MANNEQUIN REFERENCE]';
-              lDesc.textContent = 'Fetching raw product photography...';
-              loader.style.display = 'grid';
-              
-              setTimeout(() => {
-                const activeBtn = document.querySelector('.vton-btn.active');
-                img.src = activeBtn.dataset.mannequin;
-                loader.style.display = 'none';
-              }, 400);
-            });
+            // Style transition
+            btnBefore.style.background = 'rgba(255,255,255,0.15)';
+            btnBefore.style.color = '#fff';
+            btnAfter.style.background = 'transparent';
+            btnAfter.style.color = 'var(--txt-dim)';
+            btnAfter.style.boxShadow = 'none';
             
-            btnAfter.addEventListener('click', () => {
-              if (currentViewMode === 'after') return;
-              currentViewMode = 'after';
-              
-              // Style transition
-              btnAfter.style.background = 'var(--violet)';
-              btnAfter.style.color = '#fff';
-              btnAfter.style.boxShadow = '0 0 10px rgba(124,92,255,0.3)';
-              btnBefore.style.background = 'transparent';
-              btnBefore.style.color = 'var(--txt-dim)';
-              
-              // Loader
-              lTitle.textContent = '[RUNNING DIFFUSION SWAP]';
-              lDesc.textContent = 'Enforcing Gemini anatomical constraints...';
-              loader.style.display = 'grid';
-              
-              setTimeout(() => {
-                const activeBtn = document.querySelector('.vton-btn.active');
-                img.src = activeBtn.dataset.img;
-                loader.style.display = 'none';
-              }, 400);
-            });
-          }
+            // Loader
+            lTitle.textContent = isWatch ? '[LOADING STUDIO CATALOG]' : '[LOADING MANNEQUIN REFERENCE]';
+            lDesc.textContent = isWatch ? 'Fetching original flat product photography...' : 'Fetching raw product photography...';
+            loader.style.display = 'grid';
+            
+            setTimeout(() => {
+              const activeBtn = document.querySelector('.vton-btn.active');
+              img.src = activeBtn.dataset.mannequin;
+              loader.style.display = 'none';
+            }, 400);
+          });
+          
+          btnAfter.addEventListener('click', () => {
+            if (currentViewMode === 'after') return;
+            currentViewMode = 'after';
+            
+            // Style transition
+            btnAfter.style.background = isWatch ? 'var(--cyan)' : 'var(--violet)';
+            btnAfter.style.color = '#fff';
+            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : '0 0 10px rgba(124,92,255,0.3)';
+            btnBefore.style.background = 'transparent';
+            btnBefore.style.color = 'var(--txt-dim)';
+            
+            // Loader
+            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : '[RUNNING DIFFUSION SWAP]';
+            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : 'Enforcing Gemini anatomical constraints...';
+            loader.style.display = 'grid';
+            
+            setTimeout(() => {
+              const activeBtn = document.querySelector('.vton-btn.active');
+              img.src = activeBtn.dataset.img;
+              loader.style.display = 'none';
+            }, 400);
+          });
           
           btns.forEach(btn => {
             btn.addEventListener('click', () => {
               if (btn.classList.contains('active')) return;
+              
               btns.forEach(b => {
                 b.classList.remove('active');
                 b.style.border = '1px solid var(--stroke)';
                 b.style.background = 'rgba(255,255,255,0.02)';
               });
-              btn.classList.add('active');
-              btn.style.border = '1px solid var(--violet)';
-              btn.style.background = 'rgba(124,92,255,0.15)';
               
-              const lTitle = document.getElementById('vtonLoaderTitle');
-              const lDesc = document.getElementById('vtonLoaderDesc');
-              if (isSocks) {
+              btn.classList.add('active');
+              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : 'var(--violet)'}`;
+              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : 'rgba(124,92,255,0.15)'}`;
+              
+              const sku = btn.dataset.sku;
+              // Find matching project config to update description & details dynamically
+              const matchedProject = (isWatch ? watchesProjects : socksProjects).find(x => x.sku === sku);
+              if (matchedProject) {
+                updateModalTexts(matchedProject);
+              }
+              
+              if (isWatch) {
+                if (currentViewMode === 'after') {
+                  lTitle.textContent = '[RUNNING REFLECTION DIFFUSION]';
+                  lDesc.textContent = 'Synthesizing watch band & lighting alignment...';
+                } else {
+                  lTitle.textContent = '[LOADING STUDIO CATALOG]';
+                  lDesc.textContent = 'Fetching original flat product photography...';
+                }
+              } else {
                 if (currentViewMode === 'after') {
                   lTitle.textContent = '[LOCKING LOGO POSITION]';
                   lDesc.textContent = 'Running Gemini spatial anchor logic...';
@@ -3210,15 +3229,12 @@
                   lTitle.textContent = '[LOADING MANNEQUIN REFERENCE]';
                   lDesc.textContent = 'Fetching raw product photography...';
                 }
-              } else {
-                lTitle.textContent = '[RUNNING DIFFUSION SWAP]';
-                lDesc.textContent = 'Preserving geometry constraints...';
               }
               
               loader.style.display = 'grid';
               flbl.textContent = btn.dataset.label;
               setTimeout(() => {
-                img.src = currentViewMode === 'after' ? btn.dataset.img : (btn.dataset.mannequin || btn.dataset.img);
+                img.src = currentViewMode === 'after' ? btn.dataset.img : btn.dataset.mannequin;
                 loader.style.display = 'none';
               }, 700);
             });
@@ -3227,17 +3243,14 @@
       } else if (p.cat === 'retouch') {
         document.getElementById('mThumb').innerHTML = `
       <div class="ba-frame" style="width:100%; height:100%; border-radius:12px; position:relative; overflow:hidden; background:#080816; display:flex; align-items:center; justify-content:center; border:1px solid var(--stroke);">
-        <img class="ba-after" src="assets/img/p2.png" alt="Retouched Output" style="width: 100%; height: 100%; object-fit: contain;">
+        <img class="ba-after" src="${p.img}" alt="Retouched Output" style="width: 100%; height: 100%; object-fit: contain;">
         <span class="ba-tag ba-tag-r" style="right:10px; background:rgba(34,227,255,0.12); border:1px solid var(--cyan); text-transform:uppercase; font-size:9px; font-family:'JetBrains Mono'; border-radius:4px; padding:3px 8px; position:absolute; bottom:10px;">Clean Cutout</span>
       </div>`;
       } else {
         document.getElementById('mThumb').innerHTML = p.img ? `<img src="${p.img}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius:12px; border:1px solid var(--stroke);">` : `<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
       }
-      document.getElementById('mCat').textContent = p.catLabel;
-      document.getElementById('mTitle').textContent = p.title;
-      document.getElementById('mDesc').textContent = p.desc;
-      document.getElementById('mFeat').innerHTML = p.feat.map(f => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>${f}</li>`).join('');
-      document.getElementById('mTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+      
+      updateModalTexts(p);
       modalBg.classList.add('open'); document.body.style.overflow = 'hidden';
     }
     function closeModal() { modalBg.classList.remove('open'); document.body.style.overflow = ''; document.getElementById('mThumb').classList.remove('vton-mode'); }
