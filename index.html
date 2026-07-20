@@ -672,12 +672,24 @@
       gap: 26px
     }
 
+    /* ---- WORK TABS STYLES ---- */
+    .work-tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .work-tab-content.active-content {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ---- SOCKS SHOWCASE SECTION ---- */
     /* ===== SHOES SHOWCASE ===== */
     .shoes-section {
-      padding: 110px 0;
+      padding: 10px 0;
       position: relative;
-      border-top: 1px solid var(--stroke)
     }
 
     .shoes-header {
@@ -831,9 +843,8 @@
 
     /* ===== WATCHES SHOWCASE ===== */
     .watches-section {
-      padding: 110px 0;
+      padding: 10px 0;
       position: relative;
-      border-top: 1px solid var(--stroke)
     }
 
     .watches-header {
@@ -1028,7 +1039,7 @@
     /* ============================= */
 
     .socks-showcase-section {
-      padding: 110px 0;
+      padding: 10px 0;
       position: relative
     }
 
@@ -2872,118 +2883,152 @@
   </section>
 
 
-  <!-- SOCKS SHOWCASE -->
-  <section class="socks-showcase-section" id="work">
+  <!-- WORK SHOWCASE SECTION -->
+  <section class="work-showcase-section" id="work" style="padding: 110px 0 80px; position: relative; border-top: 1px solid var(--stroke);">
     <div class="wrap">
-      <div class="socks-brand-header reveal">
-        <div class="socks-brand-badge"><span class="dot-live"></span> SOCKS × AI PIPELINE</div>
-        <h2>10-SKU Branding <span class="gradtext">Showcase</span></h2>
-        <p>Hover any style to see the raw mannequin → AI try-on reveal. Every logo is anchored by Gemini spatial constraint logic — zero hallucinations.</p>
-      </div>
-      <div class="socks-grid reveal" id="socksGrid"></div>
-
-
-    </div>
-  </section>
-
-
-  <!-- WATCHES SHOWCASE -->
-  <section class="watches-section" id="watches">
-    <div class="wrap">
-      <div class="watches-header reveal">
-        <div class="watches-badge"><span class="dot-live"></span> WATCHES × AI STUDIO</div>
-        <h2>Watch <span class="gradtext">AI Catalog</span></h2>
-        <p>20-SKU multi-angle catalog — original flat product photography transformed into realistic model wrist shots. Hover to reveal before/after, click to inspect in detail.</p>
-      </div>
-
-      <div class="watches-grid reveal" id="watchesGrid"></div>
-    </div>
-  </section>
-
-  <!-- SHOES SHOWCASE -->
-  <section class="shoes-section" id="shoes">
-    <div class="wrap">
-      <div class="shoes-header reveal">
-        <div class="shoes-badge"><span class="dot-live"></span> SHOES × AI PIPELINE</div>
-        <h2>Footwear <span class="gradtext">AI Catalog</span></h2>
-        <p>7-SKU dynamic footwear showcase — raw flat-lay product photography integrated with contextual model shoots. Hover to reveal before/after, click to inspect in detail.</p>
-      </div>
-
-      <div class="shoes-grid reveal" id="shoesGrid"></div>
-    </div>
-  </section>
-
-  <!-- AI PRODUCT SHOOTS -->
-
-  <section id="shoots">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-tag">03 / AI Product Shoots</div>
-        <h2>From flat studio shot to <span class="gradtext">scroll-stopping catalog</span></h2>
-        <p>Real client footwear, relit and recomposed with diffusion pipelines — geometry, logo and stitching locked,
-          only the world around the product reimagined. Drag the slider to compare.</p>
-      </div>
-
-      <div class="ba-tabs reveal">
-        <button class="ba-tab active" data-ba="0">Studio → Cinematic Blue</button>
-        <button class="ba-tab " data-ba="1">Studio → Golden Concrete</button>
-        <button class="ba-tab " data-ba="2">Studio → Misty Forest</button>
-      </div>
-
-      <div class="ba-wrap reveal">
-        <div class="ba-stage" data-stage="0" style="display:block">
-          <div class="ba-frame">
-            <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Dramatic studio relight">
-            <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
-            <div class="ba-divider">
-              <div class="ba-handle"><span>‹</span><span>›</span></div>
-            </div>
-            <span class="ba-tag ba-tag-l">Before</span>
-            <span class="ba-tag ba-tag-r">After</span>
-            <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
-          </div>
-          <p class="ba-scene">Dramatic studio relight</p>
+      
+      <!-- Unified Section Header -->
+      <div class="reveal" style="text-align: center; margin-bottom: 50px;">
+        <div style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); font-family: 'JetBrains Mono'; font-size: 12px; color: var(--txt-dim); letter-spacing: .08em; margin-bottom: 20px;">
+          <span class="dot-live"></span> PORTFOLIO WORKS
         </div>
-        <div class="ba-stage" data-stage="1" style="display:none">
-          <div class="ba-frame">
-            <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Golden-hour architectural"
-              style="filter: sepia(0.5) hue-rotate(-20deg) saturate(1.5) contrast(1.1) brightness(0.95);">
-            <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
-            <div class="ba-divider">
-              <div class="ba-handle"><span>‹</span><span>›</span></div>
-            </div>
-            <span class="ba-tag ba-tag-l">Before</span>
-            <span class="ba-tag ba-tag-r">After</span>
-            <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
-          </div>
-          <p class="ba-scene">Golden-hour architectural</p>
-        </div>
-        <div class="ba-stage" data-stage="2" style="display:none">
-          <div class="ba-frame">
-            <img class="ba-after" src="assets/img/p5.jpg" alt="AI-enhanced product shoot — Outdoor trail composite">
-            <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
-            <div class="ba-divider">
-              <div class="ba-handle"><span>‹</span><span>›</span></div>
-            </div>
-            <span class="ba-tag ba-tag-l">Before</span>
-            <span class="ba-tag ba-tag-r">After</span>
-            <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
-          </div>
-          <p class="ba-scene">Outdoor trail composite</p>
+        <h2 style="font-size: clamp(32px, 5vw, 60px); font-weight: 800; margin-bottom: 20px;">AI Product <span class="gradtext">Showcase</span></h2>
+        <p style="font-size: 17px; color: var(--txt-dim); max-width: 600px; margin: 0 auto;">Select a category to view VTON pipelines, custom diffusion integrations, and high-fidelity model shoot generations.</p>
+      </div>
+
+      <!-- Tab Switcher Navigation -->
+      <div style="display: flex; justify-content: center; margin-bottom: 50px;">
+        <div class="work-tabs-nav reveal" style="display: inline-flex; gap: 8px; flex-wrap: wrap; padding: 6px; background: rgba(8,8,22,0.6); backdrop-filter: blur(12px); border: 1px solid var(--stroke); border-radius: 100px; justify-content: center; align-items: center; z-index: 10; position: relative;">
+          <button class="work-tab-btn active-shoes" data-target="content-shoes" style="padding: 10px 20px; border: 1px solid rgba(16,185,129,0.4); border-radius: 100px; background: rgba(16,185,129,0.15); color: #10b981; font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span>
+            Footwear AI (7 SKUs)
+          </button>
+          <button class="work-tab-btn" data-target="content-watches" style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--cyan);"></span>
+            Watches AI (20 SKUs)
+          </button>
+          <button class="work-tab-btn" data-target="content-socks" style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--violet);"></span>
+            Campus Socks (10 SKUs)
+          </button>
+          <button class="work-tab-btn" data-target="content-shoots" style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#eab308;"></span>
+            AI Product Shoots (19 Creatives)
+          </button>
         </div>
       </div>
 
-      <div class="sec-head reveal" style="margin-top:80px">
-        <h2 style="font-size:clamp(26px,3vw,36px)">More <span class="gradtext">transformations</span></h2>
-        <p>A selection of finished scenes generated from plain pack-shots.</p>
+      <!-- Tab Content Panels -->
+      <div class="work-tab-container">
+        
+        <!-- Tab Content 1: Shoes -->
+        <div id="content-shoes" class="work-tab-content active-content">
+          <div class="shoes-section">
+            <div class="shoes-header" style="text-align: center; margin-bottom: 30px;">
+              <div class="shoes-badge"><span class="dot-live"></span> SHOES × AI PIPELINE</div>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">7-SKU dynamic footwear showcase — raw flat-lay product photography integrated with contextual model shoots. Hover to reveal before/after, click to inspect in detail.</p>
+            </div>
+            <div class="shoes-grid" id="shoesGrid"></div>
+          </div>
+        </div>
+
+        <!-- Tab Content 2: Watches -->
+        <div id="content-watches" class="work-tab-content">
+          <div class="watches-section">
+            <div class="watches-header" style="text-align: center; margin-bottom: 30px;">
+              <div class="watches-badge"><span class="dot-live"></span> WATCHES × AI STUDIO</div>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">20-SKU multi-angle catalog — original flat product photography transformed into realistic model wrist shots. Hover to reveal before/after, click to inspect in detail.</p>
+            </div>
+            <div class="watches-grid" id="watchesGrid"></div>
+          </div>
+        </div>
+
+        <!-- Tab Content 3: Socks -->
+        <div id="content-socks" class="work-tab-content">
+          <div class="socks-showcase-section">
+            <div class="socks-brand-header" style="text-align: center; margin-bottom: 30px;">
+              <div class="socks-brand-badge"><span class="dot-live"></span> SOCKS × AI PIPELINE</div>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">Hover any style to see the raw mannequin → AI try-on reveal. Every logo is anchored by Gemini spatial constraint logic — zero hallucinations.</p>
+            </div>
+            <div class="socks-grid" id="socksGrid"></div>
+          </div>
+        </div>
+
+        <!-- Tab Content 4: Shoots & Creatives -->
+        <div id="content-shoots" class="work-tab-content">
+          <div class="shoes-section" style="padding: 10px 0;">
+            <div class="shoes-header" style="text-align: center; margin-bottom: 35px;">
+              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(234,179,8,.35); background: rgba(234,179,8,.08); font-family: 'JetBrains Mono'; font-size: 12px; color: #eab308; letter-spacing: .08em; margin-bottom: 20px;">
+                <span class="dot-live"></span> PRODUCT SCENES & CREATIVES
+              </div>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 0 auto;">Real client footwear, relit and recomposed with diffusion pipelines — geometry, logo and stitching locked. Drag the slider to compare.</p>
+            </div>
+            
+            <div class="ba-tabs reveal" style="margin-bottom: 40px;">
+              <button class="ba-tab active" data-ba="0">Studio → Cinematic Blue</button>
+              <button class="ba-tab " data-ba="1">Studio → Golden Concrete</button>
+              <button class="ba-tab " data-ba="2">Studio → Misty Forest</button>
+            </div>
+
+            <div class="ba-wrap reveal" style="margin-bottom: 60px;">
+              <div class="ba-stage" data-stage="0" style="display:block">
+                <div class="ba-frame">
+                  <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Dramatic studio relight">
+                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+                  <div class="ba-divider">
+                    <div class="ba-handle"><span>‹</span><span>›</span></div>
+                  </div>
+                  <span class="ba-tag ba-tag-l">Before</span>
+                  <span class="ba-tag ba-tag-r">After</span>
+                  <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+                </div>
+                <p class="ba-scene">Dramatic studio relight</p>
+              </div>
+              <div class="ba-stage" data-stage="1" style="display:none">
+                <div class="ba-frame">
+                  <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Golden-hour architectural"
+                    style="filter: sepia(0.5) hue-rotate(-20deg) saturate(1.5) contrast(1.1) brightness(0.95);">
+                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+                  <div class="ba-divider">
+                    <div class="ba-handle"><span>‹</span><span>›</span></div>
+                  </div>
+                  <span class="ba-tag ba-tag-l">Before</span>
+                  <span class="ba-tag ba-tag-r">After</span>
+                  <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+                </div>
+                <p class="ba-scene">Golden-hour architectural</p>
+              </div>
+              <div class="ba-stage" data-stage="2" style="display:none">
+                <div class="ba-frame">
+                  <img class="ba-after" src="assets/img/p5.jpg" alt="AI-enhanced product shoot — Outdoor trail composite">
+                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+                  <div class="ba-divider">
+                    <div class="ba-handle"><span>‹</span><span>›</span></div>
+                  </div>
+                  <span class="ba-tag ba-tag-l">Before</span>
+                  <span class="ba-tag ba-tag-r">After</span>
+                  <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+                </div>
+                <p class="ba-scene">Outdoor trail composite</p>
+              </div>
+            </div>
+
+            <div class="sec-head reveal" style="margin-top:80px; text-align: center;">
+              <h2 style="font-size:clamp(26px,3vw,36px)">More <span class="gradtext">transformations</span></h2>
+              <p>A selection of finished scenes generated from plain pack-shots.</p>
+            </div>
+            <div class="shoot-grid reveal" id="shootGrid"></div>
+            <div style="text-align: center; margin-top: 40px;" id="showMoreCreativesWrap">
+              <button id="btnShowMoreCreatives" class="btn secondary" style="border: 1px solid var(--stroke); background: rgba(255,255,255,0.02); padding: 12px 28px; border-radius: 30px; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;">
+                <span>Show More Creatives (13)</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.3s;" id="showMoreIcon"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="shoot-grid reveal" id="shootGrid"></div>
-      <div style="text-align: center; margin-top: 40px;" id="showMoreCreativesWrap">
-        <button id="btnShowMoreCreatives" class="btn secondary" style="border: 1px solid var(--stroke); background: rgba(255,255,255,0.02); padding: 12px 28px; border-radius: 30px; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;">
-          <span>Show More Creatives (13)</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.3s;" id="showMoreIcon"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-      </div>
+
     </div>
   </section>
 
@@ -3340,6 +3385,66 @@
     
     // Initial Render
     renderCreatives();
+
+    /* ---- WORK TABS NAVIGATION LOGIC ---- */
+    const tabButtons = document.querySelectorAll('.work-tab-btn');
+    const tabContents = document.querySelectorAll('.work-tab-content');
+    
+    const categoryThemes = {
+      'content-shoes': { border: '1px solid rgba(16,185,129,0.4)', background: 'rgba(16,185,129,0.15)', color: '#10b981' },
+      'content-watches': { border: '1px solid rgba(34,227,255,0.4)', background: 'rgba(34,227,255,0.15)', color: 'var(--cyan)' },
+      'content-socks': { border: '1px solid rgba(124,92,255,0.4)', background: 'rgba(124,92,255,0.15)', color: 'var(--violet)' },
+      'content-shoots': { border: '1px solid rgba(234,179,8,0.4)', background: 'rgba(234,179,8,0.15)', color: '#eab308' }
+    };
+    
+    function switchTab(targetId) {
+      tabButtons.forEach(btn => {
+        const btnTarget = btn.getAttribute('data-target');
+        if (btnTarget === targetId) {
+          const theme = categoryThemes[targetId];
+          btn.style.border = theme.border;
+          btn.style.background = theme.background;
+          btn.style.color = theme.color;
+        } else {
+          btn.style.border = '1px solid transparent';
+          btn.style.background = 'transparent';
+          btn.style.color = 'var(--txt-dim)';
+        }
+      });
+      
+      tabContents.forEach(content => {
+        if (content.id === targetId) {
+          content.style.display = 'block';
+          setTimeout(() => {
+            content.classList.add('active-content');
+            // Recalculate slider dimensions once content is visible
+            window.dispatchEvent(new Event('resize'));
+          }, 10);
+        } else {
+          content.classList.remove('active-content');
+          content.style.display = 'none';
+        }
+      });
+    }
+    
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        switchTab(targetId);
+      });
+    });
+
+    // Intercept clicks on links that point to #shoots to switch tab and scroll to #work
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href === '#shoots') {
+          e.preventDefault();
+          switchTab('content-shoots');
+          document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
 
 
     /* ---- TIMELINE ---- */
