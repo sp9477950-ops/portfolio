@@ -2977,25 +2977,12 @@
         <h2 style="font-size:clamp(26px,3vw,36px)">More <span class="gradtext">transformations</span></h2>
         <p>A selection of finished scenes generated from plain pack-shots.</p>
       </div>
-      <div class="shoot-grid reveal">
-        <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Cinematic colour-pop relight">
-          <figcaption>Cinematic colour-pop relight</figcaption>
-        </figure>
-        <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Pastel studio scene">
-          <figcaption>Pastel studio scene</figcaption>
-        </figure>
-        <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Urban lifestyle backdrop">
-          <figcaption>Urban lifestyle backdrop</figcaption>
-        </figure>
-        <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Studio gradient set">
-          <figcaption>Studio gradient set</figcaption>
-        </figure>
-        <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Soft pastel composition">
-          <figcaption>Soft pastel composition</figcaption>
-        </figure>
-        <figure class="shoot-card"><img loading="lazy" src="assets/img/p5.jpg" alt="Concrete & shadow play">
-          <figcaption>Concrete & shadow play</figcaption>
-        </figure>
+      <div class="shoot-grid reveal" id="shootGrid"></div>
+      <div style="text-align: center; margin-top: 40px;" id="showMoreCreativesWrap">
+        <button id="btnShowMoreCreatives" class="btn secondary" style="border: 1px solid var(--stroke); background: rgba(255,255,255,0.02); padding: 12px 28px; border-radius: 30px; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;">
+          <span>Show More Creatives (13)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.3s;" id="showMoreIcon"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -3271,6 +3258,88 @@
       
       shoesGrid.appendChild(sc);
     });
+
+
+    /* ---- RENDER CREATIVES GALLERY ---- */
+    const creatives = [
+      { img: "assets/img/creatives/creative_1.jpg", caption: "Cinematic Neo-Noir Relight" },
+      { img: "assets/img/creatives/creative_2.jpg", caption: "Pastel Geometry Composition" },
+      { img: "assets/img/creatives/creative_3.jpg", caption: "Urban Cyberpunk Backdrop" },
+      { img: "assets/img/creatives/creative_4.jpg", caption: "Neon Glow Studio" },
+      { img: "assets/img/creatives/creative_5.jpg", caption: "Volcanic Rock Display" },
+      { img: "assets/img/creatives/creative_6.jpg", caption: "Brutalist Concrete & Shadow" },
+      { img: "assets/img/creatives/creative_7.jpg", caption: "Tropical Oasis Composition" },
+      { img: "assets/img/creatives/creative_8.jpg", caption: "Minimalist Wood & Sand" },
+      { img: "assets/img/creatives/creative_9.jpg", caption: "Sunset Horizon Contrast" },
+      { img: "assets/img/creatives/creative_10.jpg", caption: "Artistic Marble Pedestal" },
+      { img: "assets/img/creatives/creative_11.jpg", caption: "Industrial Warehouse Setting" },
+      { img: "assets/img/creatives/creative_12.jpg", caption: "Retro Synthwave Grid" },
+      { img: "assets/img/creatives/creative_13.jpg", caption: "Desert Dune Studio" },
+      { img: "assets/img/creatives/creative_14.jpg", caption: "Misty Mountain Trail" },
+      { img: "assets/img/creatives/creative_15.jpg", caption: "Zen Garden Stone" },
+      { img: "assets/img/creatives/creative_16.jpg", caption: "Autumn Forest Floor" },
+      { img: "assets/img/creatives/creative_17.jpg", caption: "Surreal Floating Pedestal" },
+      { img: "assets/img/creatives/creative_18.jpg", caption: "Classic Gallery Spotlight" },
+      { img: "assets/img/creatives/creative_19.jpg", caption: "Abstract Color-Block Set" }
+    ];
+
+    const shootGrid = document.getElementById('shootGrid');
+    const btnShowMore = document.getElementById('btnShowMoreCreatives');
+    const showMoreWrap = document.getElementById('showMoreCreativesWrap');
+    
+    let creativesVisibleCount = 6;
+    
+    function renderCreatives() {
+      shootGrid.innerHTML = '';
+      const visibleList = creatives.slice(0, creativesVisibleCount);
+      visibleList.forEach((c) => {
+        const figure = document.createElement('figure');
+        figure.className = 'shoot-card';
+        // Add dynamic style for fade-in effect
+        figure.style.opacity = '0';
+        figure.style.transform = 'translateY(20px)';
+        figure.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        
+        figure.innerHTML = `
+          <img loading="lazy" src="${c.img}" alt="${c.caption}">
+          <figcaption>${c.caption}</figcaption>
+        `;
+        shootGrid.appendChild(figure);
+        
+        // Trigger reflow & animation
+        setTimeout(() => {
+          figure.style.opacity = '1';
+          figure.style.transform = 'translateY(0)';
+        }, 50);
+      });
+      
+      if (creativesVisibleCount >= creatives.length) {
+        showMoreWrap.style.display = 'none';
+      } else {
+        btnShowMore.querySelector('span').textContent = `Show More Creatives (${creatives.length - creativesVisibleCount})`;
+      }
+    }
+    
+    btnShowMore.addEventListener('mouseenter', () => {
+      btnShowMore.style.borderColor = 'rgba(16,185,129,0.45)';
+      btnShowMore.style.background = 'rgba(16,185,129,0.05)';
+      btnShowMore.style.color = '#fff';
+      document.getElementById('showMoreIcon').style.transform = 'translateY(2px)';
+    });
+    btnShowMore.addEventListener('mouseleave', () => {
+      btnShowMore.style.borderColor = 'var(--stroke)';
+      btnShowMore.style.background = 'rgba(255,255,255,0.02)';
+      btnShowMore.style.color = 'var(--txt-dim)';
+      document.getElementById('showMoreIcon').style.transform = 'translateY(0)';
+    });
+    
+    btnShowMore.addEventListener('click', () => {
+      creativesVisibleCount = creatives.length;
+      renderCreatives();
+    });
+    
+    // Initial Render
+    renderCreatives();
 
 
     /* ---- TIMELINE ---- */
