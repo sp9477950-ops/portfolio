@@ -679,6 +679,7 @@
       transform: translateY(15px);
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
+
     .work-tab-content.active-content {
       display: block;
       opacity: 1;
@@ -703,8 +704,8 @@
       gap: 10px;
       padding: 8px 18px;
       border-radius: 30px;
-      border: 1px solid rgba(16,185,129,.35);
-      background: rgba(16,185,129,.08);
+      border: 1px solid rgba(16, 185, 129, .35);
+      background: rgba(16, 185, 129, .08);
       font-family: 'JetBrains Mono';
       font-size: 12px;
       color: #10b981;
@@ -731,8 +732,19 @@
       gap: 28px
     }
 
-    @media(max-width:900px) { .shoes-grid { grid-template-columns: 1fr 1fr; gap: 20px } }
-    @media(max-width:560px) { .shoes-grid { grid-template-columns: 1fr; gap: 24px } }
+    @media(max-width:900px) {
+      .shoes-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px
+      }
+    }
+
+    @media(max-width:560px) {
+      .shoes-grid {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+    }
 
     .shoe-item {
       background: var(--surface);
@@ -743,8 +755,8 @@
     }
 
     .shoe-item:hover {
-      border-color: rgba(16,185,129,.45);
-      box-shadow: 0 20px 50px -16px rgba(16,185,129,.2);
+      border-color: rgba(16, 185, 129, .45);
+      box-shadow: 0 20px 50px -16px rgba(16, 185, 129, .2);
       transform: translateY(-4px)
     }
 
@@ -763,8 +775,8 @@
       font-family: 'JetBrains Mono';
       font-size: 10px;
       color: #10b981;
-      background: rgba(16,185,129,.1);
-      border: 1px solid rgba(16,185,129,.25);
+      background: rgba(16, 185, 129, .1);
+      border: 1px solid rgba(16, 185, 129, .25);
       padding: 3px 9px;
       border-radius: 6px;
       letter-spacing: .06em
@@ -794,11 +806,21 @@
       transition: opacity .55s ease
     }
 
-    .shoe-ba-card .shoe-before-img { opacity: 0 }
-    .shoe-ba-card .shoe-after-img  { opacity: 1 }
+    .shoe-ba-card .shoe-before-img {
+      opacity: 0
+    }
 
-    .shoe-item:hover .shoe-ba-card .shoe-before-img { opacity: 1 }
-    .shoe-item:hover .shoe-ba-card .shoe-after-img  { opacity: 0 }
+    .shoe-ba-card .shoe-after-img {
+      opacity: 1
+    }
+
+    .shoe-item:hover .shoe-ba-card .shoe-before-img {
+      opacity: 1
+    }
+
+    .shoe-item:hover .shoe-ba-card .shoe-after-img {
+      opacity: 0
+    }
 
     .shoe-hover-hint {
       position: absolute;
@@ -806,9 +828,9 @@
       right: 10px;
       font-family: 'JetBrains Mono';
       font-size: 9px;
-      color: rgba(255,255,255,.45);
+      color: rgba(255, 255, 255, .45);
       letter-spacing: .05em;
-      background: rgba(7,7,17,.6);
+      background: rgba(7, 7, 17, .6);
       backdrop-filter: blur(4px);
       padding: 3px 8px;
       border-radius: 6px;
@@ -817,13 +839,15 @@
       z-index: 3
     }
 
-    .shoe-item:hover .shoe-hover-hint { opacity: 0 }
+    .shoe-item:hover .shoe-hover-hint {
+      opacity: 0
+    }
 
     .shoe-angles {
       display: flex;
       gap: 8px;
       padding: 10px 12px 14px;
-      background: rgba(0,0,0,.2)
+      background: rgba(0, 0, 0, .2)
     }
 
     .shoe-angles img {
@@ -858,8 +882,8 @@
       gap: 10px;
       padding: 8px 18px;
       border-radius: 30px;
-      border: 1px solid rgba(34,227,255,.35);
-      background: rgba(34,227,255,.08);
+      border: 1px solid rgba(34, 227, 255, .35);
+      background: rgba(34, 227, 255, .08);
       font-family: 'JetBrains Mono';
       font-size: 12px;
       color: var(--cyan);
@@ -886,8 +910,19 @@
       gap: 28px
     }
 
-    @media(max-width:900px) { .watches-grid { grid-template-columns: 1fr 1fr; gap: 20px } }
-    @media(max-width:560px) { .watches-grid { grid-template-columns: 1fr; gap: 24px } }
+    @media(max-width:900px) {
+      .watches-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px
+      }
+    }
+
+    @media(max-width:560px) {
+      .watches-grid {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+    }
 
     .watch-item {
       background: var(--surface);
@@ -898,8 +933,8 @@
     }
 
     .watch-item:hover {
-      border-color: rgba(34,227,255,.45);
-      box-shadow: 0 20px 50px -16px rgba(34,227,255,.2);
+      border-color: rgba(34, 227, 255, .45);
+      box-shadow: 0 20px 50px -16px rgba(34, 227, 255, .2);
       transform: translateY(-4px)
     }
 
@@ -918,8 +953,8 @@
       font-family: 'JetBrains Mono';
       font-size: 10px;
       color: var(--cyan);
-      background: rgba(34,227,255,.1);
-      border: 1px solid rgba(34,227,255,.25);
+      background: rgba(34, 227, 255, .1);
+      border: 1px solid rgba(34, 227, 255, .25);
       padding: 3px 9px;
       border-radius: 6px;
       letter-spacing: .06em
@@ -951,12 +986,22 @@
     }
 
     /* After is shown by default */
-    .watch-ba-card .watch-before-img { opacity: 0 }
-    .watch-ba-card .watch-after-img  { opacity: 1 }
+    .watch-ba-card .watch-before-img {
+      opacity: 0
+    }
+
+    .watch-ba-card .watch-after-img {
+      opacity: 1
+    }
 
     /* Hover: show before, hide after */
-    .watch-item:hover .watch-ba-card .watch-before-img { opacity: 1 }
-    .watch-item:hover .watch-ba-card .watch-after-img  { opacity: 0 }
+    .watch-item:hover .watch-ba-card .watch-before-img {
+      opacity: 1
+    }
+
+    .watch-item:hover .watch-ba-card .watch-after-img {
+      opacity: 0
+    }
 
     .watch-ba-labels {
       position: absolute;
@@ -980,20 +1025,25 @@
     }
 
     .after-pill {
-      background: rgba(34,227,255,.15);
-      border: 1px solid rgba(34,227,255,.4);
+      background: rgba(34, 227, 255, .15);
+      border: 1px solid rgba(34, 227, 255, .4);
       color: var(--cyan)
     }
 
     .before-pill {
-      background: rgba(124,92,255,.15);
-      border: 1px solid rgba(124,92,255,.4);
+      background: rgba(124, 92, 255, .15);
+      border: 1px solid rgba(124, 92, 255, .4);
       color: #b89dff;
       opacity: 0
     }
 
-    .watch-item:hover .after-pill { opacity: 0 }
-    .watch-item:hover .before-pill { opacity: 1 }
+    .watch-item:hover .after-pill {
+      opacity: 0
+    }
+
+    .watch-item:hover .before-pill {
+      opacity: 1
+    }
 
     .watch-hover-hint {
       position: absolute;
@@ -1001,9 +1051,9 @@
       right: 10px;
       font-family: 'JetBrains Mono';
       font-size: 9px;
-      color: rgba(255,255,255,.45);
+      color: rgba(255, 255, 255, .45);
       letter-spacing: .05em;
-      background: rgba(7,7,17,.6);
+      background: rgba(7, 7, 17, .6);
       backdrop-filter: blur(4px);
       padding: 3px 8px;
       border-radius: 6px;
@@ -1012,14 +1062,16 @@
       z-index: 3
     }
 
-    .watch-item:hover .watch-hover-hint { opacity: 0 }
+    .watch-item:hover .watch-hover-hint {
+      opacity: 0
+    }
 
     /* Thumbnail strip */
     .watch-angles {
       display: flex;
       gap: 8px;
       padding: 10px 12px 14px;
-      background: rgba(0,0,0,.2)
+      background: rgba(0, 0, 0, .2)
     }
 
     .watch-angles img {
@@ -1036,6 +1088,7 @@
       border-color: var(--cyan);
       transform: scale(1.04)
     }
+
     /* ============================= */
 
     .socks-showcase-section {
@@ -1048,7 +1101,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(124,92,255,0.07), transparent 70%);
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(124, 92, 255, 0.07), transparent 70%);
       pointer-events: none
     }
 
@@ -1063,8 +1116,8 @@
       gap: 10px;
       padding: 8px 18px;
       border-radius: 30px;
-      border: 1px solid rgba(124,92,255,.4);
-      background: rgba(124,92,255,.1);
+      border: 1px solid rgba(124, 92, 255, .4);
+      background: rgba(124, 92, 255, .1);
       font-family: 'JetBrains Mono';
       font-size: 12px;
       color: var(--violet);
@@ -1103,16 +1156,30 @@
     }
 
     @media(max-width:1100px) {
-      .socks-grid { grid-template-columns: repeat(4, 1fr) }
+      .socks-grid {
+        grid-template-columns: repeat(4, 1fr)
+      }
     }
+
     @media(max-width:800px) {
-      .socks-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .socks-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
     }
+
     @media(max-width:560px) {
-      .socks-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .socks-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
     }
+
     @media(max-width:400px) {
-      .socks-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .socks-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
     }
 
     .sock-card {
@@ -1123,13 +1190,13 @@
       aspect-ratio: 3/4;
       background: var(--surface);
       border: 1px solid var(--stroke);
-      transition: .45s cubic-bezier(.2,.8,.3,1);
+      transition: .45s cubic-bezier(.2, .8, .3, 1);
       group: true
     }
 
     .sock-card:hover {
-      border-color: rgba(124,92,255,.6);
-      box-shadow: 0 20px 50px -15px rgba(124,92,255,.5), 0 0 0 1px rgba(124,92,255,.2);
+      border-color: rgba(124, 92, 255, .6);
+      box-shadow: 0 20px 50px -15px rgba(124, 92, 255, .5), 0 0 0 1px rgba(124, 92, 255, .2);
       transform: translateY(-6px) scale(1.02)
     }
 
@@ -1169,7 +1236,7 @@
       left: 0;
       right: 0;
       padding: 50px 14px 14px;
-      background: linear-gradient(to top, rgba(7,7,17,.95) 0%, rgba(7,7,17,.6) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(7, 7, 17, .95) 0%, rgba(7, 7, 17, .6) 60%, transparent 100%);
       z-index: 2;
       transition: opacity .4s ease
     }
@@ -1205,20 +1272,25 @@
     }
 
     .sock-card .sock-mode-badge.ai {
-      background: rgba(124,92,255,.2);
-      border: 1px solid rgba(124,92,255,.5);
+      background: rgba(124, 92, 255, .2);
+      border: 1px solid rgba(124, 92, 255, .5);
       color: #b89dff
     }
 
     .sock-card .sock-mode-badge.mannequin {
-      background: rgba(34,227,255,.15);
-      border: 1px solid rgba(34,227,255,.4);
+      background: rgba(34, 227, 255, .15);
+      border: 1px solid rgba(34, 227, 255, .4);
       color: var(--cyan);
       opacity: 0
     }
 
-    .sock-card:hover .sock-mode-badge.ai { opacity: 0 }
-    .sock-card:hover .sock-mode-badge.mannequin { opacity: 1 }
+    .sock-card:hover .sock-mode-badge.ai {
+      opacity: 0
+    }
+
+    .sock-card:hover .sock-mode-badge.mannequin {
+      opacity: 1
+    }
 
     /* Number badge */
     .sock-card .sock-num {
@@ -1228,7 +1300,7 @@
       z-index: 3;
       font-family: 'JetBrains Mono';
       font-size: 11px;
-      background: rgba(7,7,17,.75);
+      background: rgba(7, 7, 17, .75);
       border: 1px solid var(--stroke);
       backdrop-filter: blur(6px);
       padding: 4px 9px;
@@ -1951,8 +2023,8 @@
         order: -1;
         max-width: 100%;
         margin: 0 auto;
-        min-height: 380px;
-        height: 380px;
+        min-height: 650px;
+        height: 650px;
       }
 
       .hero-cutout {
@@ -2581,35 +2653,54 @@
       transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
     }
+
     #splash.hide {
       opacity: 0;
       transform: scale(1.04);
       pointer-events: none;
     }
+
     .splash-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,92,255,0.22) 0%, rgba(34,227,255,0.07) 50%, transparent 75%);
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124, 92, 255, 0.22) 0%, rgba(34, 227, 255, 0.07) 50%, transparent 75%);
       pointer-events: none;
       animation: splashPulse 4s ease-in-out infinite alternate;
     }
+
     @keyframes splashPulse {
-      from { opacity: 0.6; transform: scale(1); }
-      to   { opacity: 1;   transform: scale(1.06); }
+      from {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.06);
+      }
     }
+
     .splash-grid {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(124,92,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,92,255,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(124, 92, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 92, 255, 0.04) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
       animation: splashGridFade 1.2s ease forwards;
     }
+
     @keyframes splashGridFade {
-      from { opacity: 0; } to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
+
     /* floating orbs */
     .splash-orb {
       position: absolute;
@@ -2618,13 +2709,44 @@
       pointer-events: none;
       animation: splashFloat linear infinite alternate;
     }
-    .splash-orb.o1 { width:340px; height:340px; background:rgba(124,92,255,0.18); top:-80px; left:-80px; animation-duration:6s; }
-    .splash-orb.o2 { width:280px; height:280px; background:rgba(34,227,255,0.12); bottom:-60px; right:-60px; animation-duration:8s; }
-    .splash-orb.o3 { width:180px; height:180px; background:rgba(75,59,255,0.14); top:40%; right:10%; animation-duration:5s; }
-    @keyframes splashFloat {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(20px,30px) scale(1.1); }
+
+    .splash-orb.o1 {
+      width: 340px;
+      height: 340px;
+      background: rgba(124, 92, 255, 0.18);
+      top: -80px;
+      left: -80px;
+      animation-duration: 6s;
     }
+
+    .splash-orb.o2 {
+      width: 280px;
+      height: 280px;
+      background: rgba(34, 227, 255, 0.12);
+      bottom: -60px;
+      right: -60px;
+      animation-duration: 8s;
+    }
+
+    .splash-orb.o3 {
+      width: 180px;
+      height: 180px;
+      background: rgba(75, 59, 255, 0.14);
+      top: 40%;
+      right: 10%;
+      animation-duration: 5s;
+    }
+
+    @keyframes splashFloat {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(20px, 30px) scale(1.1);
+      }
+    }
+
     .splash-content {
       position: relative;
       z-index: 2;
@@ -2633,7 +2755,7 @@
       flex-direction: column;
       align-items: center;
     }
-    
+
     .splash-logo-container {
       margin-bottom: 20px;
       display: flex;
@@ -2643,7 +2765,7 @@
       opacity: 0;
       animation: splashFadeUp 0.7s 0.1s ease forwards;
     }
-    
+
     .splash-logo-svg {
       width: 76px;
       height: 76px;
@@ -2651,14 +2773,14 @@
       filter: drop-shadow(0 0 10px rgba(34, 227, 255, 0.35));
       animation: rotateLogo 25s infinite linear;
     }
-    
+
     .hex-path {
       stroke-dasharray: 300;
       stroke-dashoffset: 300;
       stroke-width: 1.5;
       animation: drawHex 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    
+
     .line-paths {
       stroke-dasharray: 200;
       stroke-dashoffset: 200;
@@ -2666,42 +2788,59 @@
       opacity: 0.55;
       animation: drawLines 2s 0.5s ease-out forwards;
     }
-    
+
     .center-core {
       opacity: 0;
       transform: scale(0);
       transform-origin: center;
       animation: popCore 0.8s 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, pulseCore 2.5s 2.2s infinite alternate;
     }
-    
+
     @keyframes rotateLogo {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
-    
+
     @keyframes drawHex {
-      to { stroke-dashoffset: 0; }
+      to {
+        stroke-dashoffset: 0;
+      }
     }
-    
+
     @keyframes drawLines {
-      to { stroke-dashoffset: 0; }
+      to {
+        stroke-dashoffset: 0;
+      }
     }
-    
+
     @keyframes popCore {
-      to { opacity: 1; transform: scale(1); }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
-    
+
     @keyframes pulseCore {
-      0% { filter: drop-shadow(0 0 4px rgba(124, 92, 255, 0.6)); }
-      100% { filter: drop-shadow(0 0 16px rgba(34, 227, 255, 1)); }
+      0% {
+        filter: drop-shadow(0 0 4px rgba(124, 92, 255, 0.6));
+      }
+
+      100% {
+        filter: drop-shadow(0 0 16px rgba(34, 227, 255, 1));
+      }
     }
 
     .splash-tag {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(124,92,255,0.12);
-      border: 1px solid rgba(124,92,255,0.35);
+      background: rgba(124, 92, 255, 0.12);
+      border: 1px solid rgba(124, 92, 255, 0.35);
       border-radius: 100px;
       padding: 6px 16px;
       font-family: 'JetBrains Mono', monospace;
@@ -2713,15 +2852,27 @@
       opacity: 0;
       animation: splashFadeUp 0.7s 0.3s ease forwards;
     }
+
     .splash-tag-dot {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       background: var(--cyan);
       border-radius: 50%;
       animation: splashBlink 1.2s 0.3s infinite;
     }
+
     @keyframes splashBlink {
-      0%,100% { opacity:1; } 50% { opacity:0.2; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.2;
+      }
     }
+
     .splash-name {
       font-family: 'Outfit', sans-serif;
       font-size: clamp(72px, 18vw, 130px);
@@ -2752,10 +2903,12 @@
         transform: translateY(40px) scale(0.9);
         filter: blur(12px);
       }
+
       50% {
         opacity: 0.8;
         filter: blur(4px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -2772,6 +2925,7 @@
       animation: splashFadeUp 0.8s 1.3s ease forwards;
       min-height: 24px;
     }
+
     .splash-cta {
       display: inline-flex;
       align-items: center;
@@ -2787,20 +2941,25 @@
       cursor: pointer;
       opacity: 0;
       animation: splashFadeUp 0.8s 2.0s ease forwards;
-      box-shadow: 0 0 40px rgba(124,92,255,0.45), 0 0 80px rgba(124,92,255,0.15);
+      box-shadow: 0 0 40px rgba(124, 92, 255, 0.45), 0 0 80px rgba(124, 92, 255, 0.15);
       transition: transform 0.25s, box-shadow 0.25s;
     }
+
     .splash-cta:hover {
       transform: scale(1.04) translateY(-2px);
-      box-shadow: 0 0 60px rgba(124,92,255,0.6), 0 0 100px rgba(34,227,255,0.2);
+      box-shadow: 0 0 60px rgba(124, 92, 255, 0.6), 0 0 100px rgba(34, 227, 255, 0.2);
     }
+
     .splash-cta svg {
-      width: 18px; height: 18px;
+      width: 18px;
+      height: 18px;
       transition: transform 0.25s;
     }
+
     .splash-cta:hover svg {
       transform: translateX(4px);
     }
+
     .splash-scroll-hint {
       position: absolute;
       bottom: 32px;
@@ -2814,6 +2973,7 @@
       animation: splashFadeUp 0.7s 2.6s ease forwards;
       z-index: 2;
     }
+
     .splash-scroll-hint span {
       font-size: 10px;
       letter-spacing: 0.15em;
@@ -2821,20 +2981,42 @@
       color: var(--txt-faint);
       font-family: 'JetBrains Mono';
     }
+
     .scroll-line {
       width: 1px;
       height: 40px;
       background: linear-gradient(to bottom, var(--violet), transparent);
       animation: scrollLinePulse 1.6s 2.6s ease infinite;
     }
+
     @keyframes scrollLinePulse {
-      0% { opacity:0; transform:scaleY(0); transform-origin:top; }
-      50% { opacity:1; }
-      100% { opacity:0; transform:scaleY(1); transform-origin:bottom; }
+      0% {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: scaleY(1);
+        transform-origin: bottom;
+      }
     }
+
     @keyframes splashFadeUp {
-      from { opacity:0; transform:translateY(24px); }
-      to   { opacity:1; transform:translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -2844,7 +3026,8 @@
   <!-- SPLASH SCREEN -->
   <div id="splash">
     <div class="splash-bg"></div>
-    <canvas id="splashCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.85; z-index: 1;"></canvas>
+    <canvas id="splashCanvas"
+      style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.85; z-index: 1;"></canvas>
     <div class="splash-orb o1"></div>
     <div class="splash-orb o2"></div>
     <div class="splash-orb o3"></div>
@@ -2869,7 +3052,9 @@
         </svg>
       </div>
       <div class="splash-name" id="splashName">
-        <span class="sl" style="--d:0">W</span><span class="sl" style="--d:1">e</span><span class="sl" style="--d:2">l</span><span class="sl" style="--d:3">c</span><span class="sl" style="--d:4">o</span><span class="sl" style="--d:5">m</span><span class="sl" style="--d:6">e</span>
+        <span class="sl" style="--d:0">W</span><span class="sl" style="--d:1">e</span><span class="sl"
+          style="--d:2">l</span><span class="sl" style="--d:3">c</span><span class="sl" style="--d:4">o</span><span
+          class="sl" style="--d:5">m</span><span class="sl" style="--d:6">e</span>
       </div>
     </div>
   </div>
@@ -3044,67 +3229,100 @@
   </section>
 
   <!-- WHY CHOOSE US -->
-  <section id="why-choose-us" style="padding: 110px 0; position: relative; border-top: 1px solid var(--stroke); background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(34,227,255,0.03), transparent 70%);">
+  <section id="why-choose-us"
+    style="padding: 110px 0; position: relative; border-top: 1px solid var(--stroke); background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(34,227,255,0.03), transparent 70%);">
     <div class="wrap">
       <div class="sec-head reveal" style="text-align: center; margin-bottom: 64px;">
-        <div style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(124, 92, 255, .35); background: rgba(124, 92, 255, .08); font-family: 'JetBrains Mono'; font-size: 12px; color: var(--violet); letter-spacing: .08em; margin-bottom: 20px;">
+        <div
+          style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(124, 92, 255, .35); background: rgba(124, 92, 255, .08); font-family: 'JetBrains Mono'; font-size: 12px; color: var(--violet); letter-spacing: .08em; margin-bottom: 20px;">
           ✦ THE STYLING DIFFERENCE
         </div>
-        <h2 style="font-size: clamp(32px, 4.5vw, 56px); font-weight: 800;">Why Choose <span class="gradtext">Us</span></h2>
-        <p style="margin: 20px auto 0; max-width: 600px; font-size: 17px; color: var(--txt-dim);">We don't just generate images; we engineer context, anatomy, and product placement.</p>
+        <h2 style="font-size: clamp(32px, 4.5vw, 56px); font-weight: 800;">Why Choose <span class="gradtext">Us</span>
+        </h2>
+        <p style="margin: 20px auto 0; max-width: 600px; font-size: 17px; color: var(--txt-dim);">We don't just generate
+          images; we engineer context, anatomy, and product placement.</p>
       </div>
 
-      <div class="about-roles reveal" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 26px; margin-top: 0;">
+      <div class="about-roles reveal"
+        style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 26px; margin-top: 0;">
         <div class="role-card card" style="text-align: left; padding: 34px;">
-          <div class="icon" style="font-size: 32px; margin-bottom: 20px; background: rgba(34,227,255,0.08); width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; border: 1px solid rgba(34,227,255,0.2); color: var(--cyan);">✨</div>
-          <h4 style="color: var(--cyan); font-size: 18px; margin-bottom: 12px; font-family: 'Outfit'; font-weight: 700;">Proper Product Styling</h4>
-          <p style="font-size: 14.5px; line-height: 1.6; color: var(--txt-dim);">We understand the intricacies of fashion. It’s not about pasting an item; it’s about wrinkles, fabric fold physics, and how garments sit on a real human form.</p>
+          <div class="icon"
+            style="font-size: 32px; margin-bottom: 20px; background: rgba(34,227,255,0.08); width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; border: 1px solid rgba(34,227,255,0.2); color: var(--cyan);">
+            ✨</div>
+          <h4
+            style="color: var(--cyan); font-size: 18px; margin-bottom: 12px; font-family: 'Outfit'; font-weight: 700;">
+            Proper Product Styling</h4>
+          <p style="font-size: 14.5px; line-height: 1.6; color: var(--txt-dim);">We understand the intricacies of
+            fashion. It’s not about pasting an item; it’s about wrinkles, fabric fold physics, and how garments sit on a
+            real human form.</p>
         </div>
 
         <div class="role-card card" style="text-align: left; padding: 34px;">
-          <div class="icon" style="font-size: 32px; margin-bottom: 20px; background: rgba(124,92,255,0.08); width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; border: 1px solid rgba(124,92,255,0.2); color: var(--violet);">🎯</div>
-          <h4 style="color: var(--violet); font-size: 18px; margin-bottom: 12px; font-family: 'Outfit'; font-weight: 700;">Exact Product Placement</h4>
-          <p style="font-size: 14.5px; line-height: 1.6; color: var(--txt-dim);">Whether it's wrapping socks around an ankle, placing a watch accurately on a wrist, or positioning footwear in a staggered dynamic layout—we maintain 1:1 relative proportions.</p>
+          <div class="icon"
+            style="font-size: 32px; margin-bottom: 20px; background: rgba(124,92,255,0.08); width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; border: 1px solid rgba(124,92,255,0.2); color: var(--violet);">
+            🎯</div>
+          <h4
+            style="color: var(--violet); font-size: 18px; margin-bottom: 12px; font-family: 'Outfit'; font-weight: 700;">
+            Exact Product Placement</h4>
+          <p style="font-size: 14.5px; line-height: 1.6; color: var(--txt-dim);">Whether it's wrapping socks around an
+            ankle, placing a watch accurately on a wrist, or positioning footwear in a staggered dynamic layout—we
+            maintain 1:1 relative proportions.</p>
         </div>
 
         <div class="role-card card" style="text-align: left; padding: 34px;">
-          <div class="icon" style="font-size: 32px; margin-bottom: 20px; background: rgba(234,179,8,0.08); width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; border: 1px solid rgba(234,179,8,0.2); color: #eab308;">👁️</div>
-          <h4 style="color: #eab308; font-size: 18px; margin-bottom: 12px; font-family: 'Outfit'; font-weight: 700;">Visual Harmony & Aesthetics</h4>
-          <p style="font-size: 14.5px; line-height: 1.6; color: var(--txt-dim);">We match lighting direction, shadow diffusion, and depth of field. Every generated model and scene respects the core product geometry so it looks shot in a professional studio.</p>
+          <div class="icon"
+            style="font-size: 32px; margin-bottom: 20px; background: rgba(234,179,8,0.08); width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; border: 1px solid rgba(234,179,8,0.2); color: #eab308;">
+            👁️</div>
+          <h4 style="color: #eab308; font-size: 18px; margin-bottom: 12px; font-family: 'Outfit'; font-weight: 700;">
+            Visual Harmony & Aesthetics</h4>
+          <p style="font-size: 14.5px; line-height: 1.6; color: var(--txt-dim);">We match lighting direction, shadow
+            diffusion, and depth of field. Every generated model and scene respects the core product geometry so it
+            looks shot in a professional studio.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- WORK SHOWCASE SECTION -->
-  <section class="work-showcase-section" id="work" style="padding: 110px 0 80px; position: relative; border-top: 1px solid var(--stroke);">
+  <section class="work-showcase-section" id="work"
+    style="padding: 110px 0 80px; position: relative; border-top: 1px solid var(--stroke);">
     <div class="wrap">
-      
+
       <!-- Unified Section Header -->
       <div class="reveal" style="text-align: center; margin-bottom: 50px;">
-        <div style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); font-family: 'JetBrains Mono'; font-size: 12px; color: var(--txt-dim); letter-spacing: .08em; margin-bottom: 20px;">
+        <div
+          style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); font-family: 'JetBrains Mono'; font-size: 12px; color: var(--txt-dim); letter-spacing: .08em; margin-bottom: 20px;">
           <span class="dot-live"></span> PORTFOLIO WORKS
         </div>
-        <h2 style="font-size: clamp(32px, 5vw, 60px); font-weight: 800; margin-bottom: 20px;">AI Product <span class="gradtext">Showcase</span></h2>
-        <p style="font-size: 17px; color: var(--txt-dim); max-width: 600px; margin: 0 auto;">Select a category to view VTON pipelines, custom diffusion integrations, and high-fidelity model shoot generations.</p>
+        <h2 style="font-size: clamp(32px, 5vw, 60px); font-weight: 800; margin-bottom: 20px;">AI Product <span
+            class="gradtext">Showcase</span></h2>
+        <p style="font-size: 17px; color: var(--txt-dim); max-width: 600px; margin: 0 auto;">Select a category to view
+          VTON pipelines, custom diffusion integrations, and high-fidelity model shoot generations.</p>
       </div>
 
       <!-- Tab Switcher Navigation -->
       <div style="display: flex; justify-content: center; margin-bottom: 50px;">
-        <div class="work-tabs-nav reveal" style="display: inline-flex; gap: 8px; flex-wrap: wrap; padding: 6px; background: rgba(8,8,22,0.6); backdrop-filter: blur(12px); border: 1px solid var(--stroke); border-radius: 100px; justify-content: center; align-items: center; z-index: 10; position: relative;">
-          <button class="work-tab-btn active-shoes" data-target="content-shoes" style="padding: 10px 20px; border: 1px solid rgba(16,185,129,0.4); border-radius: 100px; background: rgba(16,185,129,0.15); color: #10b981; font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+        <div class="work-tabs-nav reveal"
+          style="display: inline-flex; gap: 8px; flex-wrap: wrap; padding: 6px; background: rgba(8,8,22,0.6); backdrop-filter: blur(12px); border: 1px solid var(--stroke); border-radius: 100px; justify-content: center; align-items: center; z-index: 10; position: relative;">
+          <button class="work-tab-btn active-shoes" data-target="content-shoes"
+            style="padding: 10px 20px; border: 1px solid rgba(16,185,129,0.4); border-radius: 100px; background: rgba(16,185,129,0.15); color: #10b981; font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
             <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span>
             Footwear AI (7 SKUs)
           </button>
-          <button class="work-tab-btn" data-target="content-watches" style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
-            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--cyan);"></span>
+          <button class="work-tab-btn" data-target="content-watches"
+            style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span
+              style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--cyan);"></span>
             Watches AI (20 SKUs)
           </button>
-          <button class="work-tab-btn" data-target="content-socks" style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
-            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--violet);"></span>
+          <button class="work-tab-btn" data-target="content-socks"
+            style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span
+              style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--violet);"></span>
             Campus Socks (10 SKUs)
           </button>
-          <button class="work-tab-btn" data-target="content-shoots" style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+          <button class="work-tab-btn" data-target="content-shoots"
+            style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
             <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#eab308;"></span>
             AI Product Shoots (19 Creatives)
           </button>
@@ -3113,13 +3331,15 @@
 
       <!-- Tab Content Panels -->
       <div class="work-tab-container">
-        
+
         <!-- Tab Content 1: Shoes -->
         <div id="content-shoes" class="work-tab-content active-content">
           <div class="shoes-section">
             <div class="shoes-header" style="text-align: center; margin-bottom: 30px;">
               <div class="shoes-badge"><span class="dot-live"></span> SHOES × AI PIPELINE</div>
-              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">7-SKU dynamic footwear showcase — raw flat-lay product photography integrated with contextual model shoots. Hover to reveal before/after, click to inspect in detail.</p>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">7-SKU dynamic
+                footwear showcase — raw flat-lay product photography integrated with contextual model shoots. Hover to
+                reveal before/after, click to inspect in detail.</p>
             </div>
             <div class="shoes-grid" id="shoesGrid"></div>
           </div>
@@ -3130,7 +3350,9 @@
           <div class="watches-section">
             <div class="watches-header" style="text-align: center; margin-bottom: 30px;">
               <div class="watches-badge"><span class="dot-live"></span> WATCHES × AI STUDIO</div>
-              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">20-SKU multi-angle catalog — original flat product photography transformed into realistic model wrist shots. Hover to reveal before/after, click to inspect in detail.</p>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">20-SKU
+                multi-angle catalog — original flat product photography transformed into realistic model wrist shots.
+                Hover to reveal before/after, click to inspect in detail.</p>
             </div>
             <div class="watches-grid" id="watchesGrid"></div>
           </div>
@@ -3141,7 +3363,9 @@
           <div class="socks-showcase-section">
             <div class="socks-brand-header" style="text-align: center; margin-bottom: 30px;">
               <div class="socks-brand-badge"><span class="dot-live"></span> SOCKS × AI PIPELINE</div>
-              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">Hover any style to see the raw mannequin → AI try-on reveal. Every logo is anchored by Gemini spatial constraint logic — zero hallucinations.</p>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">Hover any style
+                to see the raw mannequin → AI try-on reveal. Every logo is anchored by Gemini spatial constraint logic —
+                zero hallucinations.</p>
             </div>
             <div class="socks-grid" id="socksGrid"></div>
           </div>
@@ -3151,12 +3375,15 @@
         <div id="content-shoots" class="work-tab-content">
           <div class="shoes-section" style="padding: 10px 0;">
             <div class="shoes-header" style="text-align: center; margin-bottom: 35px;">
-              <div style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(234,179,8,.35); background: rgba(234,179,8,.08); font-family: 'JetBrains Mono'; font-size: 12px; color: #eab308; letter-spacing: .08em; margin-bottom: 20px;">
+              <div
+                style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(234,179,8,.35); background: rgba(234,179,8,.08); font-family: 'JetBrains Mono'; font-size: 12px; color: #eab308; letter-spacing: .08em; margin-bottom: 20px;">
                 <span class="dot-live"></span> PRODUCT SCENES & CREATIVES
               </div>
-              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 0 auto;">Real client footwear, relit and recomposed with diffusion pipelines — geometry, logo and stitching locked. Drag the slider to compare.</p>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 0 auto;">Real client footwear,
+                relit and recomposed with diffusion pipelines — geometry, logo and stitching locked. Drag the slider to
+                compare.</p>
             </div>
-            
+
             <div class="ba-tabs reveal" style="margin-bottom: 40px;">
               <button class="ba-tab active" data-ba="0">Studio → Cinematic Blue</button>
               <button class="ba-tab " data-ba="1">Studio → Golden Concrete</button>
@@ -3166,41 +3393,50 @@
             <div class="ba-wrap reveal" style="margin-bottom: 60px;">
               <div class="ba-stage" data-stage="0" style="display:block">
                 <div class="ba-frame">
-                  <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Dramatic studio relight">
-                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+                  <img class="ba-after" src="assets/img/p3.jpg"
+                    alt="AI-enhanced product shoot — Dramatic studio relight">
+                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot">
+                  </div>
                   <div class="ba-divider">
                     <div class="ba-handle"><span>‹</span><span>›</span></div>
                   </div>
                   <span class="ba-tag ba-tag-l">Before</span>
                   <span class="ba-tag ba-tag-r">After</span>
-                  <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+                  <input type="range" min="0" max="100" value="50" class="ba-range"
+                    aria-label="Compare before and after">
                 </div>
                 <p class="ba-scene">Dramatic studio relight</p>
               </div>
               <div class="ba-stage" data-stage="1" style="display:none">
                 <div class="ba-frame">
-                  <img class="ba-after" src="assets/img/p3.jpg" alt="AI-enhanced product shoot — Golden-hour architectural"
+                  <img class="ba-after" src="assets/img/p3.jpg"
+                    alt="AI-enhanced product shoot — Golden-hour architectural"
                     style="filter: sepia(0.5) hue-rotate(-20deg) saturate(1.5) contrast(1.1) brightness(0.95);">
-                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot">
+                  </div>
                   <div class="ba-divider">
                     <div class="ba-handle"><span>‹</span><span>›</span></div>
                   </div>
                   <span class="ba-tag ba-tag-l">Before</span>
                   <span class="ba-tag ba-tag-r">After</span>
-                  <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+                  <input type="range" min="0" max="100" value="50" class="ba-range"
+                    aria-label="Compare before and after">
                 </div>
                 <p class="ba-scene">Golden-hour architectural</p>
               </div>
               <div class="ba-stage" data-stage="2" style="display:none">
                 <div class="ba-frame">
-                  <img class="ba-after" src="assets/img/p5.jpg" alt="AI-enhanced product shoot — Outdoor trail composite">
-                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot"></div>
+                  <img class="ba-after" src="assets/img/p5.jpg"
+                    alt="AI-enhanced product shoot — Outdoor trail composite">
+                  <div class="ba-before-wrap"><img class="ba-before" src="assets/img/p4.jpg" alt="Original studio shot">
+                  </div>
                   <div class="ba-divider">
                     <div class="ba-handle"><span>‹</span><span>›</span></div>
                   </div>
                   <span class="ba-tag ba-tag-l">Before</span>
                   <span class="ba-tag ba-tag-r">After</span>
-                  <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Compare before and after">
+                  <input type="range" min="0" max="100" value="50" class="ba-range"
+                    aria-label="Compare before and after">
                 </div>
                 <p class="ba-scene">Outdoor trail composite</p>
               </div>
@@ -3212,9 +3448,13 @@
             </div>
             <div class="shoot-grid reveal" id="shootGrid"></div>
             <div style="text-align: center; margin-top: 40px;" id="showMoreCreativesWrap">
-              <button id="btnShowMoreCreatives" class="btn secondary" style="border: 1px solid var(--stroke); background: rgba(255,255,255,0.02); padding: 12px 28px; border-radius: 30px; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;">
+              <button id="btnShowMoreCreatives" class="btn secondary"
+                style="border: 1px solid var(--stroke); background: rgba(255,255,255,0.02); padding: 12px 28px; border-radius: 30px; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;">
                 <span>Show More Creatives (13)</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.3s;" id="showMoreIcon"><polyline points="6 9 12 15 18 9"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  style="transition: transform 0.3s;" id="showMoreIcon">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
               </button>
             </div>
           </div>
@@ -3269,20 +3509,26 @@
                 <path d="m22 7-10 5L2 7" />
               </svg>
             </a>
-            <a href="https://wa.me/919310054171" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp-btn" data-tooltip="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            <a href="https://wa.me/919310054171" target="_blank" rel="noopener noreferrer"
+              class="social-btn whatsapp-btn" data-tooltip="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
               </svg>
             </a>
-            <a href="https://www.linkedin.com/in/sahil-sahil-46008035a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="social-btn linkedin-btn" data-tooltip="LinkedIn">
+            <a href="https://www.linkedin.com/in/sahil-sahil-46008035a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              target="_blank" rel="noopener noreferrer" class="social-btn linkedin-btn" data-tooltip="LinkedIn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
                 <rect x="2" y="9" width="4" height="12" />
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <a href="https://www.instagram.com/luxora.ai.studio?igsh=MW5yMW9tN3Bkeml5Yw==" target="_blank" rel="noopener noreferrer" class="social-btn instagram-btn" data-tooltip="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <a href="https://www.instagram.com/luxora.ai.studio?igsh=MW5yMW9tN3Bkeml5Yw==" target="_blank"
+              rel="noopener noreferrer" class="social-btn instagram-btn" data-tooltip="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -3433,10 +3679,10 @@
             <img class="watch-thumb-img" src="${p.after_2}" alt="Angle 2">
           </div>
         </div>`;
-      
+
       // Card click opens modal
       wc.querySelector('.watch-ba-card').addEventListener('click', () => openModal(p));
-      
+
       // Thumbnail clicks also open modal
       wc.querySelectorAll('.watch-thumb-img').forEach(timg => {
         timg.addEventListener('click', (e) => {
@@ -3444,7 +3690,7 @@
           openModal(p);
         });
       });
-      
+
       watchesGrid.appendChild(wc);
     });
 
@@ -3485,10 +3731,10 @@
             <img class="shoe-thumb-img" src="${p.after_2}" alt="Angle 2">
           </div>
         </div>`;
-      
+
       // Card click opens modal
       sc.querySelector('.shoe-ba-card').addEventListener('click', () => openModal(p));
-      
+
       // Thumbnail clicks also open modal
       sc.querySelectorAll('.shoe-thumb-img').forEach(timg => {
         timg.addEventListener('click', (e) => {
@@ -3496,7 +3742,7 @@
           openModal(p);
         });
       });
-      
+
       shoesGrid.appendChild(sc);
     });
 
@@ -3527,9 +3773,9 @@
     const shootGrid = document.getElementById('shootGrid');
     const btnShowMore = document.getElementById('btnShowMoreCreatives');
     const showMoreWrap = document.getElementById('showMoreCreativesWrap');
-    
+
     let creativesVisibleCount = 6;
-    
+
     function renderCreatives() {
       shootGrid.innerHTML = '';
       const visibleList = creatives.slice(0, creativesVisibleCount);
@@ -3540,27 +3786,27 @@
         figure.style.opacity = '0';
         figure.style.transform = 'translateY(20px)';
         figure.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        
+
         figure.innerHTML = `
           <img loading="lazy" src="${c.img}" alt="${c.caption}">
           <figcaption>${c.caption}</figcaption>
         `;
         shootGrid.appendChild(figure);
-        
+
         // Trigger reflow & animation
         setTimeout(() => {
           figure.style.opacity = '1';
           figure.style.transform = 'translateY(0)';
         }, 50);
       });
-      
+
       if (creativesVisibleCount >= creatives.length) {
         showMoreWrap.style.display = 'none';
       } else {
         btnShowMore.querySelector('span').textContent = `Show More Creatives (${creatives.length - creativesVisibleCount})`;
       }
     }
-    
+
     btnShowMore.addEventListener('mouseenter', () => {
       btnShowMore.style.borderColor = 'rgba(16,185,129,0.45)';
       btnShowMore.style.background = 'rgba(16,185,129,0.05)';
@@ -3573,26 +3819,26 @@
       btnShowMore.style.color = 'var(--txt-dim)';
       document.getElementById('showMoreIcon').style.transform = 'translateY(0)';
     });
-    
+
     btnShowMore.addEventListener('click', () => {
       creativesVisibleCount = creatives.length;
       renderCreatives();
     });
-    
+
     // Initial Render
     renderCreatives();
 
     /* ---- WORK TABS NAVIGATION LOGIC ---- */
     const tabButtons = document.querySelectorAll('.work-tab-btn');
     const tabContents = document.querySelectorAll('.work-tab-content');
-    
+
     const categoryThemes = {
       'content-shoes': { border: '1px solid rgba(16,185,129,0.4)', background: 'rgba(16,185,129,0.15)', color: '#10b981' },
       'content-watches': { border: '1px solid rgba(34,227,255,0.4)', background: 'rgba(34,227,255,0.15)', color: 'var(--cyan)' },
       'content-socks': { border: '1px solid rgba(124,92,255,0.4)', background: 'rgba(124,92,255,0.15)', color: 'var(--violet)' },
       'content-shoots': { border: '1px solid rgba(234,179,8,0.4)', background: 'rgba(234,179,8,0.15)', color: '#eab308' }
     };
-    
+
     function switchTab(targetId) {
       tabButtons.forEach(btn => {
         const btnTarget = btn.getAttribute('data-target');
@@ -3607,7 +3853,7 @@
           btn.style.color = 'var(--txt-dim)';
         }
       });
-      
+
       tabContents.forEach(content => {
         if (content.id === targetId) {
           content.style.display = 'block';
@@ -3622,7 +3868,7 @@
         }
       });
     }
-    
+
     tabButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-target');
@@ -3655,7 +3901,7 @@
     const modalBg = document.getElementById('modalBg');
     function openModal(p) {
       const mThumb = document.getElementById('mThumb');
-      
+
       // Helper function to update modal texts dynamically
       function updateModalTexts(project) {
         document.getElementById('mCat').textContent = project.catLabel;
@@ -3703,7 +3949,7 @@
             <button class="vton-btn" data-img="assets/img/fashion2.png" data-label="PINK WALK" style="flex: 1; min-width:80px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--stroke); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose B)</button>
           `;
         }
- 
+
         mThumb.innerHTML = `
       <div class="interactive-vton" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:15px; background:rgba(0,0,0,0.3); border-radius:12px;">
         <div class="vton-preview-container" style="position: relative; overflow: hidden; border-radius: 12px; flex: 1; min-height: 280px; background: #080816; border: 1px solid var(--stroke); display:flex; align-items:center; justify-content:center;">
@@ -3733,87 +3979,87 @@
           </div>
         </div>
       </div>`;
- 
+
         setTimeout(() => {
           const btns = document.querySelectorAll('.vton-btn');
           const img = document.getElementById('vtonPreview');
           const loader = document.getElementById('vtonLoader');
           const flbl = document.getElementById('fabricLabel');
-          
+
           let currentViewMode = 'after'; // default is AI Try-On
-          
+
           const btnBefore = document.getElementById('btnBefore');
           const btnAfter = document.getElementById('btnAfter');
           const lTitle = document.getElementById('vtonLoaderTitle');
           const lDesc = document.getElementById('vtonLoaderDesc');
-          
+
           btnBefore.addEventListener('click', () => {
             if (currentViewMode === 'before') return;
             currentViewMode = 'before';
-            
+
             // Style transition
             btnBefore.style.background = 'rgba(255,255,255,0.15)';
             btnBefore.style.color = '#fff';
             btnAfter.style.background = 'transparent';
             btnAfter.style.color = 'var(--txt-dim)';
             btnAfter.style.boxShadow = 'none';
-            
+
             // Loader
             lTitle.textContent = (isWatch || isShoes) ? '[LOADING STUDIO CATALOG]' : '[LOADING MANNEQUIN REFERENCE]';
             lDesc.textContent = (isWatch || isShoes) ? 'Fetching original flat product photography...' : 'Fetching raw product photography...';
             loader.style.display = 'grid';
-            
+
             setTimeout(() => {
               const activeBtn = document.querySelector('.vton-btn.active');
               img.src = activeBtn.dataset.mannequin;
               loader.style.display = 'none';
             }, 400);
           });
-          
+
           btnAfter.addEventListener('click', () => {
             if (currentViewMode === 'after') return;
             currentViewMode = 'after';
-            
+
             // Style transition
             btnAfter.style.background = isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)');
             btnAfter.style.color = '#fff';
             btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : (isShoes ? '0 0 10px rgba(16,185,129,0.3)' : '0 0 10px rgba(124,92,255,0.3)');
             btnBefore.style.background = 'transparent';
             btnBefore.style.color = 'var(--txt-dim)';
-            
+
             // Loader
             lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : (isShoes ? '[RUNNING PRODUCT CONTEXT DIFFUSION]' : '[RUNNING DIFFUSION SWAP]');
             lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : (isShoes ? 'Synthesizing footwear perspective & lighting...' : 'Enforcing Gemini anatomical constraints...');
             loader.style.display = 'grid';
-            
+
             setTimeout(() => {
               const activeBtn = document.querySelector('.vton-btn.active');
               img.src = activeBtn.dataset.img;
               loader.style.display = 'none';
             }, 400);
           });
-          
+
           btns.forEach(btn => {
             btn.addEventListener('click', () => {
               if (btn.classList.contains('active')) return;
-              
+
               btns.forEach(b => {
                 b.classList.remove('active');
                 b.style.border = '1px solid var(--stroke)';
                 b.style.background = 'rgba(255,255,255,0.02)';
               });
-              
+
               btn.classList.add('active');
               btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}`;
               btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : (isShoes ? 'rgba(16,185,129,0.15)' : 'rgba(124,92,255,0.15)')}`;
-              
+
               const sku = btn.dataset.sku;
               // Find matching project config to update description & details dynamically
               const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : socksProjects)).find(x => x.sku === sku);
               if (matchedProject) {
                 updateModalTexts(matchedProject);
               }
-              
+
               if (isWatch) {
                 if (currentViewMode === 'after') {
                   lTitle.textContent = '[RUNNING REFLECTION DIFFUSION]';
@@ -3839,7 +4085,7 @@
                   lDesc.textContent = 'Fetching raw product photography...';
                 }
               }
-              
+
               loader.style.display = 'grid';
               flbl.textContent = btn.dataset.label;
               setTimeout(() => {
@@ -3858,7 +4104,7 @@
       } else {
         document.getElementById('mThumb').innerHTML = p.img ? `<img src="${p.img}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius:12px; border:1px solid var(--stroke);">` : `<div class="ph">${phSVG}<div style="font-family:'Outfit';font-weight:600">Project Screenshot</div><code>img: "project${p.id}.jpg"</code></div>`;
       }
-      
+
       updateModalTexts(p);
       modalBg.classList.add('open'); document.body.style.overflow = 'hidden';
     }
@@ -3945,32 +4191,32 @@
     /* ---- FORM SUBMISSION LOGIC ---- */
     const note = document.getElementById('formNote');
     const sendBtn = document.getElementById('sendBtn');
-    
+
     sendBtn.addEventListener('click', () => {
       const name = document.getElementById('f-name').value.trim();
       const email = document.getElementById('f-email').value.trim();
       const subject = document.getElementById('f-subj').value.trim();
       const message = document.getElementById('f-msg').value.trim();
-      
+
       if (!name || !email || !message) {
         note.className = 'form-note';
         note.textContent = 'Please fill in your name, email and message.';
         return;
       }
-      
+
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
         note.className = 'form-note';
         note.textContent = "That email doesn't look right — check and try again.";
         return;
       }
-      
+
       // Update button state to sending
       sendBtn.disabled = true;
       const originalText = sendBtn.innerHTML;
       sendBtn.innerHTML = `Sending... <span class="dot-live" style="background:#fff; margin-left: 5px; animation: blink 1s infinite;"></span>`;
       note.className = 'form-note';
       note.textContent = 'Submitting your message...';
-      
+
       // AJAX request to FormSubmit.co
       fetch('https://formsubmit.co/ajax/sk9477960@gmail.com', {
         method: 'POST',
@@ -3985,28 +4231,28 @@
           Message: message
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        sendBtn.disabled = false;
-        sendBtn.innerHTML = originalText;
-        
-        if (data.success === 'true' || data.success === true) {
-          note.className = 'form-note ok';
-          note.textContent = 'Success! Your message has been sent. Please check your email inbox if this is your first submission to activate FormSubmit.';
-          // Clear inputs
-          ['f-name', 'f-email', 'f-subj', 'f-msg'].forEach(id => document.getElementById(id).value = '');
-        } else {
+        .then(response => response.json())
+        .then(data => {
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = originalText;
+
+          if (data.success === 'true' || data.success === true) {
+            note.className = 'form-note ok';
+            note.textContent = 'Success! Your message has been sent. Please check your email inbox if this is your first submission to activate FormSubmit.';
+            // Clear inputs
+            ['f-name', 'f-email', 'f-subj', 'f-msg'].forEach(id => document.getElementById(id).value = '');
+          } else {
+            note.className = 'form-note';
+            note.textContent = 'Something went wrong. Please try again.';
+          }
+        })
+        .catch(error => {
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = originalText;
           note.className = 'form-note';
-          note.textContent = 'Something went wrong. Please try again.';
-        }
-      })
-      .catch(error => {
-        sendBtn.disabled = false;
-        sendBtn.innerHTML = originalText;
-        note.className = 'form-note';
-        note.textContent = 'Connection error. Please check your internet and try again.';
-        console.error('Error submitting form:', error);
-      });
+          note.textContent = 'Connection error. Please check your internet and try again.';
+          console.error('Error submitting form:', error);
+        });
     });
 
     /* ---- RESUME ---- */
@@ -4135,14 +4381,14 @@
         let pts = [];
         let mouse = { x: null, y: null };
         const count = 35;
-        
+
         function resize() {
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
         }
         resize();
         window.addEventListener('resize', resize);
-        
+
         // Populate particles
         for (let i = 0; i < count; i++) {
           pts.push({
@@ -4153,17 +4399,17 @@
             r: Math.random() * 2 + 1
           });
         }
-        
+
         splash.addEventListener('mousemove', e => {
           mouse.x = e.clientX;
           mouse.y = e.clientY;
         });
-        
+
         splash.addEventListener('mouseleave', () => {
           mouse.x = null;
           mouse.y = null;
         });
-        
+
         let animId;
         function loop() {
           if (splash.classList.contains('hide')) {
@@ -4171,7 +4417,7 @@
             return;
           }
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          
+
           // Draw connecting grid lines
           ctx.strokeStyle = 'rgba(124, 92, 255, 0.04)';
           ctx.lineWidth = 1;
@@ -4179,7 +4425,7 @@
             for (let j = i + 1; j < pts.length; j++) {
               const dx = pts[i].x - pts[j].x;
               const dy = pts[i].y - pts[j].y;
-              const dist = Math.sqrt(dx*dx + dy*dy);
+              const dist = Math.sqrt(dx * dx + dy * dy);
               if (dist < 120) {
                 ctx.beginPath();
                 ctx.moveTo(pts[i].x, pts[i].y);
@@ -4188,27 +4434,27 @@
               }
             }
           }
-          
+
           // Move and draw particles
           pts.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
-            
+
             // Bounce bounds
             if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
             if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-            
+
             // Draw particle
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(34, 227, 255, 0.4)';
             ctx.fill();
-            
+
             // Interactive connection to mouse
             if (mouse.x !== null && mouse.y !== null) {
               const dx = p.x - mouse.x;
               const dy = p.y - mouse.y;
-              const dist = Math.sqrt(dx*dx + dy*dy);
+              const dist = Math.sqrt(dx * dx + dy * dy);
               if (dist < 160) {
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
@@ -4218,7 +4464,7 @@
               }
             }
           });
-          
+
           animId = requestAnimationFrame(loop);
         }
         loop();
