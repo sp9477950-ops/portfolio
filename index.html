@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>Sahil — AI Image Generation Engineer & VTON Specialist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +48,8 @@
       overflow-x: hidden;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     ::selection {
@@ -3527,30 +3530,27 @@
           <h3>Let's build something precise.</h3>
           <p>Open to collaborations on VTON, AI retouching, and texture-projection pipelines for fashion and retail.</p>
           <div class="socials">
-            <a href="mailto:sk9477960@gmail.com" class="social-btn email-btn" data-tooltip="Email">
+            <a href="javascript:void(0)" onclick="openSecureLink('email')" class="social-btn email-btn" data-tooltip="Email">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="4" width="20" height="16" rx="2" />
                 <path d="m22 7-10 5L2 7" />
               </svg>
             </a>
-            <a href="https://wa.me/919310054171" target="_blank" rel="noopener noreferrer"
-              class="social-btn whatsapp-btn" data-tooltip="WhatsApp">
+            <a href="javascript:void(0)" onclick="openSecureLink('wa')" class="social-btn whatsapp-btn" data-tooltip="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path
                   d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
               </svg>
             </a>
-            <a href="https://www.linkedin.com/in/sahil-sahil-46008035a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-              target="_blank" rel="noopener noreferrer" class="social-btn linkedin-btn" data-tooltip="LinkedIn">
+            <a href="javascript:void(0)" onclick="openSecureLink('li')" class="social-btn linkedin-btn" data-tooltip="LinkedIn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
                 <rect x="2" y="9" width="4" height="12" />
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <a href="https://www.instagram.com/luxora.ai.studio?igsh=MW5yMW9tN3Bkeml5Yw==" target="_blank"
-              rel="noopener noreferrer" class="social-btn instagram-btn" data-tooltip="Instagram">
+            <a href="javascript:void(0)" onclick="openSecureLink('ig')" class="social-btn instagram-btn" data-tooltip="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -4494,6 +4494,32 @@
         loop();
       }
     })();
+
+    /* ---- ANTI-CLONING & SECURE OBFUSCATED LINK DISPATCHER ---- */
+    function openSecureLink(type) {
+      const links = {
+        email: atob('bWFpbHRvOnNrOTQ3Nzk2MEBnbWFpbC5jb20='),
+        wa: atob('aHR0cHM6Ly93YS5tZS85MTkzMTAwNTQxNzE='),
+        li: atob('aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL3NhaGlsLXNhaGlsLTQ2MDA4MDM1YQ=='),
+        ig: atob('aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9sdXhvcmEuYWkuc3R1ZGlvP2lnc2g9TVc1eU1XOXROM0JrZW1sNWV3PT0=')
+      };
+      if (links[type]) {
+        window.open(links[type], '_blank');
+      }
+    }
+
+    // Disable right-click & common inspection shortcuts
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (
+        e.keyCode === 123 || // F12
+        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // Ctrl+Shift+I/J/C
+        (e.ctrlKey && e.keyCode === 85) || // Ctrl+U
+        (e.metaKey && e.altKey && (e.keyCode === 73 || e.keyCode === 85)) // Cmd+Alt+I/U
+      ) {
+        e.preventDefault();
+      }
+    });
   </script>
 </body>
 
