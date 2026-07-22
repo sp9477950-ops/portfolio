@@ -252,8 +252,7 @@ const dressberryProjects = [
       "assets/img/dressberry/style_12_after_2.jpg",
       "assets/img/dressberry/style_12_after_3.jpg",
       "assets/img/dressberry/style_12_after_4.jpg",
-      "assets/img/dressberry/style_12_after_5.jpg",
-      "assets/img/dressberry/style_12_after_6.jpg"
+      "assets/img/dressberry/style_12_after_5.jpg"
     ],
     "tags": [
       "VTON",
