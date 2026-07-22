@@ -3546,6 +3546,12 @@
               style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#a855f7;"></span>
             Kurtas VTON
           </button>
+          <button class="work-tab-btn" data-target="content-western"
+            style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span
+              style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#3b82f6;"></span>
+            Western Wear
+          </button>
           <button class="work-tab-btn" data-target="content-shoots"
             style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
             <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#eab308;"></span>
@@ -3621,6 +3627,20 @@
               <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">Full-garment Ethnic Kurta VTON catalog. Hover to reveal the raw full-length mannequin input → AI model try-on generation. Click to inspect in detail.</p>
             </div>
             <div class="dressberry-grid" id="kurtasGrid"></div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Western Wear -->
+        <div id="content-western" class="work-tab-content">
+          <div class="dressberry-showcase-section" style="padding: 10px 0;">
+            <div class="dressberry-brand-header" style="text-align: center; margin-bottom: 30px;">
+              <div
+                style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(59,130,246,.35); background: rgba(59,130,246,.08); font-family: 'JetBrains Mono'; font-size: 12px; color: #3b82f6; letter-spacing: .08em; margin-bottom: 20px;">
+                <span class="dot-live" style="background:#3b82f6;"></span> WESTERN WEAR × AI VTON
+              </div>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">High-fashion Western Wear AI Try-On catalog. Hover to reveal the raw mannequin input → AI model try-on generation. Click to inspect in detail.</p>
+            </div>
+            <div class="dressberry-grid" id="westernGrid"></div>
           </div>
         </div>
 
@@ -3835,6 +3855,7 @@
   <script src="assets/data/agents.js"></script>
   <script src="assets/data/dressberry.js"></script>
   <script src="assets/data/kurtas.js"></script>
+  <script src="assets/data/western.js"></script>
 
   <script>
     /* ---- PROJECT DATA ---- */
@@ -3848,7 +3869,8 @@
       ...webProjects,
       ...agentsProjects,
       ...dressberryProjects,
-      ...kurtasProjects
+      ...kurtasProjects,
+      ...westernProjects
     ];
 
 
@@ -4078,6 +4100,45 @@
     });
 
 
+    /* ---- RENDER WESTERN WEAR VTON ---- */
+    const westernGrid = document.getElementById('westernGrid');
+    westernProjects.forEach((p, i) => {
+      p.cat = 'western';
+      p.catLabel = 'Western Wear';
+      p.feat = [
+        "High-fashion western apparel to photorealistic model VTON",
+        "Retains 100% fabric texture & print/pattern integrity",
+        "Rigorous perspective, lighting & body silhouette matching",
+        "High-fidelity resolution with zero distortion"
+      ];
+      p.img = p.after; // fallback primary image
+
+      const wc = document.createElement('div');
+      wc.className = 'dressberry-item reveal';
+      wc.innerHTML = `
+        <div class="dressberry-ba-wrap">
+          <div class="dressberry-label-row">
+            <span class="dressberry-sku-badge" style="color: #3b82f6; background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.25);">${p.sku}</span>
+            <span class="dressberry-name-badge">${p.title}</span>
+          </div>
+          <div class="dressberry-ba-card">
+            <img class="db-before-img" src="${p.before}" alt="${p.title} Before">
+            <img class="db-after-img" src="${p.after}" alt="${p.title} After">
+            <div class="dressberry-hover-hint">Hover to reveal</div>
+            <div class="watch-ba-labels">
+              <span class="ba-pill before-pill">Before</span>
+              <span class="ba-pill after-pill" style="background: rgba(59,130,246,.15); border: 1px solid rgba(59,130,246,.4); color: #3b82f6;">After</span>
+            </div>
+          </div>
+        </div>`;
+
+      // Card click opens modal
+      wc.querySelector('.dressberry-ba-card').addEventListener('click', () => openModal(p));
+
+      westernGrid.appendChild(wc);
+    });
+
+
     /* ---- RENDER CREATIVES GALLERY ---- */
     const creatives = [
       { img: "assets/img/creatives/creative_1.jpg", caption: "Cinematic Neo-Noir Relight" },
@@ -4169,6 +4230,7 @@
       'content-socks': { border: '1px solid rgba(124,92,255,0.4)', background: 'rgba(124,92,255,0.15)', color: 'var(--violet)' },
       'content-dressberry': { border: '1px solid rgba(236,72,153,0.4)', background: 'rgba(236,72,153,0.15)', color: '#ec4899' },
       'content-kurtas': { border: '1px solid rgba(168,85,247,0.4)', background: 'rgba(168,85,247,0.15)', color: '#a855f7' },
+      'content-western': { border: '1px solid rgba(59,130,246,0.4)', background: 'rgba(59,130,246,0.15)', color: '#3b82f6' },
       'content-shoots': { border: '1px solid rgba(234,179,8,0.4)', background: 'rgba(234,179,8,0.15)', color: '#eab308' }
     };
 
@@ -4244,12 +4306,13 @@
         document.getElementById('mTags').innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
       }
 
-      if (p.cat === 'vton' || p.cat === 'watches' || p.cat === 'shoes' || p.cat === 'dressberry' || p.cat === 'kurtas') {
+      if (p.cat === 'vton' || p.cat === 'watches' || p.cat === 'shoes' || p.cat === 'dressberry' || p.cat === 'kurtas' || p.cat === 'western') {
         const isSocks = p.isSocks === true;
         const isWatch = p.cat === 'watches';
         const isShoes = p.cat === 'shoes';
         const isDressberry = p.cat === 'dressberry';
         const isKurtas = p.cat === 'kurtas';
+        const isWestern = p.cat === 'western';
         mThumb.classList.add('vton-mode');
 
         // Dynamically create control buttons
@@ -4289,6 +4352,12 @@
             const borderStyle = kp.sku === p.sku ? 'border: 1px solid #a855f7; background: rgba(168,85,247,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
             btnsHTML += `<button class="vton-btn ${active}" data-sku="${kp.sku}" data-img="${kp.after}" data-mannequin="${kp.before}" data-label="${kp.title}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${kp.sku}</button>`;
           });
+        } else if (isWestern) {
+          westernProjects.forEach((wp) => {
+            const active = wp.sku === p.sku ? 'active' : '';
+            const borderStyle = wp.sku === p.sku ? 'border: 1px solid #3b82f6; background: rgba(59,130,246,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
+            btnsHTML += `<button class="vton-btn ${active}" data-sku="${wp.sku}" data-img="${wp.after}" data-mannequin="${wp.before}" data-label="${wp.title}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${wp.sku}</button>`;
+          });
         } else {
           btnsHTML = `
             <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
@@ -4303,8 +4372,8 @@
           <img id="vtonPreview" src="${p.after}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
           <div id="vtonLoader" style="position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,8,22,0.85); backdrop-filter: blur(4px); color: #fff; font-size: 14px; font-weight: 600; z-index: 10; border-radius:12px;">
             <div style="text-align: center;">
-              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : 'var(--violet)')))}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
-              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : 'var(--cyan)')))}">[RUNNING DIFFUSION SWAP]</div>
+              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : (isWestern ? '#3b82f6' : 'var(--violet)'))))}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
+              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : (isWestern ? '#3b82f6' : 'var(--cyan)'))))}">[RUNNING DIFFUSION SWAP]</div>
               <div id="vtonLoaderDesc" style="font-size:11px;color:var(--txt-faint);margin-top:4px;">Preserving geometry constraints...</div>
             </div>
           </div>
@@ -4313,15 +4382,15 @@
         <!-- BEFORE/AFTER TABS -->
         <div class="socks-toggle-pill" style="display: flex; gap: 4px; background: rgba(0,0,0,0.5); border: 1px solid var(--stroke); border-radius: 100px; padding: 4px; width: fit-content; margin: 12px auto 0; z-index: 5;">
           <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (${isWatch || isShoes ? 'Flat Shot' : 'Mannequin'})</button>
-          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : 'var(--violet)')))}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : (isShoes ? 'rgba(16,185,129,0.3)' : (isDressberry ? 'rgba(236,72,153,0.3)' : (isKurtas ? 'rgba(168,85,247,0.3)' : 'rgba(124,92,255,0.3)')))}">After (AI Model)</button>
+          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : (isWestern ? '#3b82f6' : 'var(--violet)'))))}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : (isShoes ? 'rgba(16,185,129,0.3)' : (isDressberry ? 'rgba(236,72,153,0.3)' : (isKurtas ? 'rgba(168,85,247,0.3)' : (isWestern ? 'rgba(59,130,246,0.3)' : 'rgba(124,92,255,0.3)'))))}">After (AI Model)</button>
         </div>
  
-        ${(isDressberry || isKurtas) ? `<div id="dbOptionContainer" style="display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 12px; z-index: 5;"></div>` : ''}
+        ${(isDressberry || isKurtas || isWestern) ? `<div id="dbOptionContainer" style="display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 12px; z-index: 5;"></div>` : ''}
  
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
-            <span>${isWatch ? 'Select Watch SKU' : (isShoes ? 'Select Shoe SKU' : (isDressberry ? 'Select Apparel SKU' : (isKurtas ? 'Select Kurta SKU' : 'Select Sock Style / Branding Anchor')))}</span>
-            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : 'var(--cyan)')))}">${isWatch ? p.sku : (isShoes ? p.title : (isDressberry || isKurtas ? p.title : 'BLACK LOW-CUT (TOE)'))}</span>
+            <span>${isWatch ? 'Select Watch SKU' : (isShoes ? 'Select Shoe SKU' : (isDressberry ? 'Select Apparel SKU' : (isKurtas ? 'Select Kurta SKU' : (isWestern ? 'Select Western SKU' : 'Select Sock Style / Branding Anchor'))))}</span>
+            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : (isWestern ? '#3b82f6' : 'var(--cyan)'))))}">${isWatch ? p.sku : (isShoes ? p.title : (isDressberry || isKurtas || isWestern ? p.title : 'BLACK LOW-CUT (TOE)'))}</span>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 110px; overflow-y: auto; padding-right: 4px;">
             ${btnsHTML}
@@ -4386,7 +4455,7 @@
             });
           }
 
-          if (isDressberry || isKurtas) {
+          if (isDressberry || isKurtas || isWestern) {
             renderDbOptions(p);
           }
 
@@ -4418,15 +4487,15 @@
             currentViewMode = 'after';
 
             // Style transition
-            btnAfter.style.background = isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : 'var(--violet)')));
+            btnAfter.style.background = isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : (isWestern ? '#3b82f6' : 'var(--violet)'))));
             btnAfter.style.color = '#fff';
-            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : (isShoes ? '0 0 10px rgba(16,185,129,0.3)' : (isDressberry ? '0 0 10px rgba(236,72,153,0.3)' : (isKurtas ? '0 0 10px rgba(168,85,247,0.3)' : 'rgba(124,92,255,0.3)')));
+            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : (isShoes ? '0 0 10px rgba(16,185,129,0.3)' : (isDressberry ? '0 0 10px rgba(236,72,153,0.3)' : (isKurtas ? '0 0 10px rgba(168,85,247,0.3)' : (isWestern ? '0 0 10px rgba(59,130,246,0.3)' : 'rgba(124,92,255,0.3)'))));
             btnBefore.style.background = 'transparent';
             btnBefore.style.color = 'var(--txt-dim)';
 
             // Loader
-            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : (isShoes ? '[RUNNING PRODUCT CONTEXT DIFFUSION]' : (isDressberry || isKurtas ? '[RUNNING APPAREL VTON]' : '[RUNNING DIFFUSION SWAP]'));
-            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : (isShoes ? 'Synthesizing footwear perspective & lighting...' : (isDressberry || isKurtas ? 'Mapping fabric folds & pattern alignment...' : 'Enforcing Gemini anatomical constraints...'));
+            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : (isShoes ? '[RUNNING PRODUCT CONTEXT DIFFUSION]' : (isDressberry || isKurtas || isWestern ? '[RUNNING APPAREL VTON]' : '[RUNNING DIFFUSION SWAP]'));
+            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : (isShoes ? 'Synthesizing footwear perspective & lighting...' : (isDressberry || isKurtas || isWestern ? 'Mapping fabric folds & pattern alignment...' : 'Enforcing Gemini anatomical constraints...'));
             loader.style.display = 'grid';
 
             setTimeout(() => {
@@ -4447,15 +4516,15 @@
               });
 
               btn.classList.add('active');
-              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : 'var(--violet)')))}`;
-              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : (isShoes ? 'rgba(16,185,129,0.15)' : (isDressberry ? 'rgba(236,72,153,0.15)' : (isKurtas ? 'rgba(168,85,247,0.15)' : 'rgba(124,92,255,0.15)')))}`;
+              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : (isKurtas ? '#a855f7' : (isWestern ? '#3b82f6' : 'var(--violet)'))))}`;
+              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : (isShoes ? 'rgba(16,185,129,0.15)' : (isDressberry ? 'rgba(236,72,153,0.15)' : (isKurtas ? 'rgba(168,85,247,0.15)' : (isWestern ? 'rgba(59,130,246,0.15)' : 'rgba(124,92,255,0.15)'))))}`;
 
               const sku = btn.dataset.sku;
               // Find matching project config to update description & details dynamically
-              const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : (isDressberry ? dressberryProjects : (isKurtas ? kurtasProjects : socksProjects)))).find(x => x.sku === sku);
+              const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : (isDressberry ? dressberryProjects : (isKurtas ? kurtasProjects : (isWestern ? westernProjects : socksProjects))))).find(x => x.sku === sku);
               if (matchedProject) {
                 updateModalTexts(matchedProject);
-                if (isDressberry || isKurtas) {
+                if (isDressberry || isKurtas || isWestern) {
                   renderDbOptions(matchedProject);
                 }
               }
