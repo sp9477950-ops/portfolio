@@ -907,6 +907,134 @@
       margin: 0 auto
     }
 
+    /* DRESSBERRY */
+    .dressberry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media(max-width:1100px) {
+      .dressberry-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media(max-width:768px) {
+      .dressberry-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .dressberry-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    .dressberry-item {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .35s, box-shadow .35s, transform .35s;
+    }
+
+    .dressberry-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(236, 72, 153, 0.4);
+      box-shadow: 0 12px 30px -10px rgba(236, 72, 153, 0.25);
+    }
+
+    .dressberry-ba-wrap {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .dressberry-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dressberry-sku-badge {
+      font-family: 'JetBrains Mono';
+      font-size: 10px;
+      font-weight: 700;
+      color: #ec4899;
+      background: rgba(236, 72, 153, .1);
+      border: 1px solid rgba(236, 72, 153, .25);
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: .06em;
+    }
+
+    .dressberry-name-badge {
+      font-family: 'Outfit';
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt-dim);
+    }
+
+    .dressberry-ba-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      background: var(--bg-2);
+      cursor: pointer;
+    }
+
+    .dressberry-ba-card .db-before-img,
+    .dressberry-ba-card .db-after-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity .55s ease;
+    }
+
+    .dressberry-ba-card .db-before-img {
+      opacity: 0;
+    }
+
+    .dressberry-ba-card .db-after-img {
+      opacity: 1;
+    }
+
+    .dressberry-item:hover .dressberry-ba-card .db-before-img {
+      opacity: 1;
+    }
+
+    .dressberry-item:hover .dressberry-ba-card .db-after-img {
+      opacity: 0;
+    }
+
+    .dressberry-hover-hint {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(8, 8, 20, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--stroke);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--txt-dim);
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.3s ease;
+    }
+
     .watches-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -3348,6 +3476,12 @@
               style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--violet);"></span>
             Campus Socks (10 SKUs)
           </button>
+          <button class="work-tab-btn" data-target="content-dressberry"
+            style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
+            <span
+              style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#ec4899;"></span>
+            Dressberry VTON (22 SKUs)
+          </button>
           <button class="work-tab-btn" data-target="content-shoots"
             style="padding: 10px 20px; border: 1px solid transparent; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;">
             <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#eab308;"></span>
@@ -3395,6 +3529,20 @@
                 zero hallucinations.</p>
             </div>
             <div class="socks-grid" id="socksGrid"></div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Dressberry VTON -->
+        <div id="content-dressberry" class="work-tab-content">
+          <div class="dressberry-showcase-section" style="padding: 10px 0;">
+            <div class="dressberry-brand-header" style="text-align: center; margin-bottom: 30px;">
+              <div
+                style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; border: 1px solid rgba(236,72,153,.35); background: rgba(236,72,153,.08); font-family: 'JetBrains Mono'; font-size: 12px; color: #ec4899; letter-spacing: .08em; margin-bottom: 20px;">
+                <span class="dot-live" style="background:#ec4899;"></span> DRESSBERRY × AI VTON
+              </div>
+              <p style="font-size: 15px; color: var(--txt-dim); max-width: 580px; margin: 10px auto 0;">22-SKU high-fidelity apparel Try-On catalog. Hover to reveal the raw mannequin input → AI model try-on generation. Click to inspect in detail.</p>
+            </div>
+            <div class="dressberry-grid" id="dressberryGrid"></div>
           </div>
         </div>
 
@@ -3608,6 +3756,7 @@
   <script src="assets/data/furnish.js"></script>
   <script src="assets/data/web.js"></script>
   <script src="assets/data/agents.js"></script>
+  <script src="assets/data/dressberry.js"></script>
 
   <script>
     /* ---- PROJECT DATA ---- */
@@ -3619,7 +3768,8 @@
       ...retouchProjects,
       ...furnishProjects,
       ...webProjects,
-      ...agentsProjects
+      ...agentsProjects,
+      ...dressberryProjects
     ];
 
 
@@ -3771,6 +3921,45 @@
     });
 
 
+    /* ---- RENDER DRESSBERRY VTON ---- */
+    const dressberryGrid = document.getElementById('dressberryGrid');
+    dressberryProjects.forEach((p, i) => {
+      p.cat = 'dressberry';
+      p.catLabel = 'Dressberry VTON';
+      p.feat = [
+        "Mannequin garment to dynamic model try-on mapping",
+        "Retains 100% fabric texture & pattern integrity",
+        "Rigorous perspective, lighting & body silhouette matching",
+        "High-fidelity resolution with zero distortion"
+      ];
+      p.img = p.after; // fallback primary image
+
+      const dbc = document.createElement('div');
+      dbc.className = 'dressberry-item reveal';
+      dbc.innerHTML = `
+        <div class="dressberry-ba-wrap">
+          <div class="dressberry-label-row">
+            <span class="dressberry-sku-badge">${p.sku}</span>
+            <span class="dressberry-name-badge">${p.title}</span>
+          </div>
+          <div class="dressberry-ba-card">
+            <img class="db-before-img" src="${p.before}" alt="${p.title} Before">
+            <img class="db-after-img" src="${p.after}" alt="${p.title} After">
+            <div class="dressberry-hover-hint">Hover to reveal</div>
+            <div class="watch-ba-labels">
+              <span class="ba-pill before-pill">Before</span>
+              <span class="ba-pill after-pill" style="background: rgba(236,72,153,.15); border: 1px solid rgba(236,72,153,.4); color: #ec4899;">After</span>
+            </div>
+          </div>
+        </div>`;
+
+      // Card click opens modal
+      dbc.querySelector('.dressberry-ba-card').addEventListener('click', () => openModal(p));
+
+      dressberryGrid.appendChild(dbc);
+    });
+
+
     /* ---- RENDER CREATIVES GALLERY ---- */
     const creatives = [
       { img: "assets/img/creatives/creative_1.jpg", caption: "Cinematic Neo-Noir Relight" },
@@ -3860,6 +4049,7 @@
       'content-shoes': { border: '1px solid rgba(16,185,129,0.4)', background: 'rgba(16,185,129,0.15)', color: '#10b981' },
       'content-watches': { border: '1px solid rgba(34,227,255,0.4)', background: 'rgba(34,227,255,0.15)', color: 'var(--cyan)' },
       'content-socks': { border: '1px solid rgba(124,92,255,0.4)', background: 'rgba(124,92,255,0.15)', color: 'var(--violet)' },
+      'content-dressberry': { border: '1px solid rgba(236,72,153,0.4)', background: 'rgba(236,72,153,0.15)', color: '#ec4899' },
       'content-shoots': { border: '1px solid rgba(234,179,8,0.4)', background: 'rgba(234,179,8,0.15)', color: '#eab308' }
     };
 
@@ -3935,10 +4125,11 @@
         document.getElementById('mTags').innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
       }
 
-      if (p.cat === 'vton' || p.cat === 'watches' || p.cat === 'shoes') {
+      if (p.cat === 'vton' || p.cat === 'watches' || p.cat === 'shoes' || p.cat === 'dressberry') {
         const isSocks = p.isSocks === true;
         const isWatch = p.cat === 'watches';
         const isShoes = p.cat === 'shoes';
+        const isDressberry = p.cat === 'dressberry';
         mThumb.classList.add('vton-mode');
 
         // Dynamically create control buttons
@@ -3966,6 +4157,12 @@
             const borderStyle = shoe.sku === p.sku ? 'border: 1px solid #10b981; background: rgba(16,185,129,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
             btnsHTML += `<button class="vton-btn ${active}" data-sku="${shoe.sku}" data-img="${shoe.after}" data-mannequin="${shoe.before}" data-label="${shoe.title}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${shoe.title.split(' — ')[0]}</button>`;
           });
+        } else if (isDressberry) {
+          dressberryProjects.forEach((db) => {
+            const active = db.sku === p.sku ? 'active' : '';
+            const borderStyle = db.sku === p.sku ? 'border: 1px solid #ec4899; background: rgba(236,72,153,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
+            btnsHTML += `<button class="vton-btn ${active}" data-sku="${db.sku}" data-img="${db.after}" data-mannequin="${db.before}" data-label="${db.title}" style="flex: 1; min-width:85px; padding: 8px 10px; ${borderStyle} border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">${db.sku}</button>`;
+          });
         } else {
           btnsHTML = `
             <button class="vton-btn active" data-img="assets/img/fashion1.png" data-label="PINK CHIFFON" style="flex: 1; min-width:80px; padding: 10px; background: rgba(124,92,255,0.15); border: 1px solid var(--violet); border-radius: 8px; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Pink (Pose A)</button>
@@ -3980,8 +4177,8 @@
           <img id="vtonPreview" src="${p.after}" style="width: 100%; height: 100%; object-fit: contain; transition: filter 0.3s ease, transform 0.5s ease;">
           <div id="vtonLoader" style="position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,8,22,0.85); backdrop-filter: blur(4px); color: #fff; font-size: 14px; font-weight: 600; z-index: 10; border-radius:12px;">
             <div style="text-align: center;">
-              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
-              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);">[RUNNING DIFFUSION SWAP]</div>
+              <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top-color: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--violet)'))}; border-radius: 50%; width: 32px; height: 32px; animation: spin 0.8s linear infinite; margin: 0 auto 12px;"></div>
+              <div id="vtonLoaderTitle" style="font-family:'JetBrains Mono';font-size:12px;color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--cyan)'))}">[RUNNING DIFFUSION SWAP]</div>
               <div id="vtonLoaderDesc" style="font-size:11px;color:var(--txt-faint);margin-top:4px;">Preserving geometry constraints...</div>
             </div>
           </div>
@@ -3990,13 +4187,13 @@
         <!-- BEFORE/AFTER TABS -->
         <div class="socks-toggle-pill" style="display: flex; gap: 4px; background: rgba(0,0,0,0.5); border: 1px solid var(--stroke); border-radius: 100px; padding: 4px; width: fit-content; margin: 12px auto 0; z-index: 5;">
           <button id="btnBefore" style="padding: 6px 14px; border: none; border-radius: 100px; background: transparent; color: var(--txt-dim); font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s;">Before (${isWatch || isShoes ? 'Flat Shot' : 'Mannequin'})</button>
-          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : (isShoes ? 'rgba(16,185,129,0.3)' : 'rgba(124,92,255,0.3)')};">After (AI Model)</button>
+          <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--violet)'))}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : (isShoes ? 'rgba(16,185,129,0.3)' : (isDressberry ? 'rgba(236,72,153,0.3)' : 'rgba(124,92,255,0.3)'))};">After (AI Model)</button>
         </div>
  
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
-            <span>${isWatch ? 'Select Watch SKU' : (isShoes ? 'Select Shoe SKU' : 'Select Sock Style / Branding Anchor')}</span>
-            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--cyan)')}">${isWatch ? p.sku : (isShoes ? p.title : 'BLACK LOW-CUT (TOE)')}</span>
+            <span>${isWatch ? 'Select Watch SKU' : (isShoes ? 'Select Shoe SKU' : (isDressberry ? 'Select Dressberry SKU' : 'Select Sock Style / Branding Anchor'))}</span>
+            <span id="fabricLabel" style="color:${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--cyan)'))}">${isWatch ? p.sku : (isShoes ? p.title : (isDressberry ? p.title : 'BLACK LOW-CUT (TOE)'))}</span>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap:wrap; max-height: 110px; overflow-y: auto; padding-right: 4px;">
             ${btnsHTML}
@@ -4045,15 +4242,15 @@
             currentViewMode = 'after';
 
             // Style transition
-            btnAfter.style.background = isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)');
+            btnAfter.style.background = isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--violet)'));
             btnAfter.style.color = '#fff';
-            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : (isShoes ? '0 0 10px rgba(16,185,129,0.3)' : '0 0 10px rgba(124,92,255,0.3)');
+            btnAfter.style.boxShadow = isWatch ? '0 0 10px rgba(34,227,255,0.3)' : (isShoes ? '0 0 10px rgba(16,185,129,0.3)' : (isDressberry ? '0 0 10px rgba(236,72,153,0.3)' : '0 0 10px rgba(124,92,255,0.3)'));
             btnBefore.style.background = 'transparent';
             btnBefore.style.color = 'var(--txt-dim)';
 
             // Loader
-            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : (isShoes ? '[RUNNING PRODUCT CONTEXT DIFFUSION]' : '[RUNNING DIFFUSION SWAP]');
-            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : (isShoes ? 'Synthesizing footwear perspective & lighting...' : 'Enforcing Gemini anatomical constraints...');
+            lTitle.textContent = isWatch ? '[RUNNING REFLECTION DIFFUSION]' : (isShoes ? '[RUNNING PRODUCT CONTEXT DIFFUSION]' : (isDressberry ? '[RUNNING APPAREL VTON]' : '[RUNNING DIFFUSION SWAP]'));
+            lDesc.textContent = isWatch ? 'Synthesizing watch band & lighting alignment...' : (isShoes ? 'Synthesizing footwear perspective & lighting...' : (isDressberry ? 'Mapping fabric folds & pattern alignment...' : 'Enforcing Gemini anatomical constraints...'));
             loader.style.display = 'grid';
 
             setTimeout(() => {
@@ -4074,12 +4271,12 @@
               });
 
               btn.classList.add('active');
-              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : 'var(--violet)')}`;
-              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : (isShoes ? 'rgba(16,185,129,0.15)' : 'rgba(124,92,255,0.15)')}`;
+              btn.style.border = `1px solid ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--violet)'))}`;
+              btn.style.background = `${isWatch ? 'rgba(34,227,255,0.15)' : (isShoes ? 'rgba(16,185,129,0.15)' : (isDressberry ? 'rgba(236,72,153,0.15)' : 'rgba(124,92,255,0.15)'))}`;
 
               const sku = btn.dataset.sku;
               // Find matching project config to update description & details dynamically
-              const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : socksProjects)).find(x => x.sku === sku);
+              const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : (isDressberry ? dressberryProjects : socksProjects))).find(x => x.sku === sku);
               if (matchedProject) {
                 updateModalTexts(matchedProject);
               }
@@ -4099,6 +4296,14 @@
                 } else {
                   lTitle.textContent = '[LOADING STUDIO CATALOG]';
                   lDesc.textContent = 'Fetching original flat product photography...';
+                }
+              } else if (isDressberry) {
+                if (currentViewMode === 'after') {
+                  lTitle.textContent = '[RUNNING APPAREL VTON]';
+                  lDesc.textContent = 'Mapping fabric folds & pattern alignment...';
+                } else {
+                  lTitle.textContent = '[LOADING MANNEQUIN REFERENCE]';
+                  lDesc.textContent = 'Fetching raw product photography...';
                 }
               } else {
                 if (currentViewMode === 'after') {
