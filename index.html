@@ -50,6 +50,48 @@
       -webkit-font-smoothing: antialiased;
       user-select: none;
       -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /* ---- MAXIMUM IMAGE & ASSET PROTECTION ---- */
+    img, svg, picture, video, canvas {
+      -webkit-touch-callout: none !important; /* Disables iOS & Android long-press save menu */
+      -webkit-user-select: none !important;
+      -khtml-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+      -webkit-user-drag: none !important;     /* Disables image dragging */
+      user-drag: none !important;
+      pointer-events: auto;
+    }
+
+    /* Transparent Shield Overlay on cards to block right-clicks and taps */
+    .shoe-ba-card::after,
+    .dressberry-ba-card::after,
+    .watch-ba-card::after,
+    .vton-preview-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      background: rgba(0, 0, 0, 0.001);
+      pointer-events: auto;
+    }
+
+    /* Print Protection: blank page on Print / Save as PDF */
+    @media print {
+      html, body {
+        display: none !important;
+      }
+    }
+
+    /* Anti-screenshot blur trick when window loses focus (Snipping tool / Mac overlay) */
+    body.screenshot-protect img {
+      filter: blur(60px) opacity(0) !important;
+      transition: none !important;
     }
 
     ::selection {
@@ -4779,16 +4821,43 @@
       }
     }
 
-    // Disable right-click & common inspection shortcuts
-    document.addEventListener('contextmenu', e => e.preventDefault());
+    // Disable right-click & image drag across entire document
+    document.addEventListener('contextmenu', e => e.preventDefault(), false);
+    document.addEventListener('dragstart', e => e.preventDefault(), false);
+
+    // Anti-screenshot window focus blur trick (Triggers on Mac Cmd+Shift+4 / Windows Snipping tool / Blur)
+    window.addEventListener('blur', () => {
+      document.body.classList.add('screenshot-protect');
+    });
+    window.addEventListener('focus', () => {
+      document.body.classList.remove('screenshot-protect');
+    });
+
+    // Clear clipboard if PrintScreen key is pressed
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'PrintScreen' || e.keyCode === 44) {
+        try { navigator.clipboard.writeText(''); } catch(err) {}
+      }
+    });
+
+    // Disable keyboard shortcuts for inspect, view source, print & screenshot
     document.addEventListener('keydown', e => {
       if (
         e.keyCode === 123 || // F12
         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // Ctrl+Shift+I/J/C
-        (e.ctrlKey && e.keyCode === 85) || // Ctrl+U
+        (e.ctrlKey && e.keyCode === 85) || // Ctrl+U (View Source)
+        (e.ctrlKey && e.keyCode === 80) || // Ctrl+P (Print)
+        (e.metaKey && e.keyCode === 80) || // Cmd+P (Print)
         (e.metaKey && e.altKey && (e.keyCode === 73 || e.keyCode === 85)) // Cmd+Alt+I/U
       ) {
         e.preventDefault();
+      }
+
+      // Detect Screenshot shortcuts (Cmd+Shift+3/4/5 or Win+Shift+S)
+      if ((e.metaKey && e.shiftKey && (e.keyCode === 51 || e.keyCode === 52 || e.keyCode === 53)) ||
+          (e.shiftKey && e.keyCode === 83 && (e.metaKey || e.ctrlKey))) {
+        document.body.classList.add('screenshot-protect');
+        setTimeout(() => document.body.classList.remove('screenshot-protect'), 2500);
       }
     });
   </script>
