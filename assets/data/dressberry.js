@@ -481,5 +481,289 @@ const dressberryProjects = [
       "Mannequin Try-on",
       "Pattern Lock"
     ]
+  },
+  {
+    "sku": "SG-01",
+    "title": "Apparel Style 23",
+    "short": "High-fidelity AI model try-on for Apparel Style 23.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_01_before.jpg",
+    "after": "assets/img/dressberry/sangria_01_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_01_after_1.jpg",
+      "assets/img/dressberry/sangria_01_after_2.jpg",
+      "assets/img/dressberry/sangria_01_after_3.jpg",
+      "assets/img/dressberry/sangria_01_after_4.jpg",
+      "assets/img/dressberry/sangria_01_after_5.jpg",
+      "assets/img/dressberry/sangria_01_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-02",
+    "title": "Apparel Style 24",
+    "short": "High-fidelity AI model try-on for Apparel Style 24.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_02_before.jpg",
+    "after": "assets/img/dressberry/sangria_02_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_02_after_1.jpg",
+      "assets/img/dressberry/sangria_02_after_2.jpg",
+      "assets/img/dressberry/sangria_02_after_3.jpg",
+      "assets/img/dressberry/sangria_02_after_4.jpg",
+      "assets/img/dressberry/sangria_02_after_5.jpg",
+      "assets/img/dressberry/sangria_02_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-03",
+    "title": "Apparel Style 25",
+    "short": "High-fidelity AI model try-on for Apparel Style 25.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_03_before.jpg",
+    "after": "assets/img/dressberry/sangria_03_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_03_after_1.jpg",
+      "assets/img/dressberry/sangria_03_after_2.jpg",
+      "assets/img/dressberry/sangria_03_after_3.jpg",
+      "assets/img/dressberry/sangria_03_after_4.jpg",
+      "assets/img/dressberry/sangria_03_after_5.jpg",
+      "assets/img/dressberry/sangria_03_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-04",
+    "title": "Apparel Style 26",
+    "short": "High-fidelity AI model try-on for Apparel Style 26.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_04_before.jpg",
+    "after": "assets/img/dressberry/sangria_04_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_04_after_1.jpg",
+      "assets/img/dressberry/sangria_04_after_2.jpg",
+      "assets/img/dressberry/sangria_04_after_3.jpg",
+      "assets/img/dressberry/sangria_04_after_4.jpg",
+      "assets/img/dressberry/sangria_04_after_5.jpg",
+      "assets/img/dressberry/sangria_04_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-05",
+    "title": "Apparel Style 27",
+    "short": "High-fidelity AI model try-on for Apparel Style 27.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_05_before.jpg",
+    "after": "assets/img/dressberry/sangria_05_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_05_after_1.jpg",
+      "assets/img/dressberry/sangria_05_after_2.jpg",
+      "assets/img/dressberry/sangria_05_after_3.jpg",
+      "assets/img/dressberry/sangria_05_after_4.jpg",
+      "assets/img/dressberry/sangria_05_after_5.jpg",
+      "assets/img/dressberry/sangria_05_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-06",
+    "title": "Apparel Style 28",
+    "short": "High-fidelity AI model try-on for Apparel Style 28.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_06_before.jpg",
+    "after": "assets/img/dressberry/sangria_06_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_06_after_1.jpg",
+      "assets/img/dressberry/sangria_06_after_2.jpg",
+      "assets/img/dressberry/sangria_06_after_3.jpg",
+      "assets/img/dressberry/sangria_06_after_4.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-07",
+    "title": "Apparel Style 29",
+    "short": "High-fidelity AI model try-on for Apparel Style 29.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_07_before.jpg",
+    "after": "assets/img/dressberry/sangria_07_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_07_after_1.jpg",
+      "assets/img/dressberry/sangria_07_after_2.jpg",
+      "assets/img/dressberry/sangria_07_after_3.jpg",
+      "assets/img/dressberry/sangria_07_after_4.jpg",
+      "assets/img/dressberry/sangria_07_after_5.jpg",
+      "assets/img/dressberry/sangria_07_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-09",
+    "title": "Apparel Style 30",
+    "short": "High-fidelity AI model try-on for Apparel Style 30.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_09_before.jpg",
+    "after": "assets/img/dressberry/sangria_09_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_09_after_1.jpg",
+      "assets/img/dressberry/sangria_09_after_2.jpg",
+      "assets/img/dressberry/sangria_09_after_3.jpg",
+      "assets/img/dressberry/sangria_09_after_4.jpg",
+      "assets/img/dressberry/sangria_09_after_5.jpg",
+      "assets/img/dressberry/sangria_09_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-10",
+    "title": "Apparel Style 31",
+    "short": "High-fidelity AI model try-on for Apparel Style 31.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_10_before.jpg",
+    "after": "assets/img/dressberry/sangria_10_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_10_after_1.jpg",
+      "assets/img/dressberry/sangria_10_after_2.jpg",
+      "assets/img/dressberry/sangria_10_after_3.jpg",
+      "assets/img/dressberry/sangria_10_after_4.jpg",
+      "assets/img/dressberry/sangria_10_after_5.jpg",
+      "assets/img/dressberry/sangria_10_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-11",
+    "title": "Apparel Style 32",
+    "short": "High-fidelity AI model try-on for Apparel Style 32.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_11_before.jpg",
+    "after": "assets/img/dressberry/sangria_11_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_11_after_1.jpg",
+      "assets/img/dressberry/sangria_11_after_2.jpg",
+      "assets/img/dressberry/sangria_11_after_3.jpg",
+      "assets/img/dressberry/sangria_11_after_4.jpg",
+      "assets/img/dressberry/sangria_11_after_5.jpg",
+      "assets/img/dressberry/sangria_11_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-12",
+    "title": "Apparel Style 33",
+    "short": "High-fidelity AI model try-on for Apparel Style 33.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_12_before.jpg",
+    "after": "assets/img/dressberry/sangria_12_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_12_after_1.jpg",
+      "assets/img/dressberry/sangria_12_after_2.jpg",
+      "assets/img/dressberry/sangria_12_after_3.jpg",
+      "assets/img/dressberry/sangria_12_after_4.jpg",
+      "assets/img/dressberry/sangria_12_after_5.jpg",
+      "assets/img/dressberry/sangria_12_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-13",
+    "title": "Apparel Style 34",
+    "short": "High-fidelity AI model try-on for Apparel Style 34.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_13_before.jpg",
+    "after": "assets/img/dressberry/sangria_13_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_13_after_1.jpg",
+      "assets/img/dressberry/sangria_13_after_2.jpg",
+      "assets/img/dressberry/sangria_13_after_3.jpg",
+      "assets/img/dressberry/sangria_13_after_4.jpg",
+      "assets/img/dressberry/sangria_13_after_5.jpg",
+      "assets/img/dressberry/sangria_13_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
+  },
+  {
+    "sku": "SG-14",
+    "title": "Apparel Style 35",
+    "short": "High-fidelity AI model try-on for Apparel Style 35.",
+    "desc": "Full-garment mannequin mapping to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
+    "before": "assets/img/dressberry/sangria_14_before.jpg",
+    "after": "assets/img/dressberry/sangria_14_after_1.jpg",
+    "afters": [
+      "assets/img/dressberry/sangria_14_after_1.jpg",
+      "assets/img/dressberry/sangria_14_after_2.jpg",
+      "assets/img/dressberry/sangria_14_after_3.jpg",
+      "assets/img/dressberry/sangria_14_after_4.jpg",
+      "assets/img/dressberry/sangria_14_after_5.jpg",
+      "assets/img/dressberry/sangria_14_after_6.jpg"
+    ],
+    "tags": [
+      "VTON",
+      "Apparel",
+      "Full Garment",
+      "Pattern Lock"
+    ]
   }
 ];
