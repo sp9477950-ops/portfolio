@@ -26,9 +26,8 @@ const dressberryProjects = [
     "short": "High-fidelity AI model try-on for Apparel Style 02.",
     "desc": "Mannequin garment to photorealistic model VTON mapping. Enforces strict fabric structure, pattern alignment, and natural body lighting.",
     "before": "assets/img/dressberry/style_02_before.jpg",
-    "after": "assets/img/dressberry/style_02_after_1.jpg",
+    "after": "assets/img/dressberry/style_02_after_2.jpg",
     "afters": [
-      "assets/img/dressberry/style_02_after_1.jpg",
       "assets/img/dressberry/style_02_after_2.jpg",
       "assets/img/dressberry/style_02_after_3.jpg",
       "assets/img/dressberry/style_02_after_4.jpg",
