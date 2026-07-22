@@ -1035,6 +1035,19 @@
       transition: opacity 0.3s ease;
     }
 
+    .db-opt-btn {
+      transition: all 0.2s ease;
+    }
+    .db-opt-btn:hover {
+      border-color: #ec4899 !important;
+      background: rgba(236, 72, 153, 0.08) !important;
+    }
+    .db-opt-btn.active-db-opt {
+      border-color: #ec4899 !important;
+      background: rgba(236, 72, 153, 0.15) !important;
+      box-shadow: 0 0 8px rgba(236, 72, 153, 0.25);
+    }
+
     .watches-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -4190,6 +4203,8 @@
           <button id="btnAfter" style="padding: 6px 14px; border: none; border-radius: 100px; background: ${isWatch ? 'var(--cyan)' : (isShoes ? '#10b981' : (isDressberry ? '#ec4899' : 'var(--violet)'))}; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px ${isWatch ? 'rgba(34,227,255,0.3)' : (isShoes ? 'rgba(16,185,129,0.3)' : (isDressberry ? 'rgba(236,72,153,0.3)' : 'rgba(124,92,255,0.3)'))};">After (AI Model)</button>
         </div>
  
+        ${isDressberry ? `<div id="dbOptionContainer" style="display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 12px; z-index: 5;"></div>` : ''}
+ 
         <div class="vton-controls" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
           <div style="font-family:'Outfit'; font-size: 12px; font-weight: 700; color: var(--txt-dim); text-transform: uppercase; letter-spacing: 0.08em; display:flex; justify-content:space-between;">
             <span>${isWatch ? 'Select Watch SKU' : (isShoes ? 'Select Shoe SKU' : (isDressberry ? 'Select Apparel SKU' : 'Select Sock Style / Branding Anchor'))}</span>
@@ -4213,6 +4228,54 @@
           const btnAfter = document.getElementById('btnAfter');
           const lTitle = document.getElementById('vtonLoaderTitle');
           const lDesc = document.getElementById('vtonLoaderDesc');
+
+          function renderDbOptions(project) {
+            const container = document.getElementById('dbOptionContainer');
+            if (!container) return;
+            container.innerHTML = project.afters.map((path, idx) => {
+              const active = idx === 0 ? 'active-db-opt' : '';
+              const borderStyle = idx === 0 ? 'border: 1px solid #ec4899; background: rgba(236,72,153,0.15);' : 'border: 1px solid var(--stroke); background: rgba(255,255,255,0.02);';
+              return `<button class="db-opt-btn ${active}" data-img="${path}" style="padding: 5px 12px; ${borderStyle} border-radius: 6px; color: #fff; font-family: 'Outfit'; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s;">Model ${idx + 1}</button>`;
+            }).join('');
+            
+            // Re-attach event listeners
+            const dbOptBtns = container.querySelectorAll('.db-opt-btn');
+            dbOptBtns.forEach(btn => {
+              btn.addEventListener('click', () => {
+                if (btn.classList.contains('active-db-opt')) return;
+
+                dbOptBtns.forEach(b => {
+                  b.classList.remove('active-db-opt');
+                  b.style.border = '1px solid var(--stroke)';
+                  b.style.background = 'rgba(255,255,255,0.02)';
+                });
+
+                btn.classList.add('active-db-opt');
+                btn.style.border = '1px solid #ec4899';
+                btn.style.background = 'rgba(236,72,153,0.15)';
+
+                const activeVtonBtn = document.querySelector('.vton-btn.active');
+                if (activeVtonBtn) {
+                  activeVtonBtn.dataset.img = btn.dataset.img;
+                }
+
+                if (currentViewMode === 'after') {
+                  lTitle.textContent = '[RUNNING APPAREL VTON]';
+                  lDesc.textContent = 'Rendering selected model pose & lighting...';
+                  loader.style.display = 'grid';
+
+                  setTimeout(() => {
+                    img.src = btn.dataset.img;
+                    loader.style.display = 'none';
+                  }, 500);
+                }
+              });
+            });
+          }
+
+          if (isDressberry) {
+            renderDbOptions(p);
+          }
 
           btnBefore.addEventListener('click', () => {
             if (currentViewMode === 'before') return;
@@ -4279,6 +4342,9 @@
               const matchedProject = (isWatch ? watchesProjects : (isShoes ? shoesProjects : (isDressberry ? dressberryProjects : socksProjects))).find(x => x.sku === sku);
               if (matchedProject) {
                 updateModalTexts(matchedProject);
+                if (isDressberry) {
+                  renderDbOptions(matchedProject);
+                }
               }
 
               if (isWatch) {
